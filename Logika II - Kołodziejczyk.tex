@@ -1,0 +1,116 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsfonts,amsmath,amssymb,amsthm}
+\usepackage{marvosym}
+\usepackage{tikz}
+\usepackage{textcomp}
+\usepackage{stmaryrd}
+\usetikzlibrary{positioning}
+\usetikzlibrary{arrows, automata}
+
+\title{\textbf{Logika II - Ko\l odziejczyk}}
+
+\date{}
+\begin{document}
+
+\maketitle
+\setlength{\parindent}{0cm}
+
+
+
+\newcommand{\M}{\mathfrak{M}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\X}{\mathcal{X}}
+\newcommand{\ind}{\setlength{\parindent}{1cm}  \indent \setlength{\parindent}{0cm}}
+\newcommand{\sss}{\mathbb{S}}
+\newcommand{\U}{\mathcal{U}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\om}{\omega}
+
+
+
+\section{Wstęp}
+
+Teorie:\\
+- ładne - da się zrozumieć zbiory definiowalne, da się zrozumieć struktury modeli, rozstrzygalne; np. gęste liniowe porządki bez końców - $(\Q, \leq), (\C,+, \bullet)$ \\
+- straszne - "smoki" - powyższe nieprawdziwe - np. ZF(C), $(\N, +, \bullet, \leq)$\\
+
+dwóm częściom odpowiadać będą dwie części kursu - do pierwszej są podręczniki
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Eliminacja kwantyfikatorów}
+Teoria $T$ ma eliminację kwantyfikatorów (q.e.) $\iff$ dla dowolnej formuły $\psi(x_1,...x_n)$ jest $\phi(x_1,...,x_n)$ że $T\models \forall_{x_1,...,x_n[\psi(x)\iff\phi(x)]}$ (powinno być "dowodzi")\\
+
+Uwaga: dla zdań, kiedy nie ma żadnych stałych, nie ma zdań bezkwantyfikatorowych - wtedy wrzucamy formułę z $jedną$ zmienną (alternatywnie można by dodać zmienne zdaniowe $\top, \bot$).\\
+
+\textbf{Fakt:} dla dowolnej teorii niesprzecznej $T$ istnieje jej rozszerzenie $T^+$ z eliminacją kwantyfikatorów.\\
+
+\textbf{Dowód:} na chama - dla każdej formuły $\phi$ dodajemy nowy symbol relacyjny $R_{\phi}$ i aksjomat $\forall_{x}[\phi(x)\iff R_{\phi}(x)]$\\
+
+
+\textbf{Fakt:}\\
+DLO (gęste, liniowe porządki bez końców) ma q.e.\\
+- jest zupełna, bo $\om$-kategoryczna (ma tylko jeden model przeliczalny) - więc dzięki tw. Skolema-L{\"o}wenheima inaczej zdanie nierozsztrzygalne miałoby dwa modele przeliczalne, sprzeczność\\
+
+
+
+[...]\\
+
+Wiosek - DLO jest $o$-minimalna, tj. dla dowolnego $A\models DLO$ i $\phi(x,a)$, dow. $a\in A$ zbiór $\{x\in A\ |\ A\models \phi(x,a)\}$ (inaczej mówiąc - dowolny zbiór otwarty) jest skończoną sumą przedziałów (tu: singleton, przedział otwarty lub półprosta otwarta).
+\\
+
+
+
+Twierdzenie:\\
+Dla dowolnej teorii T, równoważne są następujące warunki:\\
+(i) T ma q.e.\\
+(ii) dla dowolnego $\psi\in T$ i dowolnych modeli $A,B$ dla T i struktury $D$ w ich przecięciu, to dla dowolnej krotki $d\in D$, mamy $A\models\exists_{y}[\psi(d, y)]\iff B\models\exists_{y}[\psi(d, y)]$\\
+
+Dowód:\\
+(i) $\Rightarrow$ (ii) - proste, bo wywalamy kwantyfikator i wtedy nasza formuła patrzy tylko na $d$.
+(ii) $\Rightarrow$ (i)\\
+$[...]$\\
+
+
+
+Definicja $A$ jest minimalne $\iff$ każdy definiowalny podzbiór $A$ jest skończony lub koskończony; jest silnie minimalna $\iff$ każde $B$ elmentarnie równoważne z $A$ jest minimalne
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
