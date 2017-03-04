@@ -1,0 +1,168 @@
+% UWAGI EDYTORSKIE
+% -- jedno zdanie w jednej linii
+% -- myślniki w tekście piszemy jako "--" a minus jako "-"
+
+
+\documentclass{article}
+
+\usepackage[MeX,plmath]{polski}
+\usepackage[utf8]{inputenc}
+\usepackage{mathtools} % nowy, ulepszony amsmath
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb} % dodatkowe symbole
+\usepackage{latexsym} % dodatkowe symbole
+\usepackage{textcomp} % dodatkowe symbole
+\usepackage{hyperref} % klikalne linki -- użyj \url{...}
+\usepackage{array} % do skomplikowanych tabel
+\usepackage{todonotes} % do notatek, nt. co jest do zrobienia; użyj \todo{...}
+\usepackage{tikz} % do tworzenia grafiki
+\usetikzlibrary{arrows, automata, positioning}
+
+\title{\textbf{Logika matematyczna II} \\ -- skrypt do wykładu --}
+
+\date{\small{Wersja z dnia: \today}}
+\begin{document}
+
+\maketitle
+
+% Oznaczenia na zbiory liczb naturalnych, całkowitych, etc.
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+% Oznaczenia na ...
+\newcommand{\X}{\mathcal{X}}
+\newcommand{\Y}{\mathcal{Y}}
+
+% Twierdzenia, wnioski, etc. 
+\newtheorem{thm}{Thm}[section]
+\theoremstyle{plain}
+\newtheorem{tw}[thm]{Twierdzenie}
+\newtheorem{stw}[thm]{Stwierdzenie}
+\newtheorem{wn}[thm]{Wniosek}
+\newtheorem{lem}[thm]{Lemat}
+\newtheorem{teza}[thm]{Teza}
+\newtheorem{fakt}[thm]{Fakt}
+
+% Definicje, oznaczenia, etc.
+\theoremstyle{definition}
+\newtheorem{df}[thm]{Definicja}
+\newtheorem{oznn}[thm]{Oznaczenia}
+\newtheorem{ozn}[thm]{Oznaczenie}
+
+% Przykłady, uwagi, etc.
+\theoremstyle{remark}
+\newtheorem{prz}[thm]{Przykład}
+\newtheorem{uw}[thm]{Uwaga}
+\newtheorem{przyp}[thm]{Przypomnienie}
+\newtheorem{zd}{Zadanie}
+
+% Oznaczenia na różne teorie, ZFC, PA, etc.
+% (Skróty te działają w otoczeniu matematycznym)
+\newcommand{\PA}{\mathsf{P \mkern-1.9mu A}}
+\newcommand{\ZFC}{\mathsf{Z \mkern-1.8mu F \mkern-1.5mu C}}
+\newcommand{\DLO}{\mathsf{D \mkern-1.5mu L \mkern-1.8mu O}}
+
+% Skróty popularnych wyrażeń.
+\newcommand{\wtw}{wtedy i tylko wtedy, gdy }
+\newcommand{\fae}{następujące warunki są równoważne: }
+\newcommand{\Fae}{Następujące warunki są równoważne: }
+
+% Inne
+\newcommand{\Th}{\text{Th}}
+
+
+\begin{abstract}
+	Notatki do wykładu \textit{Logika matematyczna II} dra Leszka Kołodziejczyka, prowadzonego w semestrze letnim roku akademickiego 2016/17.
+	Spisywane przez Jędrzeja Kołodziejskiego i Bartosza Piotrowskiego.
+	Uwagi o błędach są mile widziane -- proszę pisać na \texttt{bartoszpiotrowski@post.pl}
+\end{abstract}
+
+
+\section*{Uwagi wstępne}
+Teorie aksjomatyczne są dwojakiego rodzaju:
+\begin{itemize}
+	\item \textit{ładne} (pod takim, czy innym względem) -- da się zrozumieć zbiory w nich definiowalne, da się zrozumieć struktury ich modeli, są rozstrzygalne; Przykłady takich teorii to: gęste liniowe porządki bez końców,  $\Th(\Q, \leq), \Th(\C,+, \bullet)$
+	\item \textit{straszne}, tzw. \textit{smoki} -- powyższe nieprawdziwe - np. ZF(C), $(\N, +, \bullet, \leq)$\\
+\end{itemize}
+dwóm częściom odpowiadać będą dwie części kursu - do pierwszej są podręczniki
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Eliminacja kwantyfikatorów}
+Teoria $T$ ma eliminację kwantyfikatorów (q.e.) $\iff$ dla dowolnej formuły $\psi(x_1,...x_n)$ jest $\phi(x_1,...,x_n)$ że $T\models \forall_{x_1,...,x_n[\psi(x)\iff\phi(x)]}$ (powinno być "dowodzi")\\
+
+Uwaga: dla zdań, kiedy nie ma żadnych stałych, nie ma zdań bezkwantyfikatorowych - wtedy wrzucamy formułę z $jedną$ zmienną (alternatywnie można by dodać zmienne zdaniowe $\top, \bot$).\\
+
+\textbf{Fakt:} dla dowolnej teorii niesprzecznej $T$ istnieje jej rozszerzenie $T^+$ z eliminacją kwantyfikatorów.\\
+
+\textbf{Dowód:} na chama - dla każdej formuły $\phi$ dodajemy nowy symbol relacyjny $R_{\phi}$ i aksjomat $\forall_{x}[\phi(x)\iff R_{\phi}(x)]$\\
+
+
+\textbf{Fakt:}\\
+DLO (gęste, liniowe porządki bez końców) ma q.e.\\
+- jest zupełna, bo $\om$-kategoryczna (ma tylko jeden model przeliczalny) - więc dzięki tw. Skolema-L{\"o}wenheima inaczej zdanie nierozsztrzygalne miałoby dwa modele przeliczalne, sprzeczność\\
+
+
+
+[...]\\
+
+Wiosek - DLO jest $o$-minimalna, tj. dla dowolnego $A\models DLO$ i $\phi(x,a)$, dow. $a\in A$ zbiór $\{x\in A\ |\ A\models \phi(x,a)\}$ (inaczej mówiąc - dowolny zbiór otwarty) jest skończoną sumą przedziałów (tu: singleton, przedział otwarty lub półprosta otwarta).
+\\
+
+
+
+Twierdzenie:\\
+Dla dowolnej teorii T, równoważne są następujące warunki:\\
+(i) T ma q.e.\\
+(ii) dla dowolnego $\psi\in T$ i dowolnych modeli $A,B$ dla T i struktury $D$ w ich przecięciu, to dla dowolnej krotki $d\in D$, mamy $A\models\exists_{y}[\psi(d, y)]\iff B\models\exists_{y}[\psi(d, y)]$\\
+
+Dowód:\\
+(i) $\Rightarrow$ (ii) - proste, bo wywalamy kwantyfikator i wtedy nasza formuła patrzy tylko na $d$.
+(ii) $\Rightarrow$ (i)\\
+$[...]$\\
+
+
+
+Definicja $A$ jest minimalne $\iff$ każdy definiowalny podzbiór $A$ jest skończony lub koskończony; jest silnie minimalna $\iff$ każde $B$ elmentarnie równoważne z $A$ jest minimalne
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
