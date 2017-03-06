@@ -1,7 +1,10 @@
 % UWAGI EDYTORSKIE
 % -- jedno zdanie w jednej linii
 % -- myślniki w tekście piszemy jako "--" a minus jako "-"
-
+% zamiast "..." w wyrażeniach matematycznych używamy "\ldots"
+% zamiast ":" w wyrażeniach matematycznych używamy "\colon"
+% wypunktowania lub wyliczenia robimy przy pomocy otoczeń itemize lub enumerate
+% w zasadzie nie używamy "\\"
 
 \documentclass{article}
 
@@ -19,7 +22,7 @@
 \usepackage{tikz} % do tworzenia grafiki
 \usetikzlibrary{arrows, automata, positioning}
 
-\title{\textbf{Logika matematyczna II} \\ -- skrypt do wykładu --}
+\title{\textbf{Logika matematyczna II} \\ \Large{$\sim$ notatki z wykładu $\sim$}}
 
 \date{\small{Wersja z dnia: \today}}
 \begin{document}
@@ -63,7 +66,7 @@
 % Oznaczenia na różne teorie, ZFC, PA, etc.
 % (Skróty te działają w otoczeniu matematycznym)
 \newcommand{\PA}{\mathsf{P \mkern-1.9mu A}}
-\newcommand{\ZFC}{\mathsf{Z \mkern-1.8mu F \mkern-1.5mu C}}
+\newcommand{\ZFC}{\mathsf{Z \mkern-1.6mu F \mkern-1.5mu C}}
 \newcommand{\DLO}{\mathsf{D \mkern-1.5mu L \mkern-1.8mu O}}
 
 % Skróty popularnych wyrażeń.
@@ -85,46 +88,79 @@
 \section*{Uwagi wstępne}
 Teorie aksjomatyczne są dwojakiego rodzaju:
 \begin{itemize}
-	\item \textit{ładne} (pod takim, czy innym względem) -- da się zrozumieć zbiory w nich definiowalne, da się zrozumieć struktury ich modeli, są rozstrzygalne; Przykłady takich teorii to: gęste liniowe porządki bez końców,  $\Th(\Q, \leq), \Th(\C,+, \bullet)$
-	\item \textit{straszne}, tzw. \textit{smoki} -- powyższe nieprawdziwe - np. ZF(C), $(\N, +, \bullet, \leq)$\\
+	\item \textit{ładne} (pod takim, czy innym względem) -- da się zrozumieć zbiory w nich definiowalne, jak również struktury ich modeli; są rozstrzygalne. 
+		Przykładem tego typu teorii są gęste liniowe porządki bez końców ($\DLO$), czyli $\Th(\Q, \leq), \Th(\R, +, \cdot, \leq)$, etc.
+		Tego typu \textit{ładne} teorie są przedmiotem zainteresowania teorii modeli.
+	\item \textit{straszne} (tzw. \textit{smoki}) -- teorie te nie spełniają żadnych warunków \textit{ładności}.
+		Przykłady: $\ZFC$, $\Th(\N, +, \cdot, \leq)$.
 \end{itemize}
-dwóm częściom odpowiadać będą dwie części kursu - do pierwszej są podręczniki
+Pierwsza część niniejszego kursu będzie dotyczyła teorii \textit{ładnych}, druga zaś -- \textit{smoków}.
 
-
-
-
-
-
-
-
-
-
+Polecane podręczniki do pierwszej części to:
+\begin{itemize}
+	\item David Marker, \textit{Model Theory: An Introduction}, Graduate Texts in Mathematics, Springer, 2002,
+	\item Katrin Tent, Martin Ziegler, \textit{A Course in Model Theory}, Cambridge University Press, 2012.
+\end{itemize}
 
 
 \section{Eliminacja kwantyfikatorów}
-Teoria $T$ ma eliminację kwantyfikatorów (q.e.) $\iff$ dla dowolnej formuły $\psi(x_1,...x_n)$ jest $\phi(x_1,...,x_n)$ że $T\models \forall_{x_1,...,x_n[\psi(x)\iff\phi(x)]}$ (powinno być "dowodzi")\\
+\begin{df}
+	Teoria $T$ ma \textit{eliminację kwantyfikatorów} (q.e.) \wtw dla dowolnej formuły $\psi(\bar{x})$ istnieje taka formuła bezkwantyfikatorowa $\phi(\bar{x})$, że $T \models \forall {\bar{x}} (\psi(\bar{x}) \iff \phi(\bar{x}))$. 
+\end{df}
 
-Uwaga: dla zdań, kiedy nie ma żadnych stałych, nie ma zdań bezkwantyfikatorowych - wtedy wrzucamy formułę z $jedną$ zmienną (alternatywnie można by dodać zmienne zdaniowe $\top, \bot$).\\
+\begin{uw}
+	Jeśli w sygnaturze teorii $T$ nie występują żadne stałe, wówczas teoria ta nie ma zdań bezkwantyfikatorowych.
+	W takiej sytuacji można:
+	\begin{itemize}
+		\item albo dopuścić sytuację, że dla zdania $\phi$ bierzemy formułę bezkwantyfikatorową $\psi$ taką, że $T \vdash \forall x (\phi \Leftrightarrow \psi(x))$, 
+		\item albo wprowadzić zmienne zdaniowe $\top$ i $\bot$ i żądać zupełności teorii $T$.
+	\end{itemize}
+\end{uw}
 
-\textbf{Fakt:} dla dowolnej teorii niesprzecznej $T$ istnieje jej rozszerzenie $T^+$ z eliminacją kwantyfikatorów.\\
+\begin{prz}
+	W $\Th(\R, +, \cdot, \leq)$ formuła $\phi(y, z, w) \equiv y \neq 0 \wedge \exists x (yx^2 + 2x + w = 0)$ jest równoważna formule bezkwantyfikatorowej $y \neq 0 \wedge z^2 - 4yw \geq 0$.
+\end{prz}
 
-\textbf{Dowód:} na chama - dla każdej formuły $\phi$ dodajemy nowy symbol relacyjny $R_{\phi}$ i aksjomat $\forall_{x}[\phi(x)\iff R_{\phi}(x)]$\\
+Z eliminacji kwantyfikatorów typowo wynikają następujące korzyści:
+\begin{itemize}
+	\item zrozumienie zbiorów definiowalnych w danej teorii (no bo więcej, niż trzy bloki kwantyfikatorów sprawiają niemożliwym zrozumienie definicji),
+	\item uzyskanie zupełności teorii,
+	\item uzyskanie rozstrzygalności teorii.
+\end{itemize}
 
+Ale z drugiej strony trzeba uważać, bo:
 
-\textbf{Fakt:}\\
-DLO (gęste, liniowe porządki bez końców) ma q.e.\\
-- jest zupełna, bo $\om$-kategoryczna (ma tylko jeden model przeliczalny) - więc dzięki tw. Skolema-L{\"o}wenheima inaczej zdanie nierozsztrzygalne miałoby dwa modele przeliczalne, sprzeczność\\
+\begin{stw} Dla dowolnej niesprzecznej teorii $T$ istnieje jej niesprzeczne rozszerzenie $T^+ \supseteq T$ z eliminacją kwantyfikatorów.
+\end{stw}
+\begin{proof}
+	Dla każdej formuły $\phi(\bar{x})$ dodajemy nowy symbol relacyjny $R_{\phi}(\bar{x})$.
+	\[T^+ := T \cup \{\forall \bar{x} (\phi(\bar{x}) \Leftrightarrow R_{\phi}(\bar{x}))\}\].
+\end{proof}
+A nadawanie niezrozumiałym formułom nazw nie czyni ich zrozumiałymi.
 
+\begin{tw}
+	$\DLO$ (teoria gęstych liniowych porządków) posiada q.e.	
+\end{tw}
+\begin{proof}
+	Niech $\phi$ to formuła $\DLO$ w zmiennych $x_1, \ldots, x_n$.
+	(Jak wiemy) $\DLO$ jest zupełna (bo ma tylko jeden, z dokładnością do izomorfizmu, przeliczalny model, tzn. jest $\omega$-kategoryczna, a mamy twierdzenie Löwenheima-Skolema).
 
+	Zauważmy, że:
+	\begin{itemize}
+		\item jeśli $a_1, \ldots, a_n, b_1, \ldots b_n \in \Q$ są takie, że dla każdej formuły bezkwantyfikatorowej $\phi$ zachodzi $(\Q, \leq) \models \phi(\bar{a}) \Leftrightarrow \phi(\bar{b})$, to istnieje autoizomorfizm $h(\Q, \leq)$ taki, że $h(a_i) = b_i$ dla $i \in \{1, \ldots, n\}$, a zatem dla każdej formuły $\gamma(\bar{x})$ mamy $(\Q, \leq) \models \gamma(\bar{a}) \Leftrightarrow \gamma(\bar{b})$,
+		\item z dokładnością do równoważności w $\DLO$ istnieje tylko skończenie wiele formuł bezkwantyfikatorowych w zmiennych $x_1, \ldots, x_n$ -- każda jest alternatywą koniunkcji takich, jak na przykład ta: $x_1 = x_2 \wedge x_1 \leq x_3 \wedge \neg x_3 \leq x_1$.
+			Takie koniunkcje oznaczamy przez $\psi_1(\bar{x}), \psi_2(\bar{x}), \ldots$
+			W takim razie 
+			\[(\Q, \leq) \models \forall \bar{x} (\phi(\bar{x}) \Leftrightarrow \bigwedge_{\mathclap{\substack{i \text{ takie, że istnieje } \bar{a} \in \Q^n \\ \text{ takie, że }(\Q, \leq) \models \phi(\bar{a}) \wedge \psi_i(\bar{a})}}} \psi_i(\bar{x}))\]
+	\end{itemize}
+	Zatem z zupełności 
+			\[\DLO \models \forall \bar{x} (\phi(\bar{x}) \Leftrightarrow \bigwedge_{\mathclap{\substack{i \text{ takie, że istnieje } \bar{a} \in \Q^n \\ \text{ takie, że }(\Q, \leq) \models \phi(\bar{a}) \wedge \psi_i(\bar{a})}}} \psi_i(\bar{x}))\]
+\end{proof}
 
-[...]\\
+\begin{wn}
+	$\DLO$ jest \em{$o$-minimalna}, tj. dla dowolnego $A \models \DLO$ i dowolnej formuły $\phi(x,\bar{a})$, gdzie $a \in A^n$ zbiór definiowalny $\{x \in A \colon  A \models \phi(x,\bar{a})\}$ jest skończoną sumą przedziałów (być może jednopunktowych).
+\end{wn} 
 
-Wiosek - DLO jest $o$-minimalna, tj. dla dowolnego $A\models DLO$ i $\phi(x,a)$, dow. $a\in A$ zbiór $\{x\in A\ |\ A\models \phi(x,a)\}$ (inaczej mówiąc - dowolny zbiór otwarty) jest skończoną sumą przedziałów (tu: singleton, przedział otwarty lub półprosta otwarta).
-\\
-
-
-
-Twierdzenie:\\
 Dla dowolnej teorii T, równoważne są następujące warunki:\\
 (i) T ma q.e.\\
 (ii) dla dowolnego $\psi\in T$ i dowolnych modeli $A,B$ dla T i struktury $D$ w ich przecięciu, to dla dowolnej krotki $d\in D$, mamy $A\models\exists_{y}[\psi(d, y)]\iff B\models\exists_{y}[\psi(d, y)]$\\
