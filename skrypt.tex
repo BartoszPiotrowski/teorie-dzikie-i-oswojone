@@ -1,6 +1,6 @@
 % UWAGI EDYTORSKIE
-% -- jedno zdanie w jednej linii
-% -- myślniki w tekście piszemy jako "--" a minus jako "-"
+% jedno zdanie w jednej linii
+% myślniki w tekście piszemy jako "--" a minus jako "-"
 % zamiast "..." w wyrażeniach matematycznych używamy "\ldots"
 % zamiast ":" w wyrażeniach matematycznych używamy "\colon"
 % wypunktowania lub wyliczenia robimy przy pomocy otoczeń itemize lub enumerate
@@ -19,6 +19,7 @@
 \usepackage{hyperref} % klikalne linki -- użyj \url{...}
 \usepackage{array} % do skomplikowanych tabel
 \usepackage{todonotes} % do notatek, nt. co jest do zrobienia; użyj \todo{...}
+\usepackage{color} % do kolorowego tekstu
 \usepackage{tikz} % do tworzenia grafiki
 \usetikzlibrary{arrows, automata, positioning}
 
@@ -34,7 +35,10 @@
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\R}{\mathbb{R}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\B}{\mathbb{B}}
 \newcommand{\C}{\mathbb{C}}
+\newcommand{\D}{\mathbb{D}}
 
 % Oznaczenia na ...
 \newcommand{\X}{\mathcal{X}}
@@ -112,7 +116,7 @@ Polecane podręczniki do pierwszej części to:
 	Jeśli w sygnaturze teorii $T$ nie występują żadne stałe, wówczas teoria ta nie ma zdań bezkwantyfikatorowych.
 	W takiej sytuacji można:
 	\begin{itemize}
-		\item albo dopuścić sytuację, że dla zdania $\phi$ bierzemy formułę bezkwantyfikatorową $\psi$ taką, że $T \vdash \forall x (\phi \Leftrightarrow \psi(x))$, 
+		\item albo dopuścić sytuację, że dla zdania $\phi$ bierzemy formułę bezkwantyfikatorową $\psi$ taką, że $T \vdash \forall x (\phi \iff \psi(x))$, 
 		\item albo wprowadzić zmienne zdaniowe $\top$ i $\bot$ i żądać zupełności teorii $T$.
 	\end{itemize}
 \end{uw}
@@ -134,7 +138,7 @@ Ale z drugiej strony trzeba uważać, bo:
 \end{stw}
 \begin{proof}
 	Dla każdej formuły $\phi(\bar{x})$ dodajemy nowy symbol relacyjny $R_{\phi}(\bar{x})$.
-	\[T^+ := T \cup \{\forall \bar{x} (\phi(\bar{x}) \Leftrightarrow R_{\phi}(\bar{x}))\}\].
+	\[T^+ := T \cup \{\forall \bar{x} (\phi(\bar{x}) \iff R_{\phi}(\bar{x}))\}\].
 \end{proof}
 A nadawanie niezrozumiałym formułom nazw nie czyni ich zrozumiałymi.
 
@@ -147,45 +151,61 @@ A nadawanie niezrozumiałym formułom nazw nie czyni ich zrozumiałymi.
 
 	Zauważmy, że:
 	\begin{itemize}
-		\item jeśli $a_1, \ldots, a_n, b_1, \ldots b_n \in \Q$ są takie, że dla każdej formuły bezkwantyfikatorowej $\phi$ zachodzi $(\Q, \leq) \models \phi(\bar{a}) \Leftrightarrow \phi(\bar{b})$, to istnieje autoizomorfizm $h(\Q, \leq)$ taki, że $h(a_i) = b_i$ dla $i \in \{1, \ldots, n\}$, a zatem dla każdej formuły $\gamma(\bar{x})$ mamy $(\Q, \leq) \models \gamma(\bar{a}) \Leftrightarrow \gamma(\bar{b})$,
+		\item jeśli $a_1, \ldots, a_n, b_1, \ldots b_n \in \Q$ są takie, że dla każdej formuły bezkwantyfikatorowej $\phi$ zachodzi $(\Q, \leq) \models \phi(\bar{a}) \iff \phi(\bar{b})$, to istnieje autoizomorfizm $h(\Q, \leq)$ taki, że $h(a_i) = b_i$ dla $i \in \{1, \ldots, n\}$, a zatem dla każdej formuły $\gamma(\bar{x})$ mamy $(\Q, \leq) \models \gamma(\bar{a}) \iff \gamma(\bar{b})$,
 		\item z dokładnością do równoważności w $\DLO$ istnieje tylko skończenie wiele formuł bezkwantyfikatorowych w zmiennych $x_1, \ldots, x_n$ -- każda jest alternatywą koniunkcji takich, jak na przykład ta: $x_1 = x_2 \wedge x_1 \leq x_3 \wedge \neg x_3 \leq x_1$.
 			Takie koniunkcje oznaczamy przez $\psi_1(\bar{x}), \psi_2(\bar{x}), \ldots$
 			W takim razie 
-			\[(\Q, \leq) \models \forall \bar{x} (\phi(\bar{x}) \Leftrightarrow \bigwedge_{\mathclap{\substack{i \text{ takie, że istnieje } \bar{a} \in \Q^n \\ \text{ takie, że }(\Q, \leq) \models \phi(\bar{a}) \wedge \psi_i(\bar{a})}}} \psi_i(\bar{x}))\]
+			\[(\Q, \leq) \models \forall \bar{x} (\phi(\bar{x}) \iff \bigwedge_{\mathclap{\substack{i \text{ takie, że istnieje } \bar{a} \in \Q^n \\ \text{ takie, że }(\Q, \leq) \models \phi(\bar{a}) \wedge \psi_i(\bar{a})}}} \psi_i(\bar{x}))\]
 	\end{itemize}
 	Zatem z zupełności 
-			\[\DLO \models \forall \bar{x} (\phi(\bar{x}) \Leftrightarrow \bigwedge_{\mathclap{\substack{i \text{ takie, że istnieje } \bar{a} \in \Q^n \\ \text{ takie, że }(\Q, \leq) \models \phi(\bar{a}) \wedge \psi_i(\bar{a})}}} \psi_i(\bar{x}))\]
+			\[\DLO \models \forall \bar{x} (\phi(\bar{x}) \iff \bigwedge_{\mathclap{\substack{i \text{ takie, że istnieje } \bar{a} \in \Q^n \\ \text{ takie, że }(\Q, \leq) \models \phi(\bar{a}) \wedge \psi_i(\bar{a})}}} \psi_i(\bar{x}))\]
 \end{proof}
 
 \begin{wn}
 	$\DLO$ jest \em{$o$-minimalna}, tj. dla dowolnego $A \models \DLO$ i dowolnej formuły $\phi(x,\bar{a})$, gdzie $a \in A^n$ zbiór definiowalny $\{x \in A \colon  A \models \phi(x,\bar{a})\}$ jest skończoną sumą przedziałów (być może jednopunktowych).
 \end{wn} 
 
-Dla dowolnej teorii T, równoważne są następujące warunki:\\
-(i) T ma q.e.\\
-(ii) dla dowolnego $\psi\in T$ i dowolnych modeli $A,B$ dla T i struktury $D$ w ich przecięciu, to dla dowolnej krotki $d\in D$, mamy $A\models\exists_{y}[\psi(d, y)]\iff B\models\exists_{y}[\psi(d, y)]$\\
 
-Dowód:\\
-(i) $\Rightarrow$ (ii) - proste, bo wywalamy kwantyfikator i wtedy nasza formuła patrzy tylko na $d$.
-(ii) $\Rightarrow$ (i)\\
-$[...]$\\
+\begin{tw}
+Dla dowolnej teorii $T$, \fae 
+	\begin{enumerate}
+		\item $T$ ma eliminację kwantyfikatorów,
+		\item dla dowolnych dwóch struktur $\A, \B \models T$, dowolnego $\D$ takiego, że $\A \supseteq \D \subseteq \B$,  dowolnego $\bar{d} \in \D$, i dowolnej formuły bezkwantyfikatorowej $\psi(\bar{x}, y)$  zachodzi:
+			\[\A \models \exists y \, \psi(\bar{d}, y) \iff \B \models \exists y \, \psi(\bar{d}, y)\]
+	\end{enumerate}
+\end{tw}
+\begin{dw}
+	($\Rightarrow$) Łatwe. 
 
+	($\Leftarrow$) \color{red} TODO
+\end{dw}
 
+\begin{df}
+	\begin{itemize}
+		Struktura $\A$ jest: 
+		\item \textit{minimalna}, jeśli każdy definiowalny podzbiór $A$ jest skończony lub koskończony,
+		\item \textit{silnie minimalna}, jeśli każda struktura $\B \equiv \A$ jest minimalna. 
+	\end{itemize}
 
-Definicja $A$ jest minimalne $\iff$ każdy definiowalny podzbiór $A$ jest skończony lub koskończony; jest silnie minimalna $\iff$ każde $B$ elmentarnie równoważne z $A$ jest minimalne
+	Teoria $T$ jest \textit{silnie minimalna} jeśli każda struktura $\B \models T$ jest minimalna.
+\end{df}
 
+% tu można przepisac jeszcze te zadania
 
+\begin{df}
+	$T_{\forall} = \{\phi \text{ czysto uniwersalne takie, że } T \vdash 
+	\phi\}$
+\end{df}
 
+\begin{stw}
+	Niech $T$ to teoria.
+	Wówczas $\A \models T_{\forall}$ \wtw istnieje $\B \models T$ takie, że $\A \subseteq \B$.
+\end{stw}
+\begin{dw}
+	($\Leftarrow$) Oczywiste.
 
-
-
-
-
-
-
-
-
-
+	($\Rightarrow$) \color{red} TODO
+\end{dw}
 
 
 
