@@ -72,6 +72,8 @@
 \newcommand{\PA}{\mathsf{P \mkern-1.9mu A}}
 \newcommand{\ZFC}{\mathsf{Z \mkern-1.6mu F \mkern-1.5mu C}}
 \newcommand{\DLO}{\mathsf{D \mkern-1.5mu L \mkern-1.8mu O}}
+\newcommand{\ACF}{\mathsf{A \mkern-2.0mu C \mkern-1.1mu F}}
+\newcommand{\RCF}{\mathsf{R \mkern-1.7mu C \mkern-1.4mu F}}
 
 % Skróty popularnych wyrażeń.
 \newcommand{\wtw}{wtedy i tylko wtedy, gdy }
@@ -174,11 +176,11 @@ Dla dowolnej teorii $T$, \fae
 			\[\A \models \exists y \, \psi(\bar{d}, y) \iff \B \models \exists y \, \psi(\bar{d}, y)\]
 	\end{enumerate}
 \end{tw}
-\begin{dw}
+\begin{proof}
 	($\Rightarrow$) Łatwe. 
 
 	($\Leftarrow$) \color{red} TODO
-\end{dw}
+\end{proof}
 
 \begin{df}
 	\begin{itemize}
@@ -201,19 +203,38 @@ Dla dowolnej teorii $T$, \fae
 	Niech $T$ to teoria.
 	Wówczas $\A \models T_{\forall}$ \wtw istnieje $\B \models T$ takie, że $\A \subseteq \B$.
 \end{stw}
-\begin{dw}
+\begin{proof}
 	($\Leftarrow$) Oczywiste.
 
-	($\Rightarrow$) \color{red} TODO
-\end{dw}
+		($\Rightarrow$) \color{red} TODO
+\end{proof}
+
+\begin{tw}
+	Niech $T$ będzie teorią taką, że:
+	\begin{enumerate}
+		\item dla dowolnych $\A, \B \models T$ takich, że $\A \subseteq \B$, dla dowolnego $\bar{a} \in \A$ i dowolnej formuły bezkwantyfikatorowej $\psi(\bar{x}, y)$, mamy:
+			\[
+				\B \models \exists \psi(\bar{a}, y) \Rightarrow \A \models \exists \psi(\bar{a}, y) 
+			\]
+		\item dla każdej $\D \models T_{\forall}$ istnieje $\A \models T$ takie, że $\D \subseteq \A$ i każde zanurzenie $\D \hookrightarrow \B \models T$ rozszerza się do zanurzenia $\A \hookrightarrow \B$,
+	\end{enumerate}
+	wówczas $T$ ma eliminację kwantyfikatorów.
+\end{tw}
+\begin{proof}
+	\color{red} TODO
+\end{proof}
 
 
+% WYKŁAD 2, data: 7 III 2017
 
+\section{Ciała algebraicznie domknięte}
 
-
-
-
-
+\begin{df}
+	$\ACF$ to teoria w języku $\{+, \cdot, -, 0, 1\}$ (gdzie $-$ jest arności $1$) wyposażona w następujące aksjomaty:
+	\begin{itemize}
+		\item aksjomaty ciał,
+		\item schemat aksjomatów: $\forall w_n, \ldots, w_0 (w_n \neq 0 \Rightarrow \exists y (w_n y^n + \cdots + w_1y + w_0 = 0))$, gdzie $n \in \N \setminus \{0\}$.
+\end{df}
 
 
 
