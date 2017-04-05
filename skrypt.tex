@@ -1,7 +1,6 @@
-% UWAGI EDYTORSKIE
 % jedno zdanie w jednej linii
-% myślniki w tekście piszemy jako "--" a minus jako "-"
-% zamiast "..." w wyrażeniach matematycznych używamy "\ldots"
+% myślniki w ekście piszemy jako "--" a minus jako "-"
+% zamiast "..." w wyraeniach matematycznych używamy "\ldots"
 % zamiast ":" w wyrażeniach matematycznych używamy "\colon"
 % wypunktowania lub wyliczenia robimy przy pomocy otoczeń itemize lub enumerate
 % w zasadzie nie używamy "\\"
@@ -39,10 +38,16 @@
 \newcommand{\B}{\mathbb{B}}
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\D}{\mathbb{D}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\K}{\mathbb{K}}
 
 % Oznaczenia na ...
 \newcommand{\X}{\mathcal{X}}
 \newcommand{\Y}{\mathcal{Y}}
+
+% Oznaczenia na funkcje
+\newcommand{\id}{\text{id}}
 
 % Twierdzenia, wnioski, etc. 
 \newtheorem{thm}{Thm}[section]
@@ -50,6 +55,7 @@
 \newtheorem{tw}[thm]{Twierdzenie}
 \newtheorem{stw}[thm]{Stwierdzenie}
 \newtheorem{wn}[thm]{Wniosek}
+\newtheorem{wnn}[thm]{Wnioski}
 \newtheorem{lem}[thm]{Lemat}
 \newtheorem{teza}[thm]{Teza}
 \newtheorem{fakt}[thm]{Fakt}
@@ -210,6 +216,7 @@ Dla dowolnej teorii $T$, \fae
 \end{proof}
 
 \begin{tw}
+	\label{qe}
 	Niech $T$ będzie teorią taką, że:
 	\begin{enumerate}
 		\item dla dowolnych $\A, \B \models T$ takich, że $\A \subseteq \B$, dla dowolnego $\bar{a} \in \A$ i dowolnej formuły bezkwantyfikatorowej $\psi(\bar{x}, y)$, mamy:
@@ -235,6 +242,76 @@ Dla dowolnej teorii $T$, \fae
 		\item aksjomaty ciał,
 		\item schemat aksjomatów: $\forall w_n, \ldots, w_0 (w_n \neq 0 \Rightarrow \exists y (w_n y^n + \cdots + w_1y + w_0 = 0))$, gdzie $n \in \N \setminus \{0\}$.
 \end{df}
+
+
+\begin{tw}
+	$\ACF$ posiada eliminację kwantyfikatorów.
+\end{tw}
+\begin{proof}
+Dowodzimy następujące dwa lematy i korzystamy z Twierdzenia \ref{qe}.
+
+\begin{lem}
+	$\ACF_{\forall}$ to teoria dziedzin całkowitości (tj. pierścieni bez dzielników zera).
+	Ponadto zachodzi ... %TODO
+\end{lem}
+\begin{proof}
+	($\subseteq$) TODO
+
+\begin{przyp}[z algebry]
+	~\begin{itemize}
+		\item Każde ciało $\mathbb{K}$ ma swoje algebraiczne domknięcie $\mathbb{K}^{\text{alg}}$ (tzn. takie ciało $\mathbb{L} \supseteq \mathbb{K}$, że $\mathbb{L} \models \ACF$ i rozszerzenie $\mathbb{L} \supseteq \mathbb{K}$ jest algebraiczne).
+		\item Algebraiczne domknięcie $\mathbb{K}^{\text{alg}}$ jest jedyne z dokładnością do izomorfizmu nad $\mathbb{K}$ (tzn. jeśli $\mathbb{L}_1$ i $\mathbb{L}_2$ są algebraicznymi domknięciami $\mathbb{K}$, wówczas istnieje izomorfizm $h \colon \mathbb{L}_1 \rightarrow \mathbb{L}_2$ taki, że $h|\mathbb{K} = \id(\mathbb{K})$ )
+	\end{itemize}
+\end{przyp}
+
+
+	($\supseteq$) TODO
+\end{proof}
+
+\begin{lem}
+	Dla $\ACF$ zachodzi warunek (2) Twierdzenia \ref{qe}.	
+\end{lem}
+\begin{proof}
+TODO
+\end{proof}
+Z powyższych dwóch lematów i twierdzenia \ref{qe} wynika, że $\ACF$ posiada eliminację kwantyfikatorów.
+\end{proof}
+
+\begin{wnn}
+	~\begin{itemize}
+		\item $\ACF$ jest silnie minimalna, tj. w dowolnym $\mathbb{K} \models \ACF$ dowolny definiowalny podzbiór $\mathbb{K}$ jest skończony lub koskończony,
+		\item jeśli $p$ jest liczbą pierwszą lub zerem, to teoria $\ACF_p := \ACF +  \{\text{char} = p\}$ jest zupełna,
+		\item $\ACF$ jest rozstrzygalna.
+	\end{itemize}
+\end{wnn}
+
+\begin{fakt}
+	Dla każdej nieprzeliczalnej liczby porządkowej $\kappa$ teoria $\ACF_p$ jest $\kappa$-kategoryczna.
+\end{fakt}
+Ideą dowodu dla powyższego faktu jest to, że ciała algebraicznie domknięte tej samej charakterystyki i o tym samym stopniu przestępnym są izomorficzne.
+
+\begin{tw}[Ax--Grothendick]
+	Niech $\mathbb{K} \models \ACF$.
+	Niech funkcja $f \colon K^n \rightarrow K^n$ będzie dana wielomianami, tzn. $$f(x_1, \ldots, x_n) = \langle p_1(x_1, \ldots, x_n), \ldots, p_n(x_1, \ldots, x_n)\rangle ,$$ gdzie $p_1(x_1, \ldots, x_n), \ldots, p_n(x_1, \ldots, x_n) \in K[x_1, \ldots, x_n]$. %TODO nie <> tylko cos innego.
+	Wówczas jeśli $f$ jest iniekcją, to jest też surjekcją.
+\end{tw}
+\begin{proof}
+	Rozważmy zdanie $\psi_{n,k}$ wyrażające następującą własność ciała $\K$: 
+	\textit{dla wszystkich $f \colon K^n \rightarrow K^n$ danych przez $p_1, p_2, \ldots, p_n$ jak wyżej, ale spełniające warunek $\text{deg } p_i \leq k$, jeśli $f$ jest iniekcją, to jest też surjekcją. }
+	Zauważmy, że $\psi_{n,k}$ jest zdaniem postaci $\forall \exists$.
+	Jeśli $\K$ jest skończone, to $\K \models \psi_{n,k}$ (w zbiorach skończonych iniekcje są też surjekcjami). %TODO można źle zrozumieć..
+	Niech $\F^{\text{alg}}_{p}$ oznacza algebraiczne domknięcie ciała $p$-elementowego $\F^{\text{alg}}_p$.
+	Zauważmy, że $$\F^{\text{alg}}_{p} = \bigcup_{m \in \N} \F_{p^m},$$ gdzie $\F_{p^m}$ to jedyne ciało o $p^m$ elementach.
+	Zdania postaci $\forall \exists$ zachowują prawdziwość w sumach łańcuchów:
+	jeśli $\psi$ jest takim zdaniem, $\A_0 \subset \A_1 \subset \ldots $ i dla każdego $m \in \N$ zachodzi $\A_m \models \psi$, to $\bigcup_{m \in \N} \A_m \models \psi$. 
+	Zatem $\F^{\text{alg}} \models \psi_{n,k}$. % indeks p?
+	Z zupełności $\ACF_p$, gdzie $p$ jest pierwsza, mamy $\ACF_p \models \psi_{n,k}$.
+	Ze zwartości i zupełności $\ACF_0$ również $\ACF_0 \models \psi_{n,k}$.
+	
+\end{proof}
+
+
+
 
 
 
