@@ -20,6 +20,7 @@
 \usepackage{todonotes} % do notatek, nt. co jest do zrobienia; użyj \todo{...}
 \usepackage{color} % do kolorowego tekstu
 \usepackage{tikz} % do tworzenia grafiki
+\usepackage{xfrac} % do pisania struktur typu A/B, A/~, etc.
 \usetikzlibrary{arrows, automata, positioning}
 
 \title{\textbf{Logika matematyczna II} \\ \Large{$\sim$ notatki z wykładu $\sim$}}
@@ -59,6 +60,8 @@
 \newtheorem{lem}[thm]{Lemat}
 \newtheorem{teza}[thm]{Teza}
 \newtheorem{fakt}[thm]{Fakt}
+\newtheorem{uw}[thm]{Uwaga}
+\newtheorem{obs}[thm]{Obserwacja}
 
 % Definicje, oznaczenia, etc.
 \theoremstyle{definition}
@@ -69,7 +72,6 @@
 % Przykłady, uwagi, etc.
 \theoremstyle{remark}
 \newtheorem{prz}[thm]{Przykład}
-\newtheorem{uw}[thm]{Uwaga}
 \newtheorem{przyp}[thm]{Przypomnienie}
 \newtheorem{zd}{Zadanie}
 
@@ -310,13 +312,48 @@ Ideą dowodu dla powyższego faktu jest to, że ciała algebraicznie domknięte 
 	
 \end{proof}
 
+\begin{df}
+	Jeśli $\K \models \ACF$ oraz $I \subseteq K[x_1, x_2, \ldots, x_n ]$ jest ideałem, to wtedy zbiory postaci $$V(I) = \{(a_1, a_2, \ldots, a_n) \in K^n \colon p( a_1, a_2, \ldots, a_n ) = 0 \text{ dla wszystkich } p \in I\}$$ nazywamy \textit{zbiorem algebraicznym}.  
+\end{df}
 
 
+\begin{obs}
+	Ponieważ $K[x_1, x_2, \ldots, x_n ]$ jest noetherowski, to ideał $I$ jest generowany przez skończenie wiele wielomianów $p_1, p_2, \ldots, p_k$.
+	Czyli zbiór $V(I)$ jest definiowalny jako:
+	$$V(I) = \{ \bar{a} \in K^n \colon p_1(\bar{a}) = 0 \wedge p_2(\bar{a}) = 0 \wedge p_n(\bar{a})=0 \}.$$
+	%CHECK
+\end{obs}
 
+\begin{df}
+	 Zbiór konstruowalny to kombinacja borelowska zbiorów konstruowalnych.
+\end{df}
 
+\begin{tw}[Chevalley'a]
+	 Jeśli $\K \models \ACF$, $V \subseteq K^n$ to zbiór konstruowalny, $f \colon K^n \to K^l$ przekształcenie dane wielomianami $q_1, q_2, \ldots, q_l$,
+	 wówczas $f(V)$ jest konstruowalny.
+	 W szczególności rzut zbioru konstruowalnego jest konstruowalny.
+\end{tw}
+\begin{proof}
+	\[
+		f(V) = \{ (y_1, y_2, \ldots, y_l ) \colon \exists x_1, x_2, \ldots, x_n \in V (q_1(\bar{x}) = y_1, \ldots q_l(\bar{x}) = y_l)  \}.
+	\]
+	Zatem $ f(V) $ jest definiowalny formułą bezkwantyfikatorową, a zatem konstruowalny.
+\end{proof}
 
-
-
+\begin{tw}[słaba wersja twierdzenia Hilberta o zerach]
+	Niech $  \K \models \ACF $ i niech $  I \subseteq K[x_1, x_2, \ldots, x_n ] $ będzie ideałem własnym, tj. $  1 \in I $.
+	Wówczas $  V(I) \neq \emptyset $.
+\end{tw}
+\begin{proof}
+	 Niech ideał $I$ będzie generowany przez $  p_1, p_2, \ldots, p_k  $.
+	 Niech $  M \supseteq I$ będzie ideałem maksymalnym.
+	 Wtedy $L :=  \sfrac{K[x_1, x_2, \ldots, x_n ]}{M} $ jest ciałem.
+	 Zauważmy, że $  L \models \exists x_1, x_2, \ldots, x_n (p_1(\bar{x}) = 0 \wedge \ldots \wedge p_k(\bar{x}) = 0) $.
+	 Niech $ L^{\text{alg}} $ będzie algebraicznym domknięciem $ L $.
+	Mamy $  L^{\text{alg}} \models \exists x_1, x_2, \ldots, x_n (p_1(\bar{x}) = 0 \wedge \ldots \wedge p_k(\bar{x}) = 0) $.
+	Ale $  K \subseteq L^{\text{alg}} $, a $ K , L \models \ACF $, czyli $ K \prec L^{\text{alg}} $.
+	Stąd $  K \models \exists x_1, x_2, \ldots, x_n (p_1(\bar{x}) = 0 \wedge \ldots \wedge p_k(\bar{x}) = 0) $
+\end{proof}
 
 
 \end{document}
