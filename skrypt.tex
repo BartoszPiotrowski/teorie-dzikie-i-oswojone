@@ -75,6 +75,9 @@
 \newtheorem{przyp}[thm]{Przypomnienie}
 \newtheorem{zd}{Zadanie}
 
+%\DeclareMathOperator{\Exists}{\exists}
+%\DeclareMathOperator{\Forall}{\forall}
+
 % Oznaczenia na różne teorie, ZFC, PA, etc.
 % (Skróty te działają w otoczeniu matematycznym)
 \newcommand{\PA}{\mathsf{P \mkern-1.9mu A}}
@@ -218,12 +221,12 @@ Dla dowolnej teorii $T$, \fae
 \end{proof}
 
 \begin{tw}
-	\label{qe}
+	\label{tw:qe}
 	Niech $T$ będzie teorią taką, że:
 	\begin{enumerate}
 		\item dla dowolnych $\A, \B \models T$ takich, że $\A \subseteq \B$, dla dowolnego $\bar{a} \in \A$ i dowolnej formuły bezkwantyfikatorowej $\psi(\bar{x}, y)$, mamy:
 			\[
-				\B \models \exists \psi(\bar{a}, y) \Rightarrow \A \models \exists \psi(\bar{a}, y)
+				\B \models \exists y \, \psi(\bar{a}, y) \Rightarrow \A \models \exists y \, \psi(\bar{a}, y)
 			\]
 		\item dla każdej $\D \models T_{\forall}$ istnieje $\A \models T$ takie, że $\D \subseteq \A$ i każde zanurzenie $\D \hookrightarrow \B \models T$ rozszerza się do zanurzenia $\A \hookrightarrow \B$,
 	\end{enumerate}
@@ -250,7 +253,7 @@ Dla dowolnej teorii $T$, \fae
 	$\ACF$ posiada eliminację kwantyfikatorów.
 \end{tw}
 \begin{proof}
-Dowodzimy następujące dwa lematy i korzystamy z Twierdzenia \ref{qe}.
+Dowodzimy następujące dwa lematy i korzystamy z Twierdzenia \ref{tw:qe}.
 
 \begin{lem}
 	$\ACF_{\forall}$ to teoria dziedzin całkowitości (tj. pierścieni bez dzielników zera).
@@ -271,12 +274,12 @@ Dowodzimy następujące dwa lematy i korzystamy z Twierdzenia \ref{qe}.
 \end{proof}
 
 \begin{lem}
-	Dla $\ACF$ zachodzi warunek (2) Twierdzenia \ref{qe}.
+	Dla $\ACF$ zachodzi warunek (2) Twierdzenia \ref{tw:qe}.
 \end{lem}
 \begin{proof}
 TODO
 \end{proof}
-Z powyższych dwóch lematów i twierdzenia \ref{qe} wynika, że $\ACF$ posiada eliminację kwantyfikatorów.
+Z powyższych dwóch lematów i twierdzenia \ref{tw:qe} wynika, że $\ACF$ posiada eliminację kwantyfikatorów.
 \end{proof}
 
 \begin{wnn}
@@ -377,7 +380,10 @@ Ideą dowodu dla powyższego faktu jest to, że ciała algebraicznie domknięte 
 			 \end{itemize}
 
 		 \item $ \forall x (x \geq 0 \Rightarrow \exists y ( y^2 = x )) $,
-		 \item dla wszystkich nieparzystych $ n \in \N$ zachodzi $ \forall y_0 y_1 \ldots y_n (y_n \neq 0 \Rightarrow \exists x (y_n \cdot x^n + \ldots + y_1 \cdot x + y_0 = 0)) $
+		 \item dla wszystkich nieparzystych $ n \in \N$ zachodzi
+			 \[
+				 \forall y_0 y_1 \ldots y_n (y_n \neq 0 \Rightarrow \exists x (y_n \cdot x^n + \ldots + y_1 \cdot x + y_0 = 0))
+		         \]
 	 \end{enumerate}
 
 \end{df}
@@ -388,6 +394,7 @@ Motywacją do badania $ \RCF $ jest m. in. 17. problem Hilberta, który brzmi na
 Naszym celem na teraz będzie pokazanie w kilku krokach, że $ \RCF $ ma eliminację kwantyfikatorów.
 
 \begin{tw}
+\label{tw:rcf}
 	 Niech $ (R, \leq) $ będzie ciałem uporządkowanym.
 	 Następujące warunki są równoważne:
 	 \begin{enumerate}
@@ -412,6 +419,42 @@ Naszym celem na teraz będzie pokazanie w kilku krokach, że $ \RCF $ ma elimina
 		 \item Jeśli stopnia $ 1 $, to jest ok.
 		 \item Jeśli stopnia $2$ z $\Delta < 0 $, to $ p $ ma stały znak na $ R $.
 	 \end{itemize}
+
+\end{proof}
+
+\begin{tw}
+	 $ \RCF$ ma eliminację kwantyfikatorów.
+\end{tw}
+\begin{proof}
+	Pokażemy, że zachodzą obydwa warunki dostateczne posiadania q.e. z twierdzenia \ref{tw:qe}.
+	\begin{lem} % po co lemat?
+		 Niech $ (K, \leq) \subseteq (R, \leq)$ będą rcf-ami,
+	        $ \bar{a} \in K, \psi(\bar{x}, y)$ niech będzie formułą bezkwantyfikatorową,
+		oraz niech $ b \in R$ będzie takie, że $(R, \leq) \models  \psi(\bar{a}, b)$.
+		Bez utraty ogólności $ \psi(\bar{a}, y)$ ma postać:
+		\[
+			p(y) = 0 \wedge  \bigwedge_{ i = 1 }^n q_i > 0,
+		\]
+		gdzie $ p, q_i \in K[x], q_i \not \equiv 0$.
+	\end{lem}
+	Są dwie możliwości:
+	\begin{enumerate}
+		\item $ p \not \equiv 0$.
+			Wtedy $ b$ jest algebraiczne nad $ K$.
+			Z charakterystyki rcf-ów (twierdzenie \ref{tw:rcf}), $ b \in K$.
+		\item $ p \equiv 0$.
+			Wtedy $ \psi$ ma postać $ \bigwedge_{ i } q_i(y) > 0$.
+			\\TODO OBRAZEK\\
+			Zauważmy, że
+			\begin{itemize}
+				\item $ c_i < b$ i $ c_i \in K \cup \{-\infty\}$,
+				\item $ d_i > b$ i $ d_i \in K \cup \{+\infty\}$.
+			\end{itemize}
+			Niech $ c := \max (c_1, \ldots, c_n)$ oraz $ d := \min (d_1, \ldots, d_n)$.
+			Wtedy dla dowolnego elementu $ b' \in (c,d) \cup K $ zachodzi $ (K, \leq) \models \psi(\bar{a},\tilde{b})$.
+	\end{enumerate}
+
+
 
 \end{proof}
 
