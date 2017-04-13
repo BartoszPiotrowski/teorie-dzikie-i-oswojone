@@ -50,7 +50,7 @@
 % Oznaczenia na funkcje
 \newcommand{\id}{\text{id}}
 
-% Twierdzenia, wnioski, etc. 
+% Twierdzenia, wnioski, etc.
 \newtheorem{thm}{Thm}[section]
 \theoremstyle{plain}
 \newtheorem{tw}[thm]{Twierdzenie}
@@ -102,7 +102,7 @@
 \section*{Uwagi wstępne}
 Teorie aksjomatyczne są dwojakiego rodzaju:
 \begin{itemize}
-	\item \textit{ładne} (pod takim, czy innym względem) -- da się zrozumieć zbiory w nich definiowalne, jak również struktury ich modeli; są rozstrzygalne. 
+	\item \textit{ładne} (pod takim, czy innym względem) -- da się zrozumieć zbiory w nich definiowalne, jak również struktury ich modeli; są rozstrzygalne.
 		Przykładem tego typu teorii są gęste liniowe porządki bez końców ($\DLO$), czyli $\Th(\Q, \leq), \Th(\R, +, \cdot, \leq)$, etc.
 		Tego typu \textit{ładne} teorie są przedmiotem zainteresowania teorii modeli.
 	\item \textit{straszne} (tzw. \textit{smoki}) -- teorie te nie spełniają żadnych warunków \textit{ładności}.
@@ -119,14 +119,14 @@ Polecane podręczniki do pierwszej części to:
 
 \section{Eliminacja kwantyfikatorów}
 \begin{df}
-	Teoria $T$ ma \textit{eliminację kwantyfikatorów} (q.e.) \wtw dla dowolnej formuły $\psi(\bar{x})$ istnieje taka formuła bezkwantyfikatorowa $\phi(\bar{x})$, że $T \models \forall {\bar{x}} (\psi(\bar{x}) \iff \phi(\bar{x}))$. 
+	Teoria $T$ ma \textit{eliminację kwantyfikatorów} (q.e.) \wtw dla dowolnej formuły $\psi(\bar{x})$ istnieje taka formuła bezkwantyfikatorowa $\phi(\bar{x})$, że $T \models \forall {\bar{x}} (\psi(\bar{x}) \iff \phi(\bar{x}))$.
 \end{df}
 
 \begin{uw}
 	Jeśli w sygnaturze teorii $T$ nie występują żadne stałe, wówczas teoria ta nie ma zdań bezkwantyfikatorowych.
 	W takiej sytuacji można:
 	\begin{itemize}
-		\item albo dopuścić sytuację, że dla zdania $\phi$ bierzemy formułę bezkwantyfikatorową $\psi$ taką, że $T \vdash \forall x (\phi \iff \psi(x))$, 
+		\item albo dopuścić sytuację, że dla zdania $\phi$ bierzemy formułę bezkwantyfikatorową $\psi$ taką, że $T \vdash \forall x (\phi \iff \psi(x))$,
 		\item albo wprowadzić zmienne zdaniowe $\top$ i $\bot$ i żądać zupełności teorii $T$.
 	\end{itemize}
 \end{uw}
@@ -153,7 +153,7 @@ Ale z drugiej strony trzeba uważać, bo:
 A nadawanie niezrozumiałym formułom nazw nie czyni ich zrozumiałymi.
 
 \begin{tw}
-	$\DLO$ (teoria gęstych liniowych porządków) posiada q.e.	
+	$\DLO$ (teoria gęstych liniowych porządków) posiada q.e.
 \end{tw}
 \begin{proof}
 	Niech $\phi$ to formuła $\DLO$ w zmiennych $x_1, \ldots, x_n$.
@@ -164,20 +164,20 @@ A nadawanie niezrozumiałym formułom nazw nie czyni ich zrozumiałymi.
 		\item jeśli $a_1, \ldots, a_n, b_1, \ldots b_n \in \Q$ są takie, że dla każdej formuły bezkwantyfikatorowej $\phi$ zachodzi $(\Q, \leq) \models \phi(\bar{a}) \iff \phi(\bar{b})$, to istnieje autoizomorfizm $h(\Q, \leq)$ taki, że $h(a_i) = b_i$ dla $i \in \{1, \ldots, n\}$, a zatem dla każdej formuły $\gamma(\bar{x})$ mamy $(\Q, \leq) \models \gamma(\bar{a}) \iff \gamma(\bar{b})$,
 		\item z dokładnością do równoważności w $\DLO$ istnieje tylko skończenie wiele formuł bezkwantyfikatorowych w zmiennych $x_1, \ldots, x_n$ -- każda jest alternatywą koniunkcji takich, jak na przykład ta: $x_1 = x_2 \wedge x_1 \leq x_3 \wedge \neg x_3 \leq x_1$.
 			Takie koniunkcje oznaczamy przez $\psi_1(\bar{x}), \psi_2(\bar{x}), \ldots$
-			W takim razie 
+			W takim razie
 			\[(\Q, \leq) \models \forall \bar{x} (\phi(\bar{x}) \iff \bigwedge_{\mathclap{\substack{i \text{ takie, że istnieje } \bar{a} \in \Q^n \\ \text{ takie, że }(\Q, \leq) \models \phi(\bar{a}) \wedge \psi_i(\bar{a})}}} \psi_i(\bar{x}))\]
 	\end{itemize}
-	Zatem z zupełności 
+	Zatem z zupełności
 			\[\DLO \models \forall \bar{x} (\phi(\bar{x}) \iff \bigwedge_{\mathclap{\substack{i \text{ takie, że istnieje } \bar{a} \in \Q^n \\ \text{ takie, że }(\Q, \leq) \models \phi(\bar{a}) \wedge \psi_i(\bar{a})}}} \psi_i(\bar{x}))\]
 \end{proof}
 
 \begin{wn}
 	$\DLO$ jest \em{$o$-minimalna}, tj. dla dowolnego $A \models \DLO$ i dowolnej formuły $\phi(x,\bar{a})$, gdzie $a \in A^n$ zbiór definiowalny $\{x \in A \colon  A \models \phi(x,\bar{a})\}$ jest skończoną sumą przedziałów (być może jednopunktowych).
-\end{wn} 
+\end{wn}
 
 
 \begin{tw}
-Dla dowolnej teorii $T$, \fae 
+Dla dowolnej teorii $T$, \fae
 	\begin{enumerate}
 		\item $T$ ma eliminację kwantyfikatorów,
 		\item dla dowolnych dwóch struktur $\A, \B \models T$, dowolnego $\D$ takiego, że $\A \supseteq \D \subseteq \B$,  dowolnego $\bar{d} \in \D$, i dowolnej formuły bezkwantyfikatorowej $\psi(\bar{x}, y)$  zachodzi:
@@ -185,16 +185,16 @@ Dla dowolnej teorii $T$, \fae
 	\end{enumerate}
 \end{tw}
 \begin{proof}
-	($\Rightarrow$) Łatwe. 
+	($\Rightarrow$) Łatwe.
 
 	($\Leftarrow$) \color{red} TODO
 \end{proof}
 
 \begin{df}
 	\begin{itemize}
-		Struktura $\A$ jest: 
+		Struktura $\A$ jest:
 		\item \textit{minimalna}, jeśli każdy definiowalny podzbiór $A$ jest skończony lub koskończony,
-		\item \textit{silnie minimalna}, jeśli każda struktura $\B \equiv \A$ jest minimalna. 
+		\item \textit{silnie minimalna}, jeśli każda struktura $\B \equiv \A$ jest minimalna.
 	\end{itemize}
 
 	Teoria $T$ jest \textit{silnie minimalna} jeśli każda struktura $\B \models T$ jest minimalna.
@@ -203,7 +203,7 @@ Dla dowolnej teorii $T$, \fae
 % tu można przepisac jeszcze te zadania
 
 \begin{df}
-	$T_{\forall} = \{\phi \text{ czysto uniwersalne takie, że } T \vdash 
+	$T_{\forall} = \{\phi \text{ czysto uniwersalne takie, że } T \vdash
 	\phi\}$
 \end{df}
 
@@ -223,7 +223,7 @@ Dla dowolnej teorii $T$, \fae
 	\begin{enumerate}
 		\item dla dowolnych $\A, \B \models T$ takich, że $\A \subseteq \B$, dla dowolnego $\bar{a} \in \A$ i dowolnej formuły bezkwantyfikatorowej $\psi(\bar{x}, y)$, mamy:
 			\[
-				\B \models \exists \psi(\bar{a}, y) \Rightarrow \A \models \exists \psi(\bar{a}, y) 
+				\B \models \exists \psi(\bar{a}, y) \Rightarrow \A \models \exists \psi(\bar{a}, y)
 			\]
 		\item dla każdej $\D \models T_{\forall}$ istnieje $\A \models T$ takie, że $\D \subseteq \A$ i każde zanurzenie $\D \hookrightarrow \B \models T$ rozszerza się do zanurzenia $\A \hookrightarrow \B$,
 	\end{enumerate}
@@ -271,7 +271,7 @@ Dowodzimy następujące dwa lematy i korzystamy z Twierdzenia \ref{qe}.
 \end{proof}
 
 \begin{lem}
-	Dla $\ACF$ zachodzi warunek (2) Twierdzenia \ref{qe}.	
+	Dla $\ACF$ zachodzi warunek (2) Twierdzenia \ref{qe}.
 \end{lem}
 \begin{proof}
 TODO
@@ -298,22 +298,22 @@ Ideą dowodu dla powyższego faktu jest to, że ciała algebraicznie domknięte 
 	Wówczas jeśli $f$ jest iniekcją, to jest też surjekcją.
 \end{tw}
 \begin{proof}
-	Rozważmy zdanie $\psi_{n,k}$ wyrażające następującą własność ciała $\K$: 
+	Rozważmy zdanie $\psi_{n,k}$ wyrażające następującą własność ciała $\K$:
 	\textit{dla wszystkich $f \colon K^n \rightarrow K^n$ danych przez $p_1, p_2, \ldots, p_n$ jak wyżej, ale spełniające warunek $\text{deg } p_i \leq k$, jeśli $f$ jest iniekcją, to jest też surjekcją. }
 	Zauważmy, że $\psi_{n,k}$ jest zdaniem postaci $\forall \exists$.
 	Jeśli $\K$ jest skończone, to $\K \models \psi_{n,k}$ (w zbiorach skończonych iniekcje są też surjekcjami). %TODO można źle zrozumieć..
 	Niech $\F^{\text{alg}}_{p}$ oznacza algebraiczne domknięcie ciała $p$-elementowego $\F^{\text{alg}}_p$.
 	Zauważmy, że $$\F^{\text{alg}}_{p} = \bigcup_{m \in \N} \F_{p^m},$$ gdzie $\F_{p^m}$ to jedyne ciało o $p^m$ elementach.
 	Zdania postaci $\forall \exists$ zachowują prawdziwość w sumach łańcuchów:
-	jeśli $\psi$ jest takim zdaniem, $\A_0 \subset \A_1 \subset \ldots $ i dla każdego $m \in \N$ zachodzi $\A_m \models \psi$, to $\bigcup_{m \in \N} \A_m \models \psi$. 
+	jeśli $\psi$ jest takim zdaniem, $\A_0 \subset \A_1 \subset \ldots $ i dla każdego $m \in \N$ zachodzi $\A_m \models \psi$, to $\bigcup_{m \in \N} \A_m \models \psi$.
 	Zatem $\F^{\text{alg}} \models \psi_{n,k}$. % indeks p?
 	Z zupełności $\ACF_p$, gdzie $p$ jest pierwsza, mamy $\ACF_p \models \psi_{n,k}$.
 	Ze zwartości i zupełności $\ACF_0$ również $\ACF_0 \models \psi_{n,k}$.
-	
+
 \end{proof}
 
 \begin{df}
-	Jeśli $\K \models \ACF$ oraz $I \subseteq K[x_1, x_2, \ldots, x_n ]$ jest ideałem, to wtedy zbiory postaci $$V(I) = \{(a_1, a_2, \ldots, a_n) \in K^n \colon p( a_1, a_2, \ldots, a_n ) = 0 \text{ dla wszystkich } p \in I\}$$ nazywamy \textit{zbiorem algebraicznym}.  
+	Jeśli $\K \models \ACF$ oraz $I \subseteq K[x_1, x_2, \ldots, x_n ]$ jest ideałem, to wtedy zbiory postaci $$V(I) = \{(a_1, a_2, \ldots, a_n) \in K^n \colon p( a_1, a_2, \ldots, a_n ) = 0 \text{ dla wszystkich } p \in I\}$$ nazywamy \textit{zbiorem algebraicznym}.
 \end{df}
 
 
@@ -353,6 +353,66 @@ Ideą dowodu dla powyższego faktu jest to, że ciała algebraicznie domknięte 
 	Mamy $  L^{\text{alg}} \models \exists x_1, x_2, \ldots, x_n (p_1(\bar{x}) = 0 \wedge \ldots \wedge p_k(\bar{x}) = 0) $.
 	Ale $  K \subseteq L^{\text{alg}} $, a $ K , L \models \ACF $, czyli $ K \prec L^{\text{alg}} $.
 	Stąd $  K \models \exists x_1, x_2, \ldots, x_n (p_1(\bar{x}) = 0 \wedge \ldots \wedge p_k(\bar{x}) = 0) $
+\end{proof}
+
+% WYKŁAD 3, 14 III 2017
+
+\begin{stw}
+	 $ \R $ nie ma eliminacji kwantyfikatorów w języku $ \{+, \cdot, -, 0, 1\} $. %TODO "-" jest jednoargumentowy
+\end{stw}
+\begin{proof}
+	Gdyby miało, to $ (\R, +, \cdot, -, 0, 1) $ byłoby silnie minimalne.
+	Ale $\exists y (y^2 = x) $ definiuje nieskończony, konieskończony podzbiór $ \R $.
+\end{proof}
+
+\begin{df}
+	 $ \RCF $ to teoria w języku $ \{ +, \cdot, -, 0, 1, \leq \} $ z następującą aksjomatyką:
+	 \begin{enumerate}
+		 \item $ \{+, \cdot, -, 0, 1\} $ spełnia aksjomaty ciała,
+		 \item po dodaniu $\leq $ mamy ciało uporządkowane, tzn. spełnione jest:
+			 \begin{itemize}
+				 \item $ \leq $ jest liniowym porządkiem,
+				 \item $ \forall x y (x, y \geq 0 \Rightarrow x\cdot y \geq 0) $,
+				 \item $\forall x y z (x \leq y \Rightarrow x + z \leq y + z )  $,
+			 \end{itemize}
+
+		 \item $ \forall x (x \geq 0 \Rightarrow \exists y ( y^2 = x )) $,
+		 \item dla wszystkich nieparzystych $ n \in \N$ zachodzi $ \forall y_0 y_1 \ldots y_n (y_n \neq 0 \Rightarrow \exists x (y_n \cdot x^n + \ldots + y_1 \cdot x + y_0 = 0)) $
+	 \end{enumerate}
+
+\end{df}
+
+Motywacją do badania $ \RCF $ jest m. in. 17. problem Hilberta, który brzmi następująco:
+\textit{Czy każda funkcja wymierna $ f \in \R(x_1, x_2, \ldots, x_n ) $ taka, że $ f \geq 0 $ jest sumą kwadratów funkcji wymiernych?}
+
+Naszym celem na teraz będzie pokazanie w kilku krokach, że $ \RCF $ ma eliminację kwantyfikatorów.
+
+\begin{tw}
+	 Niech $ (R, \leq) $ będzie ciałem uporządkowanym.
+	 Następujące warunki są równoważne:
+	 \begin{enumerate}
+		 \item $(R, \leq) \models \RCF $,
+		 \item $R(i) := \sfrac{R[x]}{(x^2 + 1)} $ jest acf (ciałem algebraicznie domkniętym),
+		 \item $ (R, \leq) $ nie ma żadnego właściwego rozszerzenia algebraicznego uporządkowanego zgodnie z $ \leq $.
+	 \end{enumerate}
+
+\end{tw}
+\begin{proof}
+	 TODO
+\end{proof}
+
+\begin{wn}
+	Jeśli $ (R, \leq) \models \RCF $, to $ (R, \leq) $ ma własność Darboux dla wielomianów:
+	jeśli $ p(a) \cdot p(b) < 0 $ oraz $ a <b $, to istnieje $c \in (a, b) $ takie, że $ p(c) = 0 $, gdzie $ p \in R[x] $.
+\end{wn}
+\begin{proof}
+	 Bez utraty ogólności $ p $ jest nierozkładalny.
+	 A zatem, na mocy punktu 2. z twierdzenia powyżej, $ p $ jest stopnia $ 1 $, lub $ 2 $ z $ \Delta < 0$.
+	 \begin{itemize}
+		 \item Jeśli stopnia $ 1 $, to jest ok.
+		 \item Jeśli stopnia $2$ z $\Delta < 0 $, to $ p $ ma stały znak na $ R $.
+	 \end{itemize}
+
 \end{proof}
 
 
