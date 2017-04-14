@@ -104,7 +104,7 @@
 
 \section*{Uwagi wstępne}
 Teorie aksjomatyczne są dwojakiego rodzaju:
-\begin{itemize}
+\begin{itemize} % może oswojone v dzikie?
 	\item \textit{ładne} (pod takim, czy innym względem) -- da się zrozumieć zbiory w nich definiowalne, jak również struktury ich modeli; są rozstrzygalne.
 		Przykładem tego typu teorii są gęste liniowe porządki bez końców ($\DLO$), czyli $\Th(\Q, \leq), \Th(\R, +, \cdot, \leq)$, etc.
 		Tego typu \textit{ładne} teorie są przedmiotem zainteresowania teorii modeli.
@@ -453,6 +453,34 @@ Naszym celem na teraz będzie pokazanie w kilku krokach, że $ \RCF $ ma elimina
 			Niech $ c := \max (c_1, \ldots, c_n)$ oraz $ d := \min (d_1, \ldots, d_n)$.
 			Wtedy dla dowolnego elementu $ b' \in (c,d) \cup K $ zachodzi $ (K, \leq) \models \psi(\bar{a},\tilde{b})$.
 	\end{enumerate}
+	\begin{lem}
+		 $\RCF_{\forall}$ to teoria pierścieni uporządkowanych.
+	\end{lem}
+	\begin{proof}
+		 \textbf{($ \subseteq$)} Każda podstruktura ciała uporządkowanego jest pierścieniem uporządkowanym.
+		 \\\textbf{($ \supseteq$)} Niech $ (P, \leq)$ będzie pierścieniem uporządkowanym, a $Q$ niech będzie ciałem ułamków $P$.
+		 Rozszerzamy $\leq$ w kanoniczny sposób na $Q$ dostając ciało uporządkowane $ (Q, \leq)$.
+		 Weźmu maksymalne ciało uporządkowane $(R, \leq)$ będące algebraicznym rozszerzeniem $ (Q, \leq)$
+		 (na mocy lematu Kuratowskiego-Zorna).
+		 Na mocy charakteryzacji rcf-ów z twierdzenia \ref{tw:rcf} mamy $(R, \leq) \models \RCF$,
+		 a zatem $(P, \leq) \models \RCF_{\forall}$.
+	\end{proof}
+	\begin{df}
+		 Niech $(Q, \leq)$ będzie ciałem uporządkowanym.
+		 Dowolny rcf będący algebraicznym rozszerzeniem $(Q, \leq)$ uporządkowanym zgodnie z $ \leq$ nazywamy
+		 \textit{rzeczywistym domknięciem} $ (Q, \leq)$.
+	\end{df}
+	\begin{lem}
+		 Jeśli mamy pierścień uporządkowany $ (D, \leq)$,
+		 $(Q, \leq)$ jest ciałem ułamków $D$ uporządkowanym przez kanoniczne rozszerzenie $\leq$,
+		 $ (R, \leq)$ jest rzeczywistym domknięciem $ (Q, \leq)$
+		 oraz $ (Q, \leq) \subseteq (K, \tilde{\leq}) \models \RCF$,
+		 to istnieje zanurzenie $ (R, \leq)$ w $ (K, \tilde{\leq})$ będące identycznością na $ Q$
+	\end{lem}
+	\begin{proof}
+		 TODO
+	\end{proof}
+
 
 
 
