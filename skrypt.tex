@@ -486,5 +486,103 @@ Naszym celem na teraz będzie pokazanie w kilku krokach, że $ \RCF $ ma elimina
 
 \end{proof}
 
+\begin{wn}
+	$ \RCF$ jest zupełna, rozstrzygalna i \textit{o}-minimalna.
+\end{wn}
+
+\begin{uw}
+	 Z rozstrzygalności $ \RCF$ wynika rozstrzygalność ,,geometrii elementarnej".
+\end{uw}
+
+\begin{df}
+	 Niech $ (R, \leq)$ będzie rcf-em.
+	 Zbiór \textit{semialgebraiczny} to $ S \subseteq R^n$ będący skończoną sumą zbiorów postaci
+	 \[
+		 \{\bar{x} \in R^n \colon p_1(\bar{x}) = \ldots = p_l(\bar{x}) = 0, q_1(\bar{x}) > 0, \ldots, q_k(\bar{x}) > 0 \}
+	 \]
+\end{df}
+
+\begin{uw}
+	 Rodzina zbiorów semialgebraicznych jest domknięta na rzutowania.
+\end{uw}
+
+% WYKŁAD 21 III 2017
+
+Zastanówmy się nad następującą rzeczą: jakie ciała są porządkowalne?
+Wiemy bowiem, że $ \C$ lub ciała charakterystyki $ p$ nie są porządkowalne.
+
+\begin{df}
+	 $ K$ jest ciałem \textit{formalnie rzeczywistym}, jeśli $ -1$ nie jest sumą kwadratów, tzn. $ -1 \not \in \Sigma K^2$.
+\end{df}
+\begin{df}
+         Niech $ K$ będzie ciałem formalnie rzeczywistym.
+         \textit{Stożkiem} w $ K$ nazywamy taki zbiór $P$,
+	 że $\Sigma K^2 \subseteq P \subseteq K$, $P$ jest domknięty na działania $+, \cdot$ oraz $-1 \not \in P$.
+\end{df}
+
+\begin{uw}
+	W każdym ciele formalnie rzeczywistym $K$ jest przynajmniej jeden stożek, mianowicie $\Sigma K^2$.
+\end{uw}
+\begin{stw}
+	Jeśli $P$ jest stożkiem oraz $-a \not \in P$, to zbiór $$P[a] := \{x + a \cdot y \colon x, y \in P\}$$ też jest stożkiem.
+\end{stw}
+\begin{proof}
+	Wystarczy pokazać, że $-1 \not \in P[a]$.
+	Załóżmy przeciwnie: niech $-1 = x + a \cdot y$ dla pewnych $x, y \in P$.
+	Musi być $y \neq 0$, bo $-1 \not \in P$.
+	Więc
+	\begin{align*}
+		-a \cdot y &= x + 1 \\
+		-a &= \frac{1}{y} \cdot (x + 1) \\
+		-a &= \frac{1}{y^2} \cdot y \cdot (x + 1).
+	\end{align*}
+	Prawa strona ostatniego równania należy do  $P$, tak więc sprzeczność.
+\end{proof}
+\begin{wn}
+	 Niech $K$ będzie ciałem formalnie rzeczywistym a $P$ stożkiem w $K$.
+	 $P$ rozszerza się do stożka $Q$ takiego, że dla każdego $a \in K$ jest $a \in Q$ lub $-a \in Q$.
+\end{wn}
+\begin{proof}
+	 Niech $Q$ będzie maksymalnym stożkiem zawierającym $P$.
+	 Weźmy $a \in K$ i załóżmy, że $a \not \in P$.
+	 Wtedy $Q[-a]$ jest stożkiem, a z maksymalności $Q$ mamy $-a \in Q$.
+\end{proof}
+
+\begin{wn}
+	\label{wn:forrz}
+	 Niech $K$ będzie ciałem formalnie rzeczywistym oraz niech $a \not \in \Sigma K^2$.
+	 Wówczas $K$ ma uporządkowanie $\leq$, w którym $a < 0$.
+\end{wn}
+\begin{proof}
+	 $\Sigma K^2$ jest stożkiem.
+	 Wystarczy więc w dowodzie wniosku powyżej za $P$ wziąć $\Sigma K^2$ i otrzymany maksymalny stożek $Q$ porządkuje $K$.
+\end{proof}
+
+\begin{tw}
+	 17. problem Hilberta ma pozytywne rozwiązanie:
+	 jeśli $f \in \R(x_1, x_2, \ldots, x_n)$ oraz $\forall \bar{x} \in \R^n \, f(\bar{x}) \geq 0$,
+	 to są $g_1, g_2, \ldots \in \R(x_1, x_2, \ldots, x_n)$ takie, że $f = \Sigma_i g_i^2$
+\end{tw}
+\begin{proof}
+	 Załóżmy przeciwnie.
+	 $K := \R(x_1, x_2, \ldots, x_n) $ jest ciałem formalnie rzeczywistym.
+	 Założyliśmy, że $f \not \in \Sigma K^2$, dlatego na mocy wniosku \ref{wn:forrz} istnieje takie uporządkowanie $\leq$,
+	 że $f < 0$.
+	 Zauważmy, że $\leq$ rozszerza zwykły porządek na $\R$ (bo każdy nieujemny element $\R$ w $\leq$ jest kwadratem).
+	 Niech $(L, \leq)$ będzie rzeczywistym domknięciem $(K, \leq)$.
+	 \[
+	 	 (L, \leq) \models f(x_1, x_2, \ldots, x_n ) < 0
+	 \]
+	 \[
+	 	 (L, \leq) \models \exists \bar{x}  \, f(\bar{x}) < 0.
+	 \]
+	 Z modelowej zupełności $\RCF$ mamy $(\R, \leq) \preccurlyeq (L, \leq)$, więc
+	 \[
+	 	 (\R, \leq) \models  \exists \bar{x}  \, f(\bar{x}) < 0,
+	 \]
+Zatem sprzeczność.
+\end{proof}
+
+
 
 \end{document}
