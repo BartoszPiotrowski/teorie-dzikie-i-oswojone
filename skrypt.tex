@@ -93,7 +93,8 @@
 
 % Inne
 \newcommand{\Th}{\text{Th}}
-
+\newcommand{\Diag}{\text{Diag}}
+\newcommand{\DiagEl}{\text{Diag}_{\text{el}}}
 
 \begin{abstract}
 	Notatki do wykładu \textit{Logika matematyczna II} dra Leszka Kołodziejczyka, prowadzonego w semestrze letnim roku akademickiego 2016/17.
@@ -583,6 +584,45 @@ Wiemy bowiem, że $ \C$ lub ciała charakterystyki $ p$ nie są porządkowalne.
 Zatem sprzeczność.
 \end{proof}
 
+% Tu idą uzupełnienia luk w dowodzie tego i owego. Trzeba chyba to uporządkować.
+
+\section{Typy}
+
+\begin{df}
+	\textit{Typ} (czy też $n$-\textit{typ}) nad teorią $T$ to maksymalny, niesprzeczny z $T$ zbiór formuł o zmiennych wolnych należących do zbioru $\{x_1, x_2, \ldots, x_n\}$.
+		Jeśli $\A$ to struktura oraz $D \subseteq A$, to \textit{typem nad $\A$ z parametrami z $D$} nazywamy typ nad teorią $\Th(\A_D)$, gdzie $\A_D$ to rozszerzenie struktury $\A$ o stałe dla każdego elementu z $D$.
+		Podzbiór typu nazywamy \textit{typem częściowym}.
+\end{df}
+
+\begin{ozn}
+	 Typy typowo oznaczamy przez $p(x_1, x_2, \ldots, x_n), q(x_1, x_2, \ldots, x_n)$, natomiast
+	 ~\begin{itemize}
+		 \item przez $S_n(T)$ oznaczamy zbiór $n$-typów nad $T$,
+		 \item przez $S_n^{\A}(D)$ oznaczamy zbiór $n$-typów nad $\A$ z parametrami z $D$.
+	 \end{itemize}
+\end{ozn}
+
+\begin{df}
+	Typ $p(\bar{x})$ jest \textit{realizowany} w $\A$, jeśli jest takie $\bar{a} \in A^n$, że dla każdego $\phi(\bar{x}) \in p(\bar{x})$ zachodzi $\A \models \phi(\bar{a})$.
+	W przeciwnym przypadku mówimy, że $\A$ \textit{omija} typ $p(\bar{x})$.
+\end{df}
+
+\begin{prz}
+	Rozważmy następujące typy nad $(\Q, \leq)$ z parametrami z $\N$:
+	\begin{itemize}
+		\item $p_1(x) = \{\phi(x, \bar{n}) \colon \Q \models \phi(\frac{1}{2}, \bar{n})\}$,
+		\item $p_2(x)$ będący maksymalnym, niesprzecznym rozszerzeniem zbioru formuł $\{x > n \colon n \in \N\}$.
+	\end{itemize}
+	Typ $p_1$ jest realizowany, natomiast $p_2$ jest ominięty.
+\end{prz}
+
+\begin{tw}
+	 Jeśli $p$ jest typem nad $\A$ z parametrami z $D$, gdzie $D \subseteq A$,
+	 to istnieje $\tilde{\A} \succcurlyeq \A$ realizujący $p$.
+\end{tw}
+\begin{proof}
+	Teoria $\DiagEl(\A) \cup p$ jest niesprzeczna, a jej model jest elementarnym rozszerzeniem $\A$.
+\end{proof}
 
 
 \end{document}
