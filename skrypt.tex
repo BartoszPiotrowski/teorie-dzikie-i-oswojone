@@ -595,7 +595,7 @@ Zatem sprzeczność.
 \end{df}
 
 \begin{ozn}
-	 Typy typowo oznaczamy przez $p(x_1, x_2, \ldots, x_n), q(x_1, x_2, \ldots, x_n)$, natomiast
+	 Typy typowo oznaczamy przez $p(x_1, x_2, \ldots, x_n), q(x_1, x_2, \ldots, x_n)$, natomiast:
 	 ~\begin{itemize}
 		 \item przez $S_n(T)$ oznaczamy zbiór $n$-typów nad $T$,
 		 \item przez $S_n^{\A}(D)$ oznaczamy zbiór $n$-typów nad $\A$ z parametrami z $D$.
@@ -603,7 +603,7 @@ Zatem sprzeczność.
 \end{ozn}
 
 \begin{df}
-	Typ $p(\bar{x})$ jest \textit{realizowany} w $\A$, jeśli jest takie $\bar{a} \in A^n$, że dla każdego $\phi(\bar{x}) \in p(\bar{x})$ zachodzi $\A \models \phi(\bar{a})$.
+	Typ $p(\bar{x})$ jest \textit{realizowany} w $\A$, jeśli jest takie $\bar{a} \in A^n$, że dla każdej formuły $\phi(\bar{x}) \in p(\bar{x})$ zachodzi $\A \models \phi(\bar{a})$.
 	W przeciwnym przypadku mówimy, że $\A$ \textit{omija} typ $p(\bar{x})$.
 \end{df}
 
@@ -623,6 +623,74 @@ Zatem sprzeczność.
 \begin{proof}
 	Teoria $\DiagEl(\A) \cup p$ jest niesprzeczna, a jej model jest elementarnym rozszerzeniem $\A$.
 \end{proof}
+
+% WYKŁAD 28 III 2017
+
+Pytanie: jakie typy można omijać?
+
+
+\begin{df}
+	Typ $p(\bar{x})$ nad teorią $T$ (być może częściowy) jest \textit{izolowany},
+	jeśli istnieje formuła $\phi(\bar{x})$ taka, że $T + \exists \bar{x}\, \phi(\bar{x})$ jest niesprzeczne oraz dla każdego $\psi(\bar{x}) \in p(\bar{x})$, $T \vdash \forall \bar{x} \, (\phi(\bar{x}) \Rightarrow \psi(\bar{x}))$
+\end{df}
+
+\begin{stw}
+	Jeśli typ $p(\bar{x})$ nad $T$ jest izolowany, to jest realizowany w każdym modelu $T + \exists \bar{x} \, \phi(\bar{x})$.
+	W szczególności, jeśli $T$ jest zupełna, to $p(\bar{x})$ jest realizowany w każdym modelu $T$.
+\end{stw}
+
+\begin{tw}[O omijaniu typów]
+	Niech $T$ będzie teorią w przeliczalnym języku, a $p(\bar{x})$ niech będzie typem nad $T$, który nie jest izolowany.
+	Wówczas istnieje model $\A \models T$, który omija $p$.
+\end{tw}
+\begin{proof}
+	Do języka dodajemy nowe stałe $c_1, c_2, \ldots$
+	Niech $\phi_1, \phi_2, \ldots $ będzie listą wszystkich zdań w tym rozszerzonym języku, a $\psi_1(x), \psi_2(x), \ldots$ będzie listą wszystkich formuł z jedną zmienną wolną w rozszerzonym języku.
+	Definiujemy łańcuch teorii $T = T_0 \subseteq T_1 \subseteq T_2 \subseteq \ldots$
+	w sposób następujący:
+	\begin{itemize}
+		\item \textit{Krok $3i+1$:}
+			\[
+				 T_{3i+1} := \left\{\begin{array}{lr}
+						 T_{3i} + \phi_i, & \text{jeśli niesprzeczna,}\\
+						 T_{3i} + \neg \phi_i, & \text{w p.p.}
+       						 \end{array}
+			\]
+
+		\item \textit{Krok $3i+2$:}
+			Niech $c_j$ będzie pierwszą stałą nie występującą w teorii $T_{3i+1}$.
+			Wówczas $T_{3i+2} := T_{3i+1} + \exists x \, \psi_i(x) \Rightarrow \psi_i(c_j)$.
+		\item \textit{Krok $3i+3$:}
+			Niech $\bar{c}_i$ będzie $i$-tą $n$-tką nowych stałych.
+			$T_{3i+2}$ jest postaci $T + \delta(\bar{c}_i, \bar{d})$, gdzie $\delta(\bar{x}, \bar{y})$ jest formułą a $\bar{d}$ to nowe stałe spoza $\bar{c}_i$.
+			Wiadomo, że $T + \exists \bar{x} \, \exists \bar{y} \, \delta(\bar{x}, \bar{y})$ jest niesprzeczna, a zatem z nieizolowalności $p(\bar{x})$ istnieje $\pi(\bar{x}) \in p(\bar{x})$ takie, że $T + \exists \bar{x} \, \exists \bar{y} \, \delta(\bar{x}, \bar{y}) \not \vdash \pi(\bar{x})$.
+
+			Bierzemy $T_{3i+3} := T_{3i+2} + \neg \pi(\bar{c}_i)$.
+	\end{itemize}
+	Zauważmy, że $\bigcup_n T_n$ jest zupełna i ma własność zaświadczania przez stałe.
+	Niech $\B \models \bigcup_n T_n$ oraz niech $\widetilde{\A} \preccurlyeq \B$, gdzie uniwersum $\widetilde{\A}$ to $\{c_1^{\B}, c_2^{\B}, \ldots\}$.
+	$\widetilde{\A}$ jest podstrukturą $\B$ na mocy zaświadczania przez stałe, a podstrukturą elementarą na mocy kryterium Vaughta -- wszystko z powodu kroków $3i+2$.
+	Niech $\A$ będzie reduktem $\widetilde{\A}$ do języka $T$.
+	$\A \models T$, bo $\widetilde{\A} \models \bigcup_n T_n \supseteq T$.
+	Ponadto $\A$ omija typ $p$ na mocy kroków $3i+3$.
+	% TODO wyjaśnij to z LAK
+
+
+\end{proof}
+
+
+% WYKŁAD 4 IV 2017
+
+\begin{df}[System dowodowy dla FO$(\exists^{\geq \aleph_1})$]
+	 Dla dowolnego rozsądnego systemu dowodowego dla FO (w szczegóności umożliwiającego zamianę zmiennych związanych)
+	 dodajemy następujące aksomaty i reguły:
+	 \begin{enumerate}
+		 \item $\neg \exists^{\geq \aleph_1} x \, (x = y \vee x = z)$,
+		 \item $\forall x \,(\phi \Rightarrow \psi) \Rightarrow (\exists^{\geq \aleph_1} x \, \phi \Rightarrow \exists^{\geq \aleph_1} x \, \psi)$,
+		 \item $\exists^{\geq \aleph_1} y \exists x \, \phi \Rightarrow (\exists x \exists^{\geq \aleph_1} y \, \phi \vee \exists^{\geq \aleph_1} \exists y \, \phi)$.
+	 \end{enumerate}
+
+\end{df}
 
 
 \end{document}
