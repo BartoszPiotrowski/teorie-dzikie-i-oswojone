@@ -640,6 +640,7 @@ Pytanie: jakie typy można omijać?
 \end{stw}
 
 \begin{tw}[O omijaniu typów]
+	\label{tw:omi}
 	Niech $T$ będzie teorią w przeliczalnym języku, a $p(\bar{x})$ niech będzie typem nad $T$, który nie jest izolowany.
 	Wówczas istnieje model $\A \models T$, który omija $p$.
 \end{tw}
@@ -723,6 +724,81 @@ Pytanie: jakie typy można omijać?
 
 
 % WYKŁAD 4 IV 2017
+\section{Modele małe i duże}
+\begin{df}
+	 Niech $\kappa$ będzie liczbą kardynalną.
+	 Model $\A$ nazywamy $\kappa$-nasyconym, jeśli dla każdego $D \subseteq A$, $|D| < \kappa$, każdy typ w $S^{\A}_n(D)$ jest realizowany w $\A$.
+	Model $\A$ jest nasycony, jeśli jest $|A|$-nasycony.
+\end{df}
+
+\begin{uw}
+	Nasycenie wystarczy sprawdzać dla $1$-typów (przy założeniu $\kappa \geq \aleph_0$).
+\end{uw}
+
+\begin{stw}
+	 Jeśli $T$ jest przeliczalną i zupełną teorią, to każde dwa przeliczalne i nasycone modele $T$ są izomorficzne.
+\end{stw}
+\begin{proof}
+	 TODO
+\end{proof}
+%TODO przy typach jednolicić indeks górny/dolny
+\begin{stw}
+	Teoria $T$ ma przeliczalny model nasycony wtedy i tylko wtedy, gdy $\forall n \,|S_n(T)| \leq \aleph_0$.
+\end{stw}
+\begin{proof}
+	 \textbf{($\Rightarrow$)} Oczywiste.
+	 \\\textbf{($\Leftarrow$)} Jeśli w $S_n(T)$ jest tylko przeliczalnie wiele typów dla dowolnego $n$, to również dla dowolnej skończonej krotki parametrów $a_1, a_2, \ldots, a_k \in A$, gdzie $\A \models T$, jest tylko przeliczalnie wiele typów o $n$ zmiennych z parametrami $a_1, a_2, \ldots, a_k$ (bo to jeden z możliwych typów nad $k+n$ zmiennymi).
+	 Konstruujemy model przeliczalnie nasycony jako sumę łańcucha elementarnego $\A_1, \A_2, \ldots$ złożonego z przeliczanych modeli $T$ -- po kolei realizując wszystkie typy ze wszystkich krotek parametrów pojawiających się w trakcie konstrukcji.
+
+\end{proof}
+
+\begin{df}
+	$\A$ jest \textit{modelem atomowym}, jeśli dla dowolnego $n \in \N$ oraz dowolnych $a_1, a_2, \ldots, a_n \in A$ typ $\text{tp}^{\A}(a_1, a_2, \ldots, a_n)$ jest izolowany.
+\end{df}
+%TODO wyjaśnij oznaczenie tp^{\A}(...)
+\begin{df}
+	Model $\A \models T$ jest \textit{modelem pierwszym} dla $T$,
+	jeśli dla dowolnego modelu $\B \models T$ zachodzi $\A \preccurlyeq \B$.
+\end{df}
+\begin{stw}
+	 Model $\A \models T$ jest pierwszy wtedy i tylko wtedy, gdy jest przeliczany i atomowy.
+\end{stw}
+\begin{proof}
+	\textbf{($\Rightarrow$)} Oczywiste (ze względu na twierdzenie \ref{tw:omi} o omijaniu typów).
+	\\\textbf{($\Leftarrow$)}
+	Załóżmy, że $\A$ jest przeliczalny i atomowy, i niech $A = \{a_1, a_2, \ldots, a_n\}$.
+	Weźmy $B \models T$
+\end{proof}
+%TODO ta gdzie n \in \N czasem powinno być \N^+
+\begin{wn}
+	 Każde dwa modele pierwsze dla danej teorii są izomorficzne.
+\end{wn}
+\begin{proof}
+	Obydwa są przeliczlne i atomowe, więc istnieje dla nich strategia w $G^{\infty}$.
+\end{proof}
+
+\begin{wn}
+	Jeśli dla każdego $n$ jest $|S^n(T)| \leq \aleph_0$, to $T$ ma model pierwszy.
+	W szczególności, jeśli $T$ ma model przeliczalny i nasycony, to ma model pierwszy.
+\end{wn}
+\begin{proof}
+	 Skoro wszystkich typów jest co najwyżej przeliczalnie wiele, to nieizolowanych też.
+	 Można je wszystkie ominąć w jednym modelu przeliczalnym.
+\end{proof}
+
+Ile modeli przeliczalnych może mieć przeliczalna i zupełna teoria?
+\begin{itemize}
+	\item $1$, np. $\DLO$,
+	\item $2$ mieć nie może,
+	\item $3, 4, 5, \ldots$ -- może mieć,
+	\item $\aleph_0$, np. $\Th(\Z, S)$,
+	\item $\aleph_1$ przy założeniu $\aleph_1 <  \mathfrak{c}$ -- nie wiadomo, hipoteza Voughta mówi, że nie może tyle mieć,
+	\item $ \mathfrak{c}$, np. $\RCF$.
+\end{itemize}
+Więcej być nie może.
+
+
+\section{Przeliczalna pełność i zwartość dla FO $(\exists^{\geq \aleph_0})$}
 
 \begin{df}[System dowodowy dla FO$(\exists^{\geq \aleph_1})$]
 	 Dla dowolnego rozsądnego systemu dowodowego dla FO (w szczególności umożliwiającego zamianę zmiennych związanych)
