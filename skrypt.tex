@@ -595,10 +595,10 @@ Zatem sprzeczność.
 \end{df}
 
 \begin{ozn}
-	 Typy typowo oznaczamy przez $p(x_1, x_2, \ldots, x_n), q(x_1, x_2, \ldots, x_n)$, natomiast:
+	Typy typowo oznaczamy przez $p(\bar{x}), q(\bar{x})$, natomiast:
 	 ~\begin{itemize}
 		 \item przez $S_n(T)$ oznaczamy zbiór $n$-typów nad $T$,
-		 \item przez $S_n^{\A}(D)$ oznaczamy zbiór $n$-typów nad $\A$ z parametrami z $D$.
+		 \item przez $S_n^{\A}(D)$ oznaczamy zbiór $n$-typów nad $\A$ z parametrami z $D \subseteq A$.
 	 \end{itemize}
 \end{ozn}
 
@@ -616,12 +616,12 @@ Zatem sprzeczność.
 	Typ $p_1$ jest realizowany, natomiast $p_2$ jest ominięty.
 \end{prz}
 
-\begin{tw}
-	 Jeśli $p$ jest typem nad $\A$ z parametrami z $D$, gdzie $D \subseteq A$,
+\begin{stw}
+	Jeśli $p(\bar{x})$ jest typem nad $\A$ z parametrami z $D \subseteq A$,
 	 to istnieje $\tilde{\A} \succcurlyeq \A$ realizujący $p$.
-\end{tw}
+\end{stw}
 \begin{proof}
-	Teoria $\DiagEl(\A) \cup p$ jest niesprzeczna, a jej model jest elementarnym rozszerzeniem $\A$.
+	Teoria $\DiagEl(\A) \cup p(\bar{x})$ jest niesprzeczna, a jej model jest elementarnym rozszerzeniem $\A$.
 \end{proof}
 
 % WYKŁAD 28 III 2017
@@ -675,15 +675,58 @@ Pytanie: jakie typy można omijać?
 	Ponadto $\A$ omija typ $p$ na mocy kroków $3i+3$.
 	% TODO wyjaśnij to z LAK
 
+\end{proof}
+\begin{uw}
+	 W ten sam sposób można naraz ominąć przeliczalnie wiele typów.
+\end{uw}
 
+\begin{tw}
+	 Niech $T$ będzie zupełną teorią w przeliczalnym języku.
+	 Następujące warunki są równoważne:
+	 \begin{enumerate}
+		 \item $T$ jest $\omega$-kategoryczna,
+		 \item Dla każdego $n \in \N$, każdy typ w $S^n(T)$ jest izolowany,
+		 \item Dla każdego $n \in \N$, $|S^n(T)| < \aleph_0$,
+		 \item Dla każdego $n \in \N$, z dokładnością do równoważności w $T$ istnieje tylko skończenie wiele formuł ze zmiennymi wolnymi $x_1, x_2, \ldots, x_n$.
+	 \end{enumerate}
+\end{tw}
+\begin{proof}
+	\textbf{($4 \Rightarrow 3$)} Jeśli dla danego $n$, $\phi_1(\bar{x}), \phi_2(\bar{x}), \ldots, \phi_k(\bar{x})$  to wszystkie formuły z punktu 4, to typ z $S^n(T)$ możemy określić na co najwyżej $2^k$ sposobów -- wskazując, które formuły do niego należą.
+
+	\textbf{($3 \Rightarrow 2$)} Niech $p_1, p_2, \ldots, p_k$ to wszystkie typy w $S^n(T)$.
+	Weźmy typ $p_i$.
+	Dla każdego $j \neq i$ istnieje formuła $\phi_{ij}(\bar{x})$ taka, że jednocześnie $\phi_{ij}(\bar{x}) \in p_i$ oraz $\neg \phi_{ij}(\bar{x}) \in p_j$.
+	Wtedy $p_i$ jest izolowany przez $\bigwedge_{i \neq j} \phi_{ij}(\bar{x})$.
+
+	\textbf{($2 \Rightarrow 1$)} Niech $\A, \B$ będą modelami $T$.
+	Pokażemy, że Duplikator wygrywa $G^{\infty}(\A, \B)$, co da 1.
+	Strategia Duplikatora:
+	jeśli po $k$ rundach wybrane są elementy $a_1, a_2, \ldots, a_k \in \A$ oraz $b_1, b_2, \ldots, b_k \in \B$, to $\text{tp}^{\A}(a_1, a_2, \ldots, a_k) = \text{tp}^{\B}(b_1, b_2, \ldots, b_k)$.
+	Tak można zrobić, bo np. $\text{tp}^{\A}(a_1, a_2, \ldots, a_{k+1})$ izolowany formułą
+	$\phi(x_1, x_2, \ldots, x_{k+1})$, ale $\exists x_{k+1} \, \phi(x_1, x_2, \ldots, x_{k+1}) \in \text{tp}^{\A}(a_1, a_2, \ldots, a_k)$.
+
+	\textbf{($1 \Rightarrow 2$)} Załóżmy nie wprost, że w $S^n(T)$ jest typ nieizolowany $p(\bar{x})$.
+	Wtedy istnieje przeliczalny model $\A$ realizujący $p$ oraz drugi model przeliczalny $\B$ omijający $p$.
+	Oczywiście $\A \not \simeq \B$.
+
+	\textbf{($2 \Rightarrow 3$)}
+	Załóżmy nie wprost, że dla pewnego $n$ typów w $S^n(T)$ jest nieskończenie wiele.
+	Zauważmy, że istnieje formuła $\psi(\bar{x})$ taka, że zarówno ona, jak i jej negacja występują w nieskończenie wielu typach.
+	W przeciwnym przypadku zbiór $\{\phi(\bar{x}) \colon \phi \text{ występuje w nieskończenie wielu typach}\}$ byłby typem nieizolowanym.
+	Podobnie, jeśli $\psi_1(\bar{x})$ występuje w nieskończenie wielu typach, to istnieje $\psi_2(\bar{x})$ takie, że zarówno $\psi_1(\bar{x})\wedge \psi_2(\bar{x})$, jak i $\psi_1(\bar{x})\wedge \neg \psi_2(\bar{x})$ występują w nieskończenie wielu typach.
+	Istnieje typ $\{\psi_i(\bar{x}) \colon i \in \N\}$ taki, że dla każdego $k $ koniunkcja $\psi_1(\bar{x}) \wedge \psi_2(\bar{x}) \wedge \ldots \wedge \psi_k(\bar{x})$ występuje w nieskończenie wielu typach.
+	Ten typ nie może być izolowany.
+
+	\textbf{($3 \Rightarrow 4$)}
+	Formuły nierozróżnialne przez typy są równoważne.
 \end{proof}
 
 
 % WYKŁAD 4 IV 2017
 
 \begin{df}[System dowodowy dla FO$(\exists^{\geq \aleph_1})$]
-	 Dla dowolnego rozsądnego systemu dowodowego dla FO (w szczegóności umożliwiającego zamianę zmiennych związanych)
-	 dodajemy następujące aksomaty i reguły:
+	 Dla dowolnego rozsądnego systemu dowodowego dla FO (w szczególności umożliwiającego zamianę zmiennych związanych)
+	 dodajemy następujące aksjomaty i reguły:
 	 \begin{enumerate}
 		 \item $\neg \exists^{\geq \aleph_1} x \, (x = y \vee x = z)$,
 		 \item $\forall x \,(\phi \Rightarrow \psi) \Rightarrow (\exists^{\geq \aleph_1} x \, \phi \Rightarrow \exists^{\geq \aleph_1} x \, \psi)$,
