@@ -101,7 +101,7 @@
 
 \begin{abstract}
 	Notatki do wykładu \textit{Logika matematyczna II} dra Leszka Kołodziejczyka, prowadzonego w semestrze letnim roku akademickiego 2016/17.
-	Spisywane przez Jędrzeja Kołodziejskiego i Bartosza Piotrowskiego.
+	Spisywane przez Bartosza Piotrowskiego i \ldots.
 	Uwagi o błędach są mile widziane -- proszę pisać na \texttt{bartoszpiotrowski@post.pl}
 \end{abstract}
 
@@ -109,10 +109,10 @@
 \section*{Uwagi wstępne}
 Teorie aksjomatyczne są dwojakiego rodzaju:
 \begin{itemize} % może oswojone v dzikie?
-	\item \textit{ładne} (pod takim, czy innym względem) -- da się zrozumieć zbiory w nich definiowalne, jak również struktury ich modeli; są rozstrzygalne.
+	\item \textit{oswojone} (pod takim, czy innym względem) -- da się zrozumieć zbiory w nich definiowalne, jak również struktury ich modeli; są rozstrzygalne.
 		Przykładem tego typu teorii są gęste liniowe porządki bez końców ($\DLO$), czyli $\Th(\Q, \leq), \Th(\R, +, \cdot, \leq)$, etc.
-		Tego typu \textit{ładne} teorie są przedmiotem zainteresowania teorii modeli.
-	\item \textit{straszne} (tzw. \textit{smoki}) -- teorie te nie spełniają żadnych warunków \textit{ładności}.
+		Tego typu \textit{oswojone} teorie są przedmiotem zainteresowania teorii modeli.
+	\item \textit{dzikie} (vel \textit{smoki}) -- teorie te nie spełniają żadnych warunków bycia \textit{oswojoną}.
 		Przykłady: $\ZFC$, $\Th(\N, +, \cdot, \leq)$.
 \end{itemize}
 Pierwsza część niniejszego kursu będzie dotyczyła teorii \textit{ładnych}, druga zaś -- \textit{smoków}.
@@ -839,10 +839,46 @@ Udowodnijmy przykładowo pierwszą z formułę z listy:
 	 Jest to sprzeczne z (A1).
 \end{proof}
 
+Naszym celem będzie pokazanie następującego twierdzenia:
 \begin{tw}[Przeliczalna pełność dla $\FO(\q)$]
 	Jeśli $T$ to \underline{przeliczalna} teoria w $\FO(\q)$, a $\phi$ to zdanie takie, że $T \vdash \phi$,
 	to istnieje dowód $\phi$ z $T$ w naszym systemie dowodowym.
 \end{tw}
+Z powyższego płynie następujący
+\begin{wn}[przeliczalna zwartość $\FO(\q)$]
+	 Jeśli $T \vdash \phi$, gdzie $T$ i $\phi$ są jak wyżej, to istnieje skończone $T_0 \subseteq T$ takie, że $T_0 \vdash \phi$.
+\end{wn}
+
+\begin{df}
+	Parę $(\A, Q)$, gdzie $\A$ jest modelem dla $\FO$ oraz $Q \subseteq \mathcal{P}(A)$, nazywamy \textit{słabym modelem} dla $\FO(\q)$,
+	jeśli nasz system dowodowy jest poprawny przy następującej interpretacji:
+	\[
+		(\A, Q) \models \q x \, \phi[v] \text{ wtedy i tylko wtedy, gdy } \{a \in A \colon (\A, Q) \models \phi[v[a/x]]\} \in Q.
+	\]
+
+\end{df}
+
+\begin{lem}
+\label{lem:slaby_model}
+	Niech $T$ będzie zupełną niesprzeczną teorią w $\FO(\q)$ mającą własność zaświadczania przez stałe.
+	Wtedy $T$ ma słaby model.
+\end{lem}
+\begin{proof}
+	 Podobny, jak dla $\FO$, gdzie
+	 \[
+		 Q = \{\{ b \in A \colon (\A, Q) \models \phi[b/x]\} \colon \phi \text{ takie, że } T \vdash \q x \, \phi \}.
+	 \]
+	 (To jest definicja indukcyjna.)
+\end{proof}
+
+\begin{lem}
+	Nasz system dowodowy $\FO(\q)$ spełnia twierdzenie o omijaniu typów,
+	tj. jeśłi $T$ jest przeliczalną teorią a $\{p_n(\bar{x})\}_{n \in \N}$ to przeliczlna rodzina typów częściowych nieizolowanych nad $T$,
+	to istnieje (przeliczalny) słaby model $(\A, Q) \models T$ omijający wszystkie typy $p_n$.
+\end{lem}
+\begin{proof}
+	Taki, jak dla $\FO$, przy pomocy lematu \ref{lem:slaby_model}.
+\end{proof}
 
 
 \end{document}
