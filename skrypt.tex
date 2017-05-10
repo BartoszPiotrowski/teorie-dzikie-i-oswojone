@@ -85,6 +85,8 @@
 \newcommand{\DLO}{\mathsf{D \mkern-1.5mu L \mkern-1.8mu O}}
 \newcommand{\ACF}{\mathsf{A \mkern-2.0mu C \mkern-1.1mu F}}
 \newcommand{\RCF}{\mathsf{R \mkern-1.7mu C \mkern-1.4mu F}}
+\newcommand{\FO}{\mathsf{F \mkern-1.4mu O}}
+\newcommand{\q}{\mathsf{Q}}
 
 % Skróty popularnych wyrażeń.
 \newcommand{\wtw}{wtedy i tylko wtedy, gdy }
@@ -93,6 +95,7 @@
 
 % Inne
 \newcommand{\Th}{\text{Th}}
+\newcommand{\tp}{\text{tp}}
 \newcommand{\Diag}{\text{Diag}}
 \newcommand{\DiagEl}{\text{Diag}_{\text{el}}}
 
@@ -789,7 +792,7 @@ Pytanie: jakie typy można omijać?
 Ile modeli przeliczalnych może mieć przeliczalna i zupełna teoria?
 \begin{itemize}
 	\item $1$, np. $\DLO$,
-	\item $2$ mieć nie może,
+	\item $2$ mieć nie może (Vought),
 	\item $3, 4, 5, \ldots$ -- może mieć,
 	\item $\aleph_0$, np. $\Th(\Z, S)$,
 	\item $\aleph_1$ przy założeniu $\aleph_1 <  \mathfrak{c}$ -- nie wiadomo, hipoteza Voughta mówi, że nie może tyle mieć,
@@ -798,18 +801,48 @@ Ile modeli przeliczalnych może mieć przeliczalna i zupełna teoria?
 Więcej być nie może.
 
 
-\section{Przeliczalna pełność i zwartość dla FO $(\exists^{\geq \aleph_0})$}
+\section{Przeliczalna pełność i zwartość dla $\FO(\exists^{\geq \aleph_0})$}
 
-\begin{df}[System dowodowy dla FO$(\exists^{\geq \aleph_1})$]
-	 Dla dowolnego rozsądnego systemu dowodowego dla FO (w szczególności umożliwiającego zamianę zmiennych związanych)
+\begin{df}[System dowodowy dla $\FO(\exists^{\geq \aleph_1})$]
+	 Dla dowolnego rozsądnego systemu dowodowego dla $\FO$ (w szczególności umożliwiającego zamianę zmiennych związanych)
 	 dodajemy następujące aksjomaty i reguły:
-	 \begin{enumerate}
-		 \item $\neg \exists^{\geq \aleph_1} x \, (x = y \vee x = z)$,
-		 \item $\forall x \,(\phi \Rightarrow \psi) \Rightarrow (\exists^{\geq \aleph_1} x \, \phi \Rightarrow \exists^{\geq \aleph_1} x \, \psi)$,
-		 \item $\exists^{\geq \aleph_1} y \exists x \, \phi \Rightarrow (\exists x \exists^{\geq \aleph_1} y \, \phi \vee \exists^{\geq \aleph_1} \exists y \, \phi)$.
-	 \end{enumerate}
+	 \\\mbox{  }\textbf{(A1)} $\neg \exists^{\geq \aleph_1} x \, (x = y \vee x = z)$,
+	 \\\mbox{  }\textbf{(A2)} $\forall x \,(\phi \Rightarrow \psi) \Rightarrow (\exists^{\geq \aleph_1} x \, \phi \Rightarrow \exists^{\geq \aleph_1} x \, \psi)$,
+	 \\\mbox{  }\textbf{(A3)} $\exists^{\geq \aleph_1} y \exists x \, \phi \Rightarrow (\exists x \exists^{\geq \aleph_1} y \, \phi \vee \exists^{\geq \aleph_1} \exists y \, \phi)$.
 
 \end{df}
+
+\begin{uw}
+	Te reguły/aksjomaty byłyby również poprawne dla $\exists^{\geq \aleph_0} x$.
+\end{uw}
+
+\begin{ozn}
+	Dla krótkości piszemy ,,$\q$" zamiast ,,$\exists^{\geq \aleph_1} x$".
+\end{ozn}
+
+\begin{prz}
+	Parę formuł dowodliwych w $\FO(\q)$:
+	\begin{itemize}
+		\item $\q x \, \phi \Rightarrow \exists x \, \phi$,
+		\item $\exists x \,\q y \, \phi \Rightarrow \q y \, \exists x \, \phi$,
+		\item $\q x \, (\phi \vee \psi) \iff \q x \, \phi \vee \q x \, \psi$,
+		\item $\q x (\phi \wedge \psi) \iff \phi \wedge \q x \, \psi$, gdy $x \not \in \mathsf{FV}(\phi)$,
+		\item $\q x \, \phi \wedge \neg \q x \, \psi \Rightarrow \q x \, (\phi \wedge \neg \psi)$.
+	\end{itemize}
+\end{prz}
+Udowodnijmy przykładowo pierwszą z formułę z listy:
+\begin{proof}
+	 Załóżmy, że $\neg \exists x \, \phi$.
+	 Wtedy $\forall x \, (\phi \Rightarrow (x = y \vee x = z))$.
+	 Załóżmy $\q x \, \phi$.
+	 Na mocy (A2) $\q x \, (x = y \vee x = z)$.
+	 Jest to sprzeczne z (A1).
+\end{proof}
+
+\begin{tw}[Przeliczalna pełność dla $\FO(\q)$]
+	Jeśli $T$ to \underline{przeliczalna} teoria w $\FO(\q)$, a $\phi$ to zdanie takie, że $T \vdash \phi$,
+	to istnieje dowód $\phi$ z $T$ w naszym systemie dowodowym.
+\end{tw}
 
 
 \end{document}
