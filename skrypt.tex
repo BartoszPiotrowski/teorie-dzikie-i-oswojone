@@ -139,7 +139,7 @@ Polecane podręczniki do pierwszej części to:
 \end{uw}
 
 \begin{prz}
-	W $\Th(\R, +, \cdot, \leq)$ formuła $\phi(y, z, w) \equiv y \neq 0 \wedge \exists x (yx^2 + 2x + w = 0)$ jest równoważna formule bezkwantyfikatorowej $y \neq 0 \wedge z^2 - 4yw \geq 0$.
+	W $\Th(\R, +, \cdot, \leq)$ formuła $\phi(y, z, w) \equiv y \neq 0 \wedge \exists x (yx^2 + zx + w = 0)$ jest równoważna formule bezkwantyfikatorowej $y \neq 0 \wedge z^2 - 4yw \geq 0$.
 \end{prz}
 
 Z eliminacji kwantyfikatorów typowo wynikają następujące korzyści:
@@ -154,8 +154,8 @@ Ale z drugiej strony trzeba uważać, bo:
 \begin{stw} Dla dowolnej niesprzecznej teorii $T$ istnieje jej niesprzeczne rozszerzenie $T^+ \supseteq T$ z eliminacją kwantyfikatorów.
 \end{stw}
 \begin{proof}
-	Dla każdej formuły $\phi(\bar{x})$ dodajemy nowy symbol relacyjny $R_{\phi}(\bar{x})$.
-	\[T^+ := T \cup \{\forall \bar{x} (\phi(\bar{x}) \iff R_{\phi}(\bar{x}))\}\].
+	Dla każdej formuły $\phi(\bar{x})$ dodajemy nowy symbol relacyjny $R_{\phi}(\bar{x}).$
+	\[T^+ := T \cup \{\forall \bar{x} (\phi(\bar{x}) \iff R_{\phi}(\bar{x}))\}.\]
 \end{proof}
 A nadawanie niezrozumiałym formułom nazw nie czyni ich zrozumiałymi.
 
@@ -250,6 +250,7 @@ Dla dowolnej teorii $T$, \fae
 	\begin{itemize}
 		\item aksjomaty ciał,
 		\item schemat aksjomatów: $\forall w_n, \ldots, w_0 (w_n \neq 0 \Rightarrow \exists y (w_n y^n + \cdots + w_1y + w_0 = 0))$, gdzie $n \in \N \setminus \{0\}$.
+	\end{itemize}
 \end{df}
 
 
@@ -727,7 +728,7 @@ Pytanie: jakie typy można omijać?
 
 
 % WYKŁAD 4 IV 2017
-\section{Modele małe i duże}
+%\section{Modele małe i duże}
 \begin{df}
 	 Niech $\kappa$ będzie liczbą kardynalną.
 	 Model $\A$ nazywamy $\kappa$-nasyconym, jeśli dla każdego $D \subseteq A$, $|D| < \kappa$, każdy typ w $S^{\A}_n(D)$ jest realizowany w $\A$.
