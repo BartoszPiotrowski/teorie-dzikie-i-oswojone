@@ -99,6 +99,21 @@
 \newcommand{\Diag}{\text{Diag}}
 \newcommand{\DiagEl}{\text{Diag}_{\text{el}}}
 
+% numer Godela (rogi) \gnum{\phi}
+\newbox\gnBoxA
+\newdimen\gnCornerHgt
+\setbox\gnBoxA=\hbox{$\ulcorner$}
+\global\gnCornerHgt=\ht\gnBoxA
+\newdimen\gnArgHgt
+\def\gnum #1{%
+\setbox\gnBoxA=\hbox{$#1$}%
+\gnArgHgt=\ht\gnBoxA%
+\ifnum     \gnArgHgt<\gnCornerHgt \gnArgHgt=0pt%
+\else \advance \gnArgHgt by -\gnCornerHgt%
+\fi \raise\gnArgHgt\hbox{$\ulcorner$} \box\gnBoxA %
+\raise\gnArgHgt\hbox{$\urcorner$}}
+
+
 \begin{abstract}
 	Notatki do wykładu \textit{Logika matematyczna II} dra Leszka Kołodziejczyka, prowadzonego w semestrze letnim roku akademickiego 2016/17.
 	Spisywane przez Bartosza Piotrowskiego i \ldots.
@@ -115,7 +130,7 @@ Teorie aksjomatyczne są dwojakiego rodzaju:
 	\item \textit{dzikie} (vel \textit{smoki}) -- teorie te nie spełniają żadnych warunków bycia \textit{oswojoną}.
 		Przykłady: $\ZFC$, $\Th(\N, +, \cdot, \leq)$.
 \end{itemize}
-Pierwsza część niniejszego kursu będzie dotyczyła teorii \textit{ładnych}, druga zaś -- \textit{smoków}.
+Pierwsza część niniejszego kursu będzie dotyczyła teorii \textit{oswojonych}, druga zaś -- teorii \textit{dzikich}.
 
 Polecane podręczniki do pierwszej części to:
 \begin{itemize}
@@ -511,7 +526,7 @@ Naszym celem na teraz będzie pokazanie w kilku krokach, że $ \RCF $ ma elimina
 	 Rodzina zbiorów semialgebraicznych jest domknięta na rzutowania.
 \end{uw}
 
-% WYKŁAD 21 III 2017
+% WYKŁAD 4, 21 III 2017
 
 Zastanówmy się nad następującą rzeczą: jakie ciała są porządkowalne?
 Wiemy bowiem, że $ \C$ lub ciała charakterystyki $ p$ nie są porządkowalne.
@@ -628,7 +643,7 @@ Zatem sprzeczność.
 	Teoria $\DiagEl(\A) \cup p(\bar{x})$ jest niesprzeczna, a jej model jest elementarnym rozszerzeniem $\A$.
 \end{proof}
 
-% WYKŁAD 28 III 2017
+% WYKŁAD 5, 28 III 2017
 
 Pytanie: jakie typy można omijać?
 
@@ -727,7 +742,6 @@ Pytanie: jakie typy można omijać?
 \end{proof}
 
 
-% WYKŁAD 4 IV 2017
 %\section{Modele małe i duże}
 \begin{df}
 	 Niech $\kappa$ będzie liczbą kardynalną.
@@ -802,7 +816,11 @@ Ile modeli przeliczalnych może mieć przeliczalna i zupełna teoria?
 Więcej być nie może.
 
 
-\section{Przeliczalna pełność i zwartość dla $\FO(\exists^{\geq \aleph_0})$}
+% WYKŁAD 6, 4 IV 2017
+
+\section{Przeliczalna pełność i zwartość dla $\FO(\exists^{\geq \aleph_1})$}
+
+Kwantyfikator $\exists^{\geq \aleph_1}$ czytamy jako ,,istnieje nieprzeliczalnie wiele".
 
 \begin{df}[System dowodowy dla $\FO(\exists^{\geq \aleph_1})$]
 	 Dla dowolnego rozsądnego systemu dowodowego dla $\FO$ (w szczególności umożliwiającego zamianę zmiennych związanych)
@@ -880,6 +898,235 @@ Z powyższego płynie następujący
 \begin{proof}
 	Taki, jak dla $\FO$, przy pomocy lematu \ref{lem:slaby_model}.
 \end{proof}
+
+TODO Reszta tego wykładu o $\FO(\mathsf{Q})$.
+
+% WYKŁAD X, 11 IV 2017
+
+\section{Parę słów o nieprzeliczalnej kategoryczności}
+
+W tym rozdziale zakładamy, że teoria $T$ jest przeliczalna i zupełna.
+
+\begin{df}
+	Mówimy, że $T$ jest $\kappa$-stabilna, jeśli dla każdego $\A \models T$ i każdego $D \subseteq A$ takiego, że $|D| < \kappa$, dla każdego $n \in \N$ zachodzi $|S_n^{\A}(D)| \leq \kappa$.
+\end{df}
+
+\begin{df}
+	Parę $(\A, \B)$ nazywamy \textit{parą Voughta dla $T$}, jeśli $\A \preccurlyeq \B \models T$ i istnieje formuła $\psi$ taka, że $\psi^{\A}$ jest nieskończony i $\psi^{\A} = \psi^{\B}$.
+\end{df}
+
+\begin{tw}
+	 $\kappa$ nieprzeliczalna. Teoria $T$ jest $\kappa$-kategoryczna wtedy i tylko wtedy, gdy $T$ jest $\omega$-stabilna i nie ma par Voughta.
+	 W szczególności, jeśli $T$ jest kategoryczna w jakiejś mocy nieprzeliczalnej, to jest kategoryczna we wszystkich.
+\end{tw}
+\begin{proof}
+	 TODO
+\end{proof}
+
+{\Large \textbf{II część kursu -- Teorie interpretujące arytmetykę}}
+
+W zamierzeniu: mowa będzie o teoriach mających ,,aksjomatyzować matematykę'' (bądź jakiś jej istotny fragment).
+Takimi teoriami są m.in. $\ZFC$ oraz $\PA$.
+
+Aksjomatami $\PA$ są:
+\begin{itemize}
+	\item aksjomaty nieujemnej części pierścienia dyskretnie uporządowanego, czyli $\PA^-$,
+	\item schemat indukcji: dla każdej formuły $\phi(x, \bar{v})$ aksjomat postaci
+		\[
+			\forall \bar{v} \, ((\phi(0, \bar{v}) \wedge \forall x \, (\phi(x, \bar{v}) \Rightarrow \phi(x+1, \bar{v}))\Rightarrow \forall x \, \phi(x, \bar{v}))
+		\]
+\end{itemize}
+
+\begin{stw}
+	$\ZFC$ interpretuje $\PA$, tzn. istnieją formuły
+	\[
+		\phi_{\N}(x),\, \phi_+(x, y, z),\, \phi_{\cdot}(x, y, z),\, \phi_{\leq}(x, y),\, \phi_0(x),\, \phi_1(x)
+	\]
+	takie, że jeśli $\gamma$ jest formułą $\PA$ taką, że $\PA \vdash \gamma$, to $\ZFC \vdash \gamma^{\ZFC}$, gdzie $\gamma^{\ZFC}$ jest formułą $\ZFC$ będącą tłumaczeniem formuły $\gamma$ przy pomocy następujących transformacji:
+	\begin{itemize}
+		\item $x \leq y \mapsto \phi_{\leq}(x, y)$,
+		\item $x + y = z \mapsto \phi_{+}(x, y, z)$
+		\item \ldots
+		\item $\exists x \, \psi \mapsto \exists x \, (\phi_{\N}(x) \wedge \psi^{\ZFC}) $
+		\item $\forall x \, \psi \mapsto \forall x \, (\phi_{\N}(x) \Rightarrow \psi^{\ZFC}) $
+	\end{itemize}
+
+\end{stw}
+\begin{stw}
+	\label{stw:model_pa}
+	Modele $\PA$ (również $\PA^-$) mają zawsze postać:
+	\[ \underbrace{\big(0, 1, 2,  \ldots\big)}_{\substack{\text{część standardowa,} \\ \text{izomorficzna kopia } \omega}}
+\underbrace{\cdots \big(\ldots, a , \ldots\big)\cdots\big(\ldots, \left\lfloor\frac {a + b}{2}\right\rfloor, \ldots\big) \cdots
+\big(\ldots, b, \ldots\big)\cdots\big(\ldots, 2\cdot b, \ldots\big)}_{\substack{\text{część niestandardowa,}\\ \text{o typie porządkowym }(\omega^{\ast} + \omega) \cdot \eta}} \]
+
+\end{stw}
+\begin{tw}
+	 Istnieje formuła $x^y=z$, o której $\PA$ dowodzi wszystkich podstawowych własności wykresu funkcji wykładniczej, tj.
+	 \begin{itemize}
+		 \item $\forall x \, x^0=1$,
+		 \item $\forall x\, y\, z \, (x^y=z \Rightarrow x^{y+1} = x \cdot z)$,
+		 \item $\forall x\, y_1\, y_2\, z_1\, z_2 \, (x^{y_1} = z_1 \wedge x^{y_2} = z_2 \Rightarrow x^{y_1 + y_2} = z_1 \cdot z_2)$,
+		 \item $\forall x\, y \, \exists z \, (x^y = z)$.
+	 \end{itemize}
+\end{tw}
+
+\begin{wn}
+	 Możemy więc w $\PA$ zdefiniować relację ,,$x$-ty bit w zapisie binarnym $y$ to $1$''.
+\end{wn}
+\begin{proof}
+	Mianowicie tak:
+	\[
+		 \exists z_1 \, z_2 \, (z_2 \leq 2^x - 1 \wedge y = z_1 \cdot 2^{x+1} + 2^x + z_2)
+	\]
+
+\end{proof}
+\begin{stw}
+	Przy pomocy powyżej zdefiniowanej relacji $\PA$ interpretuje $\ZFC \setminus \{\text{aksjomat nieskończoności}\}$.
+\end{stw}
+\begin{proof}
+	 Formuły $\ZFC$ tłumaczymy tak:
+	 \[
+		 x \in y \mapsto \text{,,}x\text{-ty bit }y\text{ to  }1\text{''}.
+	 \]
+	Sprawdzamy, że $\PA$ dowodzi w ten sposób przetłumaczone aksjomaty $\ZFC$.
+	Przykładowo:
+	\begin{itemize}
+		\item aksjomat zbioru pustego: $\exists x \, \forall y \, \neg y \in x$ -- spełniony, bo mamy $0$,
+		\item aksjomat wyróżniania: $\forall x \, \exists w \, \forall z \, (z \in w \Leftrightarrow z \in x \wedge \phi(z))$ --
+			najpierw sprawdzamy, że $x \in y \Rightarrow x \leq y$.
+			Przez indukcję po $u \leq x$ dowodzimy
+			\[
+				 \psi(u) :\equiv \exists w \, \forall z \leq u \, (z \in w \Leftrightarrow z \in x \wedge \phi(z))
+			\]
+			\begin{itemize}
+				\item $\psi(0)$ -- OK,
+				\item $\psi(u) \Rightarrow \psi(u+1)$?
+					Weźmy świadka $w_u$ na $\psi(u)$.
+					$w_{u+1}$ konstruujemy następująco:
+					\begin{itemize}
+						\item gdy $u+1 \in x \wedge \phi(u+1)$, to $w_{u+1} := w_u + 2^{u+1}$,
+						\item w przeciwnym przypadku $w_{u+1} := w_u$.
+					\end{itemize}
+					Bierzemy więc $w_x$ będące świadkiem dla $\psi(x)$.
+			\end{itemize}
+
+
+	\end{itemize}
+
+\end{proof}
+
+% WYKŁAD X, 25 IV 2017
+
+\begin{df}
+	 Wprowadzamy następującą hierarchię formuł:
+\begin{itemize}
+\item $\Delta_0$ - klasa formuł, w których wszystkie kwantyfikatory są ograniczone,
+\item $\Sigma_n$ - klasa formuł postaci $\exists \bar{v}_1 \forall \bar{v}_2 \ldots \mathsf{Q} \bar{v}_n\, \phi $, gdzie $\phi \in \Delta_0$,
+\item $\Pi_n$ - klasa formuł postaci $\forall \bar{v}_1 \exists \bar{v}_2 \ldots \mathsf{Q} \bar{v}_n\, \phi $, gdzie $\phi \in \Delta_0$.
+\end{itemize}
+\end{df}
+
+\begin{uw}
+	 Można zakładać, że $x^y=z$ jest klasy $\Delta_0$.
+	 Można też zakładać, że mamy funkcję wykładniczą w języku $\PA$, wraz z jej aksjomatami.
+\end{uw}
+
+\begin{stw}
+	Relacja $R \subseteq \N^k$ jest \emph{rekurencyjnie przeliczalna} wtedy i tylko wtedy, gdy jest definiowalna w $\N$ formułą klasy $\Sigma_1$.
+\end{stw}
+\begin{proof}
+        \textbf{($\Leftarrow$)} Maszyna może przeszukiwać po kolei każdą $n$-tkę, i jeśli $n$-tka spełniająca formułę istnieje, to zostanie znaleziona w skończonym czasie.
+	W przeciwnym wypadku maszyna się nigdy nie zatrzyma.
+	\\\textbf{($\Rightarrow$)} Jeśli $M$ jest maszyną świadczącą o rekurencyjne przeliczalności $R$, to $R$ można zdefiniować następującą formułą klasy $\Sigma_1$:
+
+
+\begin{gather*}
+	\exists \langle s_0, s_1, \ldots, s_l  \rangle \, \forall i \leq l \, (s_i \text{ jest pewną konfiguracją maszyny } M \wedge \\
+	s_0 = \langle -; x_1, x_2, \ldots, x_k; \text{instrukcja początkowa}  \rangle \wedge\\
+s_l = \langle \text{TAK}; \text{coś jeszcze}; \text{instrukcja nieistotna} \rangle \wedge \\
+\forall i < l \, s_{i+1} \text{ powstaje z } s_i \text{ zgodnie z definicją  } M )
+\end{gather*}
+\end{proof}
+
+\begin{wn}
+	 Relacja $R$ jest rozstrzygalna wtedy i tylko wtedy, gdy $R$ jest definiowalna w $\N$ zarówno $\Sigma_1$, jak i $\Pi_1$ formułą.
+	 (Mówimy wtedy, że $R$ jest $\Delta_1$ formułą.)
+\end{wn}
+\begin{proof}
+	 \textbf{($\Rightarrow$)} Oczywiste.
+	 \\\textbf{($\Leftarrow$)} Jeśli $R$ i $\N^k \setminus R$ są rekurencyjnie przeliczalne, to obie są rozstrzygalne.
+\end{proof}
+\begin{stw}
+	 Teoria $\PA^-$ jest $\Sigma_1$-zupełna, tzn. jeśli $\phi$ jest $\Sigma_1$-zdaniem i $\N \models \phi$, to $\PA^- \vdash \phi$.
+\end{stw}
+\begin{proof}
+	Niech $\mathbb{A}$ będzie modelem $\PA^-$.
+	Jest on postaci takiej, jak przedstawiono w stwierdzeniu \ref{stw:model_pa}.
+	Formuła $\phi$ jest postaci $\exists x \, \delta(x)$, gdzie $\delta$ jest $\Delta_0$-formułą.
+	Jeśli $\N \models \exists x \, \delta(x)$, to istnieje $m$ takie, że $\N \models \delta(m)$.
+	Ale w takim razie $\A \models \delta(m^{\mathbb{A}})$, i $\A \models \phi$.
+	Z dowolności $\mathbb{A}$, $\PA^- \vdash \phi$.
+\end{proof}
+
+\begin{df}
+	 Niech
+	 \begin{itemize}
+		 \item $\underline{0} := 0$,
+		 \item $\underline{n} := \underbrace{1+1+ \ldots +1}_{n}$.
+	 \end{itemize}
+	 Term $\underline{n}$ nazywamy liczebnikiem dla $n$.
+\end{df}
+
+\begin{stw}
+	 Jeśli $R \subseteq \N^k$ jest rozstrzygalna, to $R$ jest reprezentowalna w $\PA^-$ w następującym sensie:
+	 istnieje formuła $\phi(x_1, x_2, \ldots, x_k)$ (np. klasy $\Sigma_1$) taka, że
+	 \begin{itemize}
+		 \item jeśli $(n_1, \ldots, n_k) \in R$, to $\PA^- \vdash \phi(\underline{n_1}, \ldots, \underline{n_k})$,
+		 \item jeśli $(n_1, \ldots, n_k) \not\in R$, to $\PA^- \vdash \neg\phi(\underline{n_1}, \ldots, \underline{n_k})$,
+	 \end{itemize}
+\end{stw}
+\begin{proof}
+	Niech $\exists y \, \psi(\bar{x} , y)$ definiuje $R$ oraz $\exists z \, \eta(\bar{x} , z)$ definiuje $\N^k \setminus R$, gdzie $\psi, \eta \in \Delta_0$.
+	Jako $\phi(\bar{x})$ bierzemy: $\exists y \, (\psi(\bar{x}, y) \wedge \forall z<y \, \neg \eta(\bar{x} , z))$ i korzystamy z $\Sigma_1$-zupełności $\PA^-$.
+\end{proof}
+\begin{df}
+	 Każdemu wyrażeniu języka $\PA$ możemy przypisać kod będący liczbą naturalną, który nazywamy numerem Gödela.
+	 Robimy to np. tak: każdemu symbolowi z języka $\PA$ przyporządkowujemy liczbę naturalną,
+	 np. $\neg \mapsto 0$, $\wedge \mapsto 1$, $\exists \mapsto 2$, $0 \mapsto 3$, etc.
+	 To przyporządkowanie indukuje przyporządkowanie liczb naturalnych dowolnym ciągom tych symboli (w tym formułom i termom) -- za pomocą struktury teoriomnogościowej wbudowanej w $\PA$ albo też przy pomocy systemu np. szesnastkowego.
+	 Liczbę przyporządkowaną termowi/formule $\alpha$ oznaczamy $\gnum{\alpha}$.
+\end{df}
+
+\begin{stw}
+	 Następujące relacje i funkcje są rozstrzygalne i obliczalne, odpowiednio, a zatem reprezentowalne w $\PA$:
+	 \begin{itemize}
+		 \item $x$ jest numerem Gödela zmiennej,
+		 \item $x$ jest numerem Gödela termu,
+		 \item $x$ jest numerem Gödela formuły,
+		 \item $x$ jest numerem Gödela koniunkcji formuł o numerach Gödela $y$ i $z$,
+		 \item $x$ jest numerem Gödela formuły powstałej z formuły o numerze Gödela $y$ przez dopisanie $\exists$,
+		 \item	\ldots,
+		 \item $x$ jest numerem Gödela aksjomatu $\PA$,
+		 \item $x$ jest numerem Gödela dowodu zdania o numerze $y$ w teorii $T$ ($\text{Prov}_T(x, y)$),
+		 \item $\text{num}(x):= \text{ numer Gödela liczebnika }\underline{x}$,
+		 \item $\text{subst}(x, y):= \begin{cases}
+				 \gnum{\phi(t)}&  \text{ gdy } x = \gnum{\phi(s)},\, y = \gnum{t},\,  t \text{ podstawialny za } s \text{ w } \phi \\
+						0 & \text{ w p.p. }
+					     \end{cases}$
+	 \end{itemize}
+\end{stw}
+
+\begin{uw}
+	W istocie wszystkie powyższe relacje/wykresy funkcji są definiowalne formułami $\Delta_0(\text{exp})$, tj. formulami klasy $\Delta_0$ z dopuszczeniem termów typu $2^{x^x}$.
+\end{uw}
+
+\begin{df}
+	$\text{Pr}_T(y) := \exists x \, \text{Prov}(y, x)$.
+	(Czyli ta formuła mówi: ,,$x$ jest zdaniem dowodliwym w $T$''.)
+\end{df}
+\begin{uw}
+	 Powyższa własność jest rekurencyjnie przeliczalna, ale nie rozstrzygalna.
+\end{uw}
 
 
 \end{document}
