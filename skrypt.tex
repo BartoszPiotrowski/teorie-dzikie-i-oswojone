@@ -175,8 +175,9 @@ Ale z drugiej strony trzeba uważać, bo:
 A nadawanie niezrozumiałym formułom nazw nie czyni ich zrozumiałymi.
 
 \begin{tw}
-	$\DLO$ (teoria gęstych liniowych porządków) posiada q.e.
+	$\DLO$ (teoria gęstych liniowych porządków bez końców) posiada q.e.
 \end{tw}
+% nie no, to powinno byś jaśniej i precyzyjniej napisane; jak u Markera tw. 3.1.3.
 \begin{proof}
 	Niech $\phi$ to formuła $\DLO$ w zmiennych $x_1, \ldots, x_n$.
 	(Jak wiemy) $\DLO$ jest zupełna (bo ma tylko jeden, z dokładnością do izomorfizmu, przeliczalny model, tzn. jest $\omega$-kategoryczna, a mamy twierdzenie Löwenheima-Skolema).
@@ -187,14 +188,14 @@ A nadawanie niezrozumiałym formułom nazw nie czyni ich zrozumiałymi.
 		\item z dokładnością do równoważności w $\DLO$ istnieje tylko skończenie wiele formuł bezkwantyfikatorowych w zmiennych $x_1, \ldots, x_n$ -- każda jest alternatywą koniunkcji takich, jak na przykład ta: $x_1 = x_2 \wedge x_1 \leq x_3 \wedge \neg x_3 \leq x_1$.
 			Takie koniunkcje oznaczamy przez $\psi_1(\bar{x}), \psi_2(\bar{x}), \ldots$
 			W takim razie
-			\[(\Q, \leq) \models \forall \bar{x} (\phi(\bar{x}) \iff \bigwedge_{\mathclap{\substack{i \text{ takie, że istnieje } \bar{a} \in \Q^n \\ \text{ takie, że }(\Q, \leq) \models \phi(\bar{a}) \wedge \psi_i(\bar{a})}}} \psi_i(\bar{x}))\]
+			\[(\Q, \leq) \models \forall \bar{x} (\phi(\bar{x}) \iff \bigvee_{\mathclap{\substack{i \text{ takie, że istnieje } \bar{a} \in \Q^n \\ \text{ takie, że }(\Q, \leq) \models \phi(\bar{a}) \wedge \psi_i(\bar{a})}}} \psi_i(\bar{x}))\]
 	\end{itemize}
 	Zatem z zupełności
-			\[\DLO \models \forall \bar{x} (\phi(\bar{x}) \iff \bigwedge_{\mathclap{\substack{i \text{ takie, że istnieje } \bar{a} \in \Q^n \\ \text{ takie, że }(\Q, \leq) \models \phi(\bar{a}) \wedge \psi_i(\bar{a})}}} \psi_i(\bar{x}))\]
+			\[\DLO \models \forall \bar{x} (\phi(\bar{x}) \iff \bigvee_{\mathclap{\substack{i \text{ takie, że istnieje } \bar{a} \in \Q^n \\ \text{ takie, że }(\Q, \leq) \models \phi(\bar{a}) \wedge \psi_i(\bar{a})}}} \psi_i(\bar{x}))\]
 \end{proof}
 
 \begin{wn}
-	$\DLO$ jest \em{$o$-minimalna}, tj. dla dowolnego $A \models \DLO$ i dowolnej formuły $\phi(x,\bar{a})$, gdzie $a \in A^n$ zbiór definiowalny $\{x \in A \colon  A \models \phi(x,\bar{a})\}$ jest skończoną sumą przedziałów (być może jednopunktowych).
+	$\DLO$ jest \em{$o$-minimalna}, tj. dla dowolnego $A \models \DLO$ i dowolnej formuły $\phi(x,\bar{a})$, $\bar{a} \in A^n$, zbiór definiowalny $\{x \in A \colon  A \models \phi(x,\bar{a})\}$ jest skończoną sumą przedziałów (być może jednopunktowych).
 \end{wn}
 
 
@@ -213,8 +214,8 @@ Dla dowolnej teorii $T$, \fae
 \end{proof}
 
 \begin{df}
+	Struktura $\A$ jest:
 	\begin{itemize}
-		Struktura $\A$ jest:
 		\item \textit{minimalna}, jeśli każdy definiowalny podzbiór $A$ jest skończony lub koskończony,
 		\item \textit{silnie minimalna}, jeśli każda struktura $\B \equiv \A$ jest minimalna.
 	\end{itemize}
@@ -236,7 +237,7 @@ Dla dowolnej teorii $T$, \fae
 \begin{proof}
 	($\Leftarrow$) Oczywiste.
 
-		($\Rightarrow$) \color{red} TODO
+	($\Rightarrow$) \color{red} TODO
 \end{proof}
 
 \begin{tw}
@@ -761,7 +762,7 @@ Pytanie: jakie typy można omijać?
 \end{proof}
 %TODO przy typach jednolicić indeks górny/dolny
 \begin{stw}
-	Teoria $T$ ma przeliczalny model nasycony wtedy i tylko wtedy, gdy $\forall n \,|S_n(T)| \leq \aleph_0$.
+	Zupełna teoria $T$ ma przeliczalny model nasycony wtedy i tylko wtedy, gdy $\forall n \,|S_n(T)| \leq \aleph_0$.
 \end{stw}
 \begin{proof}
 	 \textbf{($\Rightarrow$)} Oczywiste.
@@ -785,14 +786,15 @@ Pytanie: jakie typy można omijać?
 	\textbf{($\Rightarrow$)} Oczywiste (ze względu na twierdzenie \ref{tw:omi} o omijaniu typów).
 	\\\textbf{($\Leftarrow$)}
 	Załóżmy, że $\A$ jest przeliczalny i atomowy, i niech $A = \{a_1, a_2, \ldots, a_n\}$.
-	Weźmy $B \models T$
+	Weźmy $B \models T$.
+	\\TODO
 \end{proof}
 %TODO ta gdzie n \in \N czasem powinno być \N^+
 \begin{wn}
 	 Każde dwa modele pierwsze dla danej teorii są izomorficzne.
 \end{wn}
 \begin{proof}
-	Obydwa są przeliczlne i atomowe, więc istnieje dla nich strategia w $G^{\infty}$.
+	Obydwa są przeliczalne i atomowe, więc istnieje dla nich strategia w $G^{\infty}$.
 \end{proof}
 
 \begin{wn}
@@ -892,7 +894,7 @@ Z powyższego płynie następujący
 
 \begin{lem}
 	Nasz system dowodowy $\FO(\q)$ spełnia twierdzenie o omijaniu typów,
-	tj. jeśłi $T$ jest przeliczalną teorią a $\{p_n(\bar{x})\}_{n \in \N}$ to przeliczlna rodzina typów częściowych nieizolowanych nad $T$,
+	tj. jeśłi $T$ jest przeliczalną teorią a $\{p_n(\bar{x})\}_{n \in \N}$ to przeliczalna rodzina typów częściowych nieizolowanych nad $T$,
 	to istnieje (przeliczalny) słaby model $(\A, Q) \models T$ omijający wszystkie typy $p_n$.
 \end{lem}
 \begin{proof}
@@ -1066,7 +1068,7 @@ s_l = \langle \text{TAK}; \text{coś jeszcze}; \text{instrukcja nieistotna} \ran
 	Jeśli $\N \models \exists x \, \delta(x)$, to istnieje $m$ takie, że $\N \models \delta(m)$.
 	Ale w takim razie $\A \models \delta(m^{\mathbb{A}})$, i $\A \models \phi$.
 	Z dowolności $\mathbb{A}$, $\PA^- \vdash \phi$.
-\end{proof}
+\end{proof} %TODO trochę więcej dopisać; bo to chodzi, że N się zanurza w A i dlatego delta jest też tam spełniona, tak?
 
 \begin{df}
 	 Niech
@@ -1090,7 +1092,7 @@ s_l = \langle \text{TAK}; \text{coś jeszcze}; \text{instrukcja nieistotna} \ran
 	Jako $\phi(\bar{x})$ bierzemy: $\exists y \, (\psi(\bar{x}, y) \wedge \forall z<y \, \neg \eta(\bar{x} , z))$ i korzystamy z $\Sigma_1$-zupełności $\PA^-$.
 \end{proof}
 \begin{df}
-	 Każdemu wyrażeniu języka $\PA$ możemy przypisać kod będący liczbą naturalną, który nazywamy numerem Gödela.
+	 Każdemu wyrażeniu języka $\PA$ możemy przypisać kod będący liczbą naturalną, który nazywamy numerem Gödla.
 	 Robimy to np. tak: każdemu symbolowi z języka $\PA$ przyporządkowujemy liczbę naturalną,
 	 np. $\neg \mapsto 0$, $\wedge \mapsto 1$, $\exists \mapsto 2$, $0 \mapsto 3$, etc.
 	 To przyporządkowanie indukuje przyporządkowanie liczb naturalnych dowolnym ciągom tych symboli (w tym formułom i termom) -- za pomocą struktury teoriomnogościowej wbudowanej w $\PA$ albo też przy pomocy systemu np. szesnastkowego.
@@ -1098,18 +1100,18 @@ s_l = \langle \text{TAK}; \text{coś jeszcze}; \text{instrukcja nieistotna} \ran
 \end{df}
 
 \begin{stw}
-	 Następujące relacje i funkcje są rozstrzygalne i obliczalne, odpowiednio, a zatem reprezentowalne w $\PA$:
+	 Następujące relacje i funkcje są rozstrzygalne i obliczalne, odpowiednio, a zatem reprezentowalne w $\PA^-$:
 	 \begin{itemize}
-		 \item $x$ jest numerem Gödela zmiennej,
-		 \item $x$ jest numerem Gödela termu,
-		 \item $x$ jest numerem Gödela formuły,
-		 \item $x$ jest numerem Gödela koniunkcji formuł o numerach Gödela $y$ i $z$,
-		 \item $x$ jest numerem Gödela formuły powstałej z formuły o numerze Gödela $y$ przez dopisanie $\exists$,
+		 \item $x$ jest numerem Gödla zmiennej,
+		 \item $x$ jest numerem Gödla termu,
+		 \item $x$ jest numerem Gödla formuły,
+		 \item $x$ jest numerem Gödla koniunkcji formuł o numerach Gödla $y$ i $z$,
+		 \item $x$ jest numerem Gödla formuły powstałej z formuły o numerze Gödla $y$ przez dopisanie $\exists$,
 		 \item	\ldots,
-		 \item $x$ jest numerem Gödela aksjomatu $\PA$,
-		 \item $x$ jest numerem Gödela dowodu zdania o numerze $y$ w teorii $T$ ($\text{Prov}_T(x, y)$),
-		 \item $\text{num}(x):= \text{ numer Gödela liczebnika }\underline{x}$,
-		 \item $\text{subst}(x, y):= \begin{cases}
+		 \item $x$ jest numerem Gödla aksjomatu $\PA$,
+		 \item $x$ jest numerem Gödla dowodu zdania o numerze $y$ w teorii $T$ ($\text{Prov}_T(x, y)$),
+		 \item $\emph{\text{num}}(x):= \text{ numer Gödla liczebnika }\underline{x}$,
+		 \item $\emph{\text{subst}}(x, y):= \begin{cases}
 				 \gnum{\phi(t)}&  \text{ gdy } x = \gnum{\phi(s)},\, y = \gnum{t},\,  t \text{ podstawialny za } s \text{ w } \phi \\
 						0 & \text{ w p.p. }
 					     \end{cases}$
@@ -1117,7 +1119,7 @@ s_l = \langle \text{TAK}; \text{coś jeszcze}; \text{instrukcja nieistotna} \ran
 \end{stw}
 
 \begin{uw}
-	W istocie wszystkie powyższe relacje/wykresy funkcji są definiowalne formułami $\Delta_0(\text{exp})$, tj. formulami klasy $\Delta_0$ z dopuszczeniem termów typu $2^{x^x}$.
+	W istocie wszystkie powyższe relacje/wykresy funkcji są definiowalne formułami $\Delta_0(\text{exp})$, tj. formułami klasy $\Delta_0$ z dopuszczeniem termów typu $2^{x^x}$.
 \end{uw}
 
 \begin{df}
@@ -1128,5 +1130,179 @@ s_l = \langle \text{TAK}; \text{coś jeszcze}; \text{instrukcja nieistotna} \ran
 	 Powyższa własność jest rekurencyjnie przeliczalna, ale nie rozstrzygalna.
 \end{uw}
 
+\begin{lem}[przekątniowy Gödla; pierwszy raz sformułowany przez Carnapa; znany również jako lemat o punkcie stałym]
+	Niech $\phi(x)$ to formuła z jedną zmienną wolną $x$.
+	Wtedy istnieje zdanie $\psi$ takie, że $\PA^- \vdash \psi \iff \phi(\underline{\gnum{\psi}})$.
+	Ponadto jeśli $\phi$ jest klasy $\Sigma_n$ lub $\Pi_n$, $n >0$, to $\psi$ też, odpowiednio.
+\end{lem}
+\begin{proof}
+	Niech $\phi(x)$ to dowolna formuła z jedną zmienną wolną $x$.
+	Rozważmy $\zeta(x) := \phi(\text{subst}(x, \text{num}(x))$.
+	Niech $m := \gnum{\zeta}$, i niech $\psi := \zeta(\underline{m})$.
+	Zauważmy, że $\gnum{\psi} = \gnum{\phi(\text{subst}(m, \text{num}(m))} = \text{subst}(m, \text{num}(m))$.
+	Zatem $\PA^- \vdash \underline{\gnum{\psi}} = \text{subst}(m, \text{num}(m)$.
+	A zatem
+	\[
+		\PA^- \vdash \psi \iff \phi(\text{subst}(m, \text{num}(m)) \iff \phi(\underline{\gnum{\psi}}).
+	\]
+\end{proof}
+
+\begin{tw}[Tarskiego o niedefiniowalności prawdy]
+	Niech $T \supseteq \PA^-$. (Wystarczy, że $T$ interpretuje $\PA^-$).
+	Niech $\A \models T$.
+	\underline{Nie} istnieje formuła $\emph{\text{Tr}}(x)$ taka, że dla dowolnego zdania $\psi$ zachodzi
+	\[
+		\A \models \psi \iff \emph{\text{Tr}}(\underline{\gnum{\psi}}).
+	\]
+\end{tw}
+\begin{proof}
+	Przypuśćmy przeciwnie -- niech $\text{Tr}(x)$ będzie taką właśnie formułą.
+	Aplikując lemat przekątniowy do $\neg \text{Tr}(x)$, bierzemy $\psi$ takie, że
+	\[
+		 \A \models \psi \iff \neg \text{Tr}(\underline{\gnum{\psi}}).
+	\]
+	Ale przecież z założenia
+	\[
+		 \A \models \psi \iff \text{Tr}(\underline{\gnum{\psi}}),
+	\]
+	tak więc sprzeczność.
+\end{proof}
+
+\begin{df}
+	Teoria $T \supseteq \PA^-$ jest $\omega$-\textit{niesprzeczna}, jeśli \underline{nie} istnieje formuła $\phi(x)$ taka, że
+	\[
+		 T \vdash \neg \phi(\underline{0}),\, T \vdash \neg \phi(\underline{1}),\, T \vdash \neg \phi(\underline{2}), \ldots
+	\]
+	i jednocześnie
+	\[
+		 T \vdash \exists x \, \phi(x).
+	\]
+\end{df}
+
+\begin{tw}[I Gödla o niezupełności]
+	 Niech $T$ bedzie teorią, która:
+	 \begin{itemize}
+		 \item zawiera (bądź interpretuje) $\PA^-$,
+		 \item ma rozstrzygalny zbiór aksjomatów.
+	 \end{itemize}
+Wtedy istnieje zdanie $\gamma$ takie, że
+\begin{itemize}
+	\item jeśli $T$ jest niesprzeczna, to $T \not \vdash \gamma$,
+	\item jeśli $T$ jest też $\omega$-niesprzeczna, to $T \not \vdash \neg \gamma$.
+\end{itemize}
+W szczególności, jeśli $T$ jest $\omega$-niesprzeczna, to jest niezupełna.
+\end{tw}
+% TODO tu ogólnie chyba trzeba jednak napisać o słabej/silnej reprezentowalności, i już nie mówić o Sigma_1-zupełności,bo jest trochę niejasno.
+\begin{proof}
+	Ponieważ $T$ ma rozstrzygalny zbiór aksjomatów, dysponujemy $\Sigma_1$-formułą $\text{Pr}_T(x)$.
+	Korzystając z lematu przekątniowego, bierzemy zdanie $\gamma$ takie, że
+	\begin{equation}
+	\tag{*}
+		 \PA^- \vdash \gamma \iff \neg \text{Pr}(\underline{\gnum{\gamma}}).
+	\end{equation}
+
+	Załóżmy, że $T \vdash \gamma$.
+	Wtedy z (*) wynika, że $T \vdash \neg \text{Pr}_T(\underline{\gnum{\gamma}})$.
+	Z drugiej strony, na mocy $\Sigma_1$-zupełności $T$, zachodzi $T \vdash \text{Pr}_T(\underline{\gnum{\gamma}})$.
+	Czyli $T$ jest sprzeczna.
+	W szczególności, zauważmy, że $\N \models \gamma$.
+
+	Załóżmy teraz, że $T \vdash \neg \gamma$.
+	W takim razie z (*) $T \vdash \exists x \, \text{Prov}_T(\underline{\gnum{\gamma}}, x)$.
+	Ale
+	\begin{gather*}
+		T \vdash \neg \text{Prov}_T(\underline{\gnum{\gamma}}, \underline{0}), \\
+		T \vdash \neg \text{Prov}_T(\underline{\gnum{\gamma}}, \underline{1}), \\
+		T \vdash \neg \text{Prov}_T(\underline{\gnum{\gamma}}, \underline{2}), \\
+		\vdots
+	\end{gather*}
+	bo żaden z ciągów znaków o numerach Gödla 1, 2, 3, \ldots nie jest dowodem $\gamma$ w $T$, a $T$ jest $\Sigma_1$-zupełna.
+	Więc $T$ jest $\omega$-sprzeczna.
+\end{proof}
+
+\begin{uw}
+	 Roser zrobił poprawkę do powyższego twierdzenia eliminując potrzebę $\omega$-niesprzeczności na rzecz zwykłej niesprzeczności.
+\end{uw}
+
+\begin{uw}
+	 Niezupełność $\PA^-$ wynika w istocie z dyskretności modelu tej teorii, jej $\Sigma_1$-zupełności.
+	 Modele typu $\RCF$ nie mają dyskretnych fragmentów i są zupełne.
+\end{uw}
+
+Teraz pokażemy II twierdzenie Gödla, mówiące o tym, że $\PA$ nie jest w stanie pokazać własnej niesprzeczności.
+
+\begin{df}
+	 Dla $T \supseteq \PA^-$ definiujemy zdanie ,,$T$ jest niesprzeczna'':
+	 \[
+	 	 \text{Con}_T := \neg \text{Pr}_T(\underline{\gnum{0 \neq 0}}).
+	 \]
+	(Zdanie to należy do klasy $\Pi_1$.)
+\end{df}
+% TODO usuń te kombinacje \emph{\text{}}
+\begin{tw}[II Gödla o niezupełności]
+	Jeśli teoria $T$ jest niesprzeczna i zawiera, bądź interpretuje $\PA$, to $T \not \vdash \emph{\text{Con}}_T$.
+\end{tw}
+\begin{uw}
+	Zamiast $\PA$ wystarczyłoby $\mathsf{I}\Delta_0 + \text{exp}$ (tj. indukcja dla $\Delta_0$-formuł $+ \forall x \, y \, \exists z \, x^y = z$).
+	Ale $\PA^-$ już nie wystarczy.
+\end{uw}
+\begin{proof}
+	Niech $\gamma$ będzie zdaniem takim, jak w I twierdzeniu Gödla.
+	Pokażemy, że $T \vdash \text{Con}_T \Rightarrow \gamma$.
+	W tym celu będziemy korzystali z tego, że formuła $\text{Pr}_T(x)$ ma następujące własności (znane jako warunki Hilberta--Bernaysa--Löba):
+
+	\\\mbox{  } \textbf{(D1)}:
+	\[
+		\text{jeśli } T \vdash \psi,\text{ to } \PA^- \vdash \text{Pr}_T(\underline{\gnum{\psi}}),
+	\]
+
+	\\\mbox{  } \textbf{(D2)}:
+	\[
+		T \vdash \text{Pr}_T(\underline{\gnum{\psi}}) \Rightarrow \text{Pr}_{\PA^-}(\underline{\gnum{\text{Pr}_T(\underline{\gnum{\psi}})}})
+	\]
+
+	\\\mbox{  } \textbf{(D3)}:
+	\[
+		T \vdash \text{Pr}_T(\underline{\gnum{\psi}}) \wedge \text{Pr}_T(\underline{\gnum{\psi \Rightarrow \phi}}) \Rightarrow \text{Pr}_T(\underline{\gnum{\phi}}).
+	\]
+	\textbf{(D1)} to jest po prostu $\Sigma_1$-zupełność $\PA^-$.
+	\textbf{(D2)} wymaga uzasadnienia, że $T$ ,,wie'' o $\Sigma_1$-zupełności $\PA^-$ (sprawdzimy potem).
+	\textbf{(D3)} wynika z możliwości konkatenacji dowodów.
+
+	Pokażmy więc, że $T \vdash \neg \gamma \Rightarrow \neg \text{Con}_T$.
+
+	Z jednej strony $T \vdash \neg \gamma \Rightarrow \text{Pr}_T(\underline{\gnum{\gamma}})$, a więc z \textbf{(D2)}:
+	\[
+		\tag{*}
+		 T \vdash \neg \gamma \Rightarrow \text{Pr}_T(\underline{\gnum{\text{Pr}_T(\underline{\gnum{\gamma}})}}).
+	\]
+	Z drugiej zaś strony $T \vdash \gamma \Rightarrow \neg \text{Pr}_T(\underline{\gnum{\gamma}})$, a więc z \textbf{(D1)}:
+	\[
+		 T \vdash \text{Pr}_T(\underline{\gnum{\gamma \Rightarrow \neg \text{Pr}_T(\underline{\gnum{\gamma}})}}).
+	\]
+	A zatem z \textbf{(D3)}:
+	\[
+		 T \vdash \text{Pr}_T(\underline{\gnum{\gamma}}) \Rightarrow \text{Pr}_T(\underline{\gnum{\neg \text{Pr}_T(\underline{\gnum{\gamma}})}}).
+	\]
+	A więc, ponieważ $T \vdash \neg \gamma \Rightarrow \text{Pr}_T(\underline{\gnum{\gamma}})$, mamy:
+	\[
+		\tag{**}
+		 T \vdash \neg \gamma \Rightarrow \text{Pr}_T(\underline{\gnum{\neg \text{Pr}_T(\underline{\gnum{\gamma}})}})
+	\]
+	Z (*, **) mamy:
+	\[
+		 T \vdash \neg \gamma \Rightarrow \left(\text{Pr}_T(\underline{\gnum{\text{Pr}_T(\underline{\gnum{\gamma}})}}) \wedge \text{Pr}_T(\underline{\gnum{\neg \text{Pr}_T(\underline{\gnum{\gamma}})}})\right)
+	\]
+	Stąd:
+	\[
+		 T \vdash \neg \gamma \Rightarrow \left(\text{Pr}_T(\underline{\gnum{\neg\gamma}}) \wedge \text{Pr}_T(\underline{\gnum{\gamma}})\right)
+	\]
+	A ponieważ prawa strona powyższej implikacji jest równoważna $\neg \text{Con}_T$ (co wynika $+/-$ z \textbf{(D3)}), to ostatecznie osiągamy cel:
+	\[
+		 T \vdash \neg \gamma \Rightarrow \neg \text{Con}_T
+	\]
+\end{proof}
+
+%TODO uwagi światopoglądowe
 
 \end{document}
