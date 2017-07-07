@@ -1305,4 +1305,33 @@ Teraz pokażemy II twierdzenie Gödla, mówiące o tym, że $\PA$ nie jest w sta
 
 %TODO uwagi światopoglądowe
 
+\section{Formuły uniwersalne i hierarchia arytmetyczna}
+% Cel na dziś:
+\begin{tw}
+	Dla każdego $n \geq 1$ istnieje formuła $\text{\emph{Sat}}_{\Sigma_n}(x, v)$ klasy $\Sigma_n$ taka, że dla dowolnej formuły $\phi(\bar{y}) \in \Sigma_n$
+	\[
+		\PA \vdash \forall \bar{y} \, (\phi(\bar{y}) \iff \text{\emph{Sat}}_{\Sigma_n}(\underline{\gnum{\phi}}, \langle \bar{y} \rangle\))
+	\]
+
+\end{tw}
+
+\begin{lem}
+	Istnieje formuła $\text{\emph{Sat}}_{\Delta_0}(x, v)$ klasy $\Delta_0(\text{\emph{exp}})$ taka, że dla dowolnej formuły $\phi(\bar{y}) \in \Delta_0$
+	\[
+		\PA \vdash \forall \bar{y} \, (\phi(\bar{y}) \iff \text{\emph{Sat}}_{\Delta_0}(\underline{\gnum{\phi}}, \langle \bar{y} \rangle\))
+	\]
+
+\end{lem}
+\begin{proof}
+	Najpierw konstruujemy formułę $\text{val}(x, v) = w$, która ma wyrażać, że ,,wartość termu o numerze Gödla $x$ przy wartościowaniu danym przez $v$ wynosi $w$''.
+\end{proof}
+
+
+
+%\section{Twierdzenie Tennenbauma}
+
+%\section{Twierdzenie Ramseya i Parisa-Harringtona}
+
+%\section{Twierdzenie Matijasiewicza i 10. problem Hilberta}
+
 \end{document}
