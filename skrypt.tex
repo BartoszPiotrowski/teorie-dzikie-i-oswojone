@@ -21,6 +21,7 @@
 \usepackage{color} % do kolorowego tekstu
 \usepackage{tikz} % do tworzenia grafiki
 \usepackage{xfrac} % do pisania struktur typu A/B, A/~, etc.
+\usepackage{stackengine,scalerel}
 \usetikzlibrary{arrows, automata, positioning}
 
 \title{\textbf{Logika matematyczna II} \\ \Large{$\sim$ notatki z wykładu $\sim$}}
@@ -113,6 +114,10 @@
 \fi \raise\gnArgHgt\hbox{$\ulcorner$} \box\gnBoxA %
 \raise\gnArgHgt\hbox{$\urcorner$}}
 
+% circled leq
+\def\dclesize{\ThisStyle{\raisebox{-.1pt}{\scalebox{1.05}{$\SavedStyle\bigcirc$}}}}
+\def\dcle{\ensurestackMath{\stackon[0pt]{\leq}{\dclesize}}}
+\def\cleq{\def\stacktype{L}\mathbin{\scalerel*{\dcle}{\dclesize}}}
 
 \begin{abstract}
 	Notatki do wykładu \textit{Logika matematyczna II} dra Leszka Kołodziejczyka, prowadzonego w semestrze letnim roku akademickiego 2016/17.
@@ -124,71 +129,108 @@
 \section*{Uwagi wstępne}
 Teorie aksjomatyczne są dwojakiego rodzaju:
 \begin{itemize} % może oswojone v dzikie?
-	\item \textit{oswojone} (pod takim, czy innym względem) -- da się zrozumieć zbiory w nich definiowalne, jak również struktury ich modeli; są rozstrzygalne.
-		Przykładem tego typu teorii są gęste liniowe porządki bez końców ($\DLO$), czyli $\Th(\Q, \leq), \Th(\R, +, \cdot, \leq)$, etc.
-		Tego typu \textit{oswojone} teorie są przedmiotem zainteresowania teorii modeli.
-	\item \textit{dzikie} (vel \textit{smoki}) -- teorie te nie spełniają żadnych warunków bycia \textit{oswojoną}.
-		Przykłady: $\ZFC$, $\Th(\N, +, \cdot, \leq)$.
+	\item \textit{oswojone} (pod takim, czy innym względem) -- da się
+		zrozumieć zbiory w nich definiowalne, jak również struktury ich
+		modeli; są rozstrzygalne. Przykładem tego typu teorii są gęste
+		liniowe porządki bez końców ($\DLO$), czyli $\Th(\Q, \leq),
+		\Th(\R, +, \cdot, \leq)$, etc. Tego typu \textit{oswojone}
+		teorie są przedmiotem zainteresowania teorii modeli.
+	\item \textit{dzikie} (vel \textit{smoki}) -- teorie te nie spełniają
+		żadnych warunków bycia \textit{oswojoną}. Przykłady: $\ZFC$,
+		$\Th(\N, +, \cdot, \leq)$.
 \end{itemize}
-Pierwsza część niniejszego kursu będzie dotyczyła teorii \textit{oswojonych}, druga zaś -- teorii \textit{dzikich}.
+Pierwsza część niniejszego kursu będzie dotyczyła teorii \textit{oswojonych},
+druga zaś -- teorii \textit{dzikich}.
 
 Polecane podręczniki do pierwszej części to:
 \begin{itemize}
-	\item David Marker, \textit{Model Theory: An Introduction}, Graduate Texts in Mathematics, Springer, 2002,
-	\item Katrin Tent, Martin Ziegler, \textit{A Course in Model Theory}, Cambridge University Press, 2012.
+	\item David Marker, \textit{Model Theory: An Introduction}, Graduate
+		Texts in Mathematics, Springer, 2002,
+	\item Katrin Tent, Martin Ziegler, \textit{A Course in Model Theory},
+		Cambridge University Press, 2012.
 \end{itemize}
-
+% TODO oznaczenia
 
 \section{Eliminacja kwantyfikatorów}
 \begin{df}
-	Teoria $T$ ma \textit{eliminację kwantyfikatorów} (q.e.) \wtw dla dowolnej formuły $\psi(\bar{x})$ istnieje taka formuła bezkwantyfikatorowa $\phi(\bar{x})$, że $T \models \forall {\bar{x}} (\psi(\bar{x}) \iff \phi(\bar{x}))$.
+	Teoria $T$ ma \textit{eliminację kwantyfikatorów} (\textit{q.e.}) \wtw dla
+	dowolnej formuły $\psi(\bar{x})$ istnieje taka formuła
+	bezkwantyfikatorowa $\phi(\bar{x})$, że $T \models \forall {\bar{x}}
+	(\psi(\bar{x}) \iff \phi(\bar{x}))$.
 \end{df}
 
 \begin{uw}
-	Jeśli w sygnaturze teorii $T$ nie występują żadne stałe, wówczas teoria ta nie ma zdań bezkwantyfikatorowych.
-	W takiej sytuacji można:
+	Jeśli w sygnaturze teorii $T$ nie występują żadne stałe, wówczas teoria
+	ta nie ma zdań bezkwantyfikatorowych.  W takiej sytuacji można:
 	\begin{itemize}
-		\item albo dopuścić sytuację, że dla zdania $\phi$ bierzemy formułę bezkwantyfikatorową $\psi$ taką, że $T \vdash \forall x (\phi \iff \psi(x))$,
-		\item albo wprowadzić zmienne zdaniowe $\top$ i $\bot$ i żądać zupełności teorii $T$.
+		\item albo dopuścić sytuację, że dla zdania $\phi$ bierzemy
+			formułę bezkwantyfikatorową $\psi$ taką, że $T \vdash
+			\forall x (\phi \iff \psi(x))$,
+		\item albo wprowadzić zmienne zdaniowe $\top$ i $\bot$ i żądać
+			zupełności teorii $T$.
 	\end{itemize}
 \end{uw}
 
 \begin{prz}
-	W $\Th(\R, +, \cdot, \leq)$ formuła $\phi(y, z, w) \equiv y \neq 0 \wedge \exists x (yx^2 + zx + w = 0)$ jest równoważna formule bezkwantyfikatorowej $y \neq 0 \wedge z^2 - 4yw \geq 0$.
+	W $\Th(\R, +, \cdot, \leq)$ formuła $\phi(y, z, w) \equiv y \neq 0
+	\wedge \exists x (yx^2 + zx + w = 0)$ jest równoważna formule
+	bezkwantyfikatorowej $y \neq 0 \wedge z^2 - 4yw \geq 0$.
 \end{prz}
 
 Z eliminacji kwantyfikatorów typowo wynikają następujące korzyści:
 \begin{itemize}
-	\item zrozumienie zbiorów definiowalnych w danej teorii (no bo więcej, niż trzy bloki kwantyfikatorów sprawiają niemożliwym zrozumienie definicji),
+	\item zrozumienie zbiorów definiowalnych w danej teorii (no bo więcej,
+		niż trzy bloki kwantyfikatorów sprawiają niemożliwym
+		zrozumienie definicji),
 	\item uzyskanie zupełności teorii,
 	\item uzyskanie rozstrzygalności teorii.
 \end{itemize}
 
 Ale z drugiej strony trzeba uważać, bo:
 
-\begin{stw} Dla dowolnej niesprzecznej teorii $T$ istnieje jej niesprzeczne rozszerzenie $T^+ \supseteq T$ z eliminacją kwantyfikatorów.
+\begin{stw} Dla dowolnej niesprzecznej teorii $T$ istnieje jej niesprzeczne
+	rozszerzenie $T^+ \supseteq T$ z eliminacją kwantyfikatorów.
 \end{stw}
 \begin{proof}
-	Dla każdej formuły $\phi(\bar{x})$ dodajemy nowy symbol relacyjny $R_{\phi}(\bar{x}).$
-	\[T^+ := T \cup \{\forall \bar{x} (\phi(\bar{x}) \iff R_{\phi}(\bar{x}))\}.\]
+	Dla każdej formuły $\phi(\bar{x})$ dodajemy nowy symbol relacyjny
+	$R_{\phi}(\bar{x}).$
+	\[T^+ := T \cup \{\forall \bar{x} (\phi(\bar{x}) \iff
+	R_{\phi}(\bar{x}))\}.\]
 \end{proof}
-A nadawanie niezrozumiałym formułom nazw nie czyni ich zrozumiałymi.
+\ldots a nadawanie niezrozumiałym formułom nazw nie czyni ich zrozumiałymi.
 
 \begin{tw}
 	$\DLO$ (teoria gęstych liniowych porządków bez końców) posiada q.e.
 \end{tw}
 % nie no, to powinno byś jaśniej i precyzyjniej napisane; jak u Markera tw. 3.1.3.
 \begin{proof}
-	Niech $\phi$ to formuła $\DLO$ w zmiennych $x_1, \ldots, x_n$.
-	(Jak wiemy) $\DLO$ jest zupełna (bo ma tylko jeden, z dokładnością do izomorfizmu, przeliczalny model, tzn. jest $\omega$-kategoryczna, a mamy twierdzenie Löwenheima-Skolema).
+	Niech $\phi$ będzie formułą $\DLO$ w zmiennych $x_1, \ldots, x_n$.
+	(Jak wiemy) $\DLO$ jest zupełna (bo ma tylko jeden, z dokładnością do
+	izomorfizmu, przeliczalny model, tzn. jest $\omega$-kategoryczna, a
+	mamy twierdzenie Löwenheima-Skolema).
 
 	Zauważmy, że:
 	\begin{itemize}
-		\item jeśli $a_1, \ldots, a_n, b_1, \ldots b_n \in \Q$ są takie, że dla każdej formuły bezkwantyfikatorowej $\phi$ zachodzi $(\Q, \leq) \models \phi(\bar{a}) \iff \phi(\bar{b})$, to istnieje autoizomorfizm $h(\Q, \leq)$ taki, że $h(a_i) = b_i$ dla $i \in \{1, \ldots, n\}$, a zatem dla każdej formuły $\gamma(\bar{x})$ mamy $(\Q, \leq) \models \gamma(\bar{a}) \iff \gamma(\bar{b})$,
-		\item z dokładnością do równoważności w $\DLO$ istnieje tylko skończenie wiele formuł bezkwantyfikatorowych w zmiennych $x_1, \ldots, x_n$ -- każda jest alternatywą koniunkcji takich, jak na przykład ta: $x_1 = x_2 \wedge x_1 \leq x_3 \wedge \neg x_3 \leq x_1$.
-			Takie koniunkcje oznaczamy przez $\psi_1(\bar{x}), \psi_2(\bar{x}), \ldots$
-			W takim razie
-			\[(\Q, \leq) \models \forall \bar{x} (\phi(\bar{x}) \iff \bigvee_{\mathclap{\substack{i \text{ takie, że istnieje } \bar{a} \in \Q^n \\ \text{ takie, że }(\Q, \leq) \models \phi(\bar{a}) \wedge \psi_i(\bar{a})}}} \psi_i(\bar{x}))\]
+		\item jeśli $a_1, \ldots, a_n, b_1, \ldots b_n \in \Q$ są
+			takie, że dla każdej formuły bezkwantyfikatorowej
+			$\phi$ zachodzi $(\Q, \leq) \models \phi(\bar{a}) \iff
+			\phi(\bar{b})$, to istnieje autoizomorfizm $h(\Q,
+			\leq)$ taki, że $h(a_i) = b_i$ dla $i \in \{1, \ldots,
+			n\}$, a zatem dla każdej formuły $\gamma(\bar{x})$ mamy
+			$(\Q, \leq) \models \gamma(\bar{a}) \iff
+			\gamma(\bar{b})$,
+		\item z dokładnością do równoważności w $\DLO$ istnieje tylko
+			skończenie wiele formuł bezkwantyfikatorowych w
+			zmiennych $x_1, \ldots, x_n$ -- każda jest alternatywą
+			koniunkcji takich, jak na przykład ta: $x_1 = x_2
+			\wedge x_1 \leq x_3 \wedge \neg x_3 \leq x_1$.
+			Takie koniunkcje oznaczamy przez $\psi_1(\bar{x}),
+			\psi_2(\bar{x}), \ldots$.  W takim razie
+			\[(\Q, \leq) \models \forall \bar{x} (\phi(\bar{x})
+			\iff \bigvee_{\mathclap{\substack{i \text{ takie, że
+			istnieje } \bar{a} \in \Q^n \\ \text{ takie, że }(\Q,
+			\leq) \models \phi(\bar{a}) \wedge \psi_i(\bar{a})}}}
+			\psi_i(\bar{x}))\]
 	\end{itemize}
 	Zatem z zupełności
 			\[\DLO \models \forall \bar{x} (\phi(\bar{x}) \iff \bigvee_{\mathclap{\substack{i \text{ takie, że istnieje } \bar{a} \in \Q^n \\ \text{ takie, że }(\Q, \leq) \models \phi(\bar{a}) \wedge \psi_i(\bar{a})}}} \psi_i(\bar{x}))\]
@@ -675,7 +717,7 @@ Pytanie: jakie typy można omijać?
 				 T_{3i+1} := \left\{\begin{array}{lr}
 						 T_{3i} + \phi_i, & \text{jeśli niesprzeczna,}\\
 						 T_{3i} + \neg \phi_i, & \text{w p.p.}
-       						 \end{array}
+				 \end{array}\right\}
 			\]
 
 		\item \textit{Krok $3i+2$:}
@@ -1251,17 +1293,17 @@ Teraz pokażemy II twierdzenie Gödla, mówiące o tym, że $\PA$ nie jest w sta
 	Pokażemy, że $T \vdash \text{Con}_T \Rightarrow \gamma$.
 	W tym celu będziemy korzystali z tego, że formuła $\text{Pr}_T(x)$ ma następujące własności (znane jako warunki Hilberta--Bernaysa--Löba):
 
-	\\\mbox{  } \textbf{(D1)}:
+	\mbox{  } \textbf{(D1)}:
 	\[
 		\text{jeśli } T \vdash \psi,\text{ to } \PA^- \vdash \text{Pr}_T(\underline{\gnum{\psi}}),
 	\]
 
-	\\\mbox{  } \textbf{(D2)}:
+	\mbox{  } \textbf{(D2)}:
 	\[
 		T \vdash \text{Pr}_T(\underline{\gnum{\psi}}) \Rightarrow \text{Pr}_{\PA^-}(\underline{\gnum{\text{Pr}_T(\underline{\gnum{\psi}})}})
 	\]
 
-	\\\mbox{  } \textbf{(D3)}:
+	\mbox{  } \textbf{(D3)}:
 	\[
 		T \vdash \text{Pr}_T(\underline{\gnum{\psi}}) \wedge \text{Pr}_T(\underline{\gnum{\psi \Rightarrow \phi}}) \Rightarrow \text{Pr}_T(\underline{\gnum{\phi}}).
 	\]
@@ -1308,17 +1350,25 @@ Teraz pokażemy II twierdzenie Gödla, mówiące o tym, że $\PA$ nie jest w sta
 \section{Formuły uniwersalne i hierarchia arytmetyczna}
 % Cel na dziś:
 \begin{tw}
-	Dla każdego $n \geq 1$ istnieje formuła $\text{\emph{Sat}}_{\Sigma_n}(x, v)$ klasy $\Sigma_n$ taka, że dla dowolnej formuły $\phi(\bar{y}) \in \Sigma_n$
+	Dla każdego $n \geq 1$ istnieje formuła
+	$\text{\emph{Sat}}_{\Sigma_n}(x, v)$ klasy $\Sigma_n$ taka, że dla
+	dowolnej formuły $\phi(\bar{y}) \in \Sigma_n$
 	\[
-		\PA \vdash \forall \bar{y} \, (\phi(\bar{y}) \iff \text{\emph{Sat}}_{\Sigma_n}(\underline{\gnum{\phi}}, \langle \bar{y} \rangle\))
+		\PA \vdash \forall \bar{y} \, (\phi(\bar{y}) \iff
+		\text{\emph{Sat}}_{\Sigma_n}(\underline{\gnum{\phi}}, \langle
+		\bar{y} \rangle))
 	\]
 
 \end{tw}
 
 \begin{lem}
-	Istnieje formuła $\text{\emph{Sat}}_{\Delta_0}(x, v)$ klasy $\Delta_0(\text{\emph{exp}})$ taka, że dla dowolnej formuły $\phi(\bar{y}) \in \Delta_0$
+	Istnieje formuła $\text{\emph{Sat}}_{\Delta_0}(x, v)$ klasy
+	$\Delta_0(\text{\emph{exp}})$ taka, że dla dowolnej formuły
+	$\phi(\bar{y}) \in \Delta_0$
 	\[
-		\PA \vdash \forall \bar{y} \, (\phi(\bar{y}) \iff \text{\emph{Sat}}_{\Delta_0}(\underline{\gnum{\phi}}, \langle \bar{y} \rangle\))
+		\PA \vdash \forall \bar{y} \, (\phi(\bar{y}) \iff
+		\text{\emph{Sat}}_{\Delta_0}(\underline{\gnum{\phi}}, \langle
+		\bar{y} \rangle))
 	\]
 
 \end{lem}
@@ -1326,9 +1376,13 @@ Teraz pokażemy II twierdzenie Gödla, mówiące o tym, że $\PA$ nie jest w sta
 	Najpierw konstruujemy formułę $\text{val}(x, v) = w$, która ma wyrażać, że ,,wartość termu o numerze Gödla $x$ przy wartościowaniu danym przez $v$ wynosi $w$''.
 \end{proof}
 
+%TODO dokończyć, może na końcu; przy pomocy książki Kaya
 
+\section{Twierdzenie Tennenbauma}
+\begin{df}
+	Struktura $\A = (\N, \oplus, \odot, \cleq)$ jest \textit{strukturą obliczalną} (vel \textit{rekurencyjną}), jeśli $\oplus, \odot$ i $\cleq$ są obliczalnymi relacjami w $\N$.
+\end{df}
 
-%\section{Twierdzenie Tennenbauma}
 
 %\section{Twierdzenie Ramseya i Parisa-Harringtona}
 
