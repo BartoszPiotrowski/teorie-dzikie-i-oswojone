@@ -150,6 +150,7 @@ Polecane podręczniki do pierwszej części to:
 		Cambridge University Press, 2012.
 \end{itemize}
 % TODO oznaczenia
+% co znaczy \phi(\bar{x})? \bar{x} to wszystkie zmienne wolne?
 
 \section{Eliminacja kwantyfikatorów}
 \begin{df}
@@ -202,7 +203,7 @@ Ale z drugiej strony trzeba uważać, bo:
 \begin{tw}
 	$\DLO$ (teoria gęstych liniowych porządków bez końców) posiada q.e.
 \end{tw}
-% nie no, to powinno byś jaśniej i precyzyjniej napisane; jak u Markera tw. 3.1.3.
+% nie no, to może być jaśniej i precyzyjniej napisane; jak u Markera tw. 3.1.3.
 \begin{proof}
 	Niech $\phi$ będzie formułą $\DLO$ w zmiennych $x_1, \ldots, x_n$.
 	(Jak wiemy) $\DLO$ jest zupełna (bo ma tylko jeden, z dokładnością do
@@ -214,11 +215,11 @@ Ale z drugiej strony trzeba uważać, bo:
 		\item jeśli $a_1, \ldots, a_n, b_1, \ldots b_n \in \Q$ są
 			takie, że dla każdej formuły bezkwantyfikatorowej
 			$\phi$ zachodzi $(\Q, \leq) \models \phi(\bar{a}) \iff
-			\phi(\bar{b})$, to istnieje autoizomorfizm $h(\Q,
-			\leq)$ taki, że $h(a_i) = b_i$ dla $i \in \{1, \ldots,
-			n\}$, a zatem dla każdej formuły $\gamma(\bar{x})$ mamy
-			$(\Q, \leq) \models \gamma(\bar{a}) \iff
-			\gamma(\bar{b})$,
+			\phi(\bar{b})$, to istnieje autoizomorfizm $h$ dla
+			$(\Q, \leq)$ taki, że $h(a_i) = b_i$ dla $i \in \{1,
+			\ldots, n\}$, a zatem dla każdej formuły
+			$\gamma(\bar{x})$ mamy $(\Q, \leq) \models
+			\gamma(\bar{a}) \iff \gamma(\bar{b})$,
 		\item z dokładnością do równoważności w $\DLO$ istnieje tylko
 			skończenie wiele formuł bezkwantyfikatorowych w
 			zmiennych $x_1, \ldots, x_n$ -- każda jest alternatywą
@@ -233,39 +234,108 @@ Ale z drugiej strony trzeba uważać, bo:
 			\psi_i(\bar{x}))\]
 	\end{itemize}
 	Zatem z zupełności
-			\[\DLO \models \forall \bar{x} (\phi(\bar{x}) \iff \bigvee_{\mathclap{\substack{i \text{ takie, że istnieje } \bar{a} \in \Q^n \\ \text{ takie, że }(\Q, \leq) \models \phi(\bar{a}) \wedge \psi_i(\bar{a})}}} \psi_i(\bar{x}))\]
+	\[\DLO \models \forall \bar{x} (\phi(\bar{x}) \iff
+	\bigvee_{\mathclap{\substack{i \text{ takie, że istnieje } \bar{a} \in
+	\Q^n \\ \text{ takie, że }(\Q, \leq) \models \phi(\bar{a}) \wedge
+	\psi_i(\bar{a})}}} \psi_i(\bar{x}))\]
 \end{proof}
 
 \begin{wn}
-	$\DLO$ jest \em{$o$-minimalna}, tj. dla dowolnego $A \models \DLO$ i dowolnej formuły $\phi(x,\bar{a})$, $\bar{a} \in A^n$, zbiór definiowalny $\{x \in A \colon  A \models \phi(x,\bar{a})\}$ jest skończoną sumą przedziałów (być może jednopunktowych).
+	$\DLO$ jest \em{$o$-minimalna}, tj. dla dowolnego $A \models \DLO$ i
+	dowolnej formuły $\phi(x,\bar{a})$, $\bar{a} \in A^n$, zbiór
+	definiowalny $\{x \in A \colon  A \models \phi(x,\bar{a})\}$ jest
+	skończoną sumą przedziałów (być może jednopunktowych).
 \end{wn}
+% TODO Skądinąd, DLO jest: ...
 
+\begin{lem}
+	Jeśli dla teorii $T$ i dowolnej formuły bezkwantyfikatorowej
+	$\phi(\bar{x}, y)$ istnieje formuła bezkwantyfikatorowa
+	$\varphi(\bar{x}, y)$ taka, że
+	$T \models \exists x \phi(\bar{x}, y) \iff \varphi(\bar{x}, y)$,
+	wówczas $T$ ma eliminację kwantyfikatorów.
+\end{lem}
+\begin{proof}
+	Indukcja po złożoności formuły.
+\end{proof}
 
 \begin{tw}
 Dla dowolnej teorii $T$, \fae
 	\begin{enumerate}
 		\item $T$ ma eliminację kwantyfikatorów,
-		\item dla dowolnych dwóch struktur $\A, \B \models T$, dowolnego $\D$ takiego, że $\A \supseteq \D \subseteq \B$,  dowolnego $\bar{d} \in \D$, i dowolnej formuły bezkwantyfikatorowej $\psi(\bar{x}, y)$  zachodzi:
-			\[\A \models \exists y \, \psi(\bar{d}, y) \iff \B \models \exists y \, \psi(\bar{d}, y)\]
+		\item dla dowolnych dwóch struktur $\A, \B \models T$,
+			dowolnego $\D$ takiego, że $\A \supseteq \D \subseteq
+			\B$,  dowolnego $\bar{d} \in \D$, i dowolnej formuły
+			bezkwantyfikatorowej $\psi(\bar{x}, y)$  zachodzi:
+			\[\A \models \exists y \, \psi(\bar{d}, y) \iff \B
+			\models \exists y \, \psi(\bar{d}, y)\]
 	\end{enumerate}
 \end{tw}
 \begin{proof}
 	($\Rightarrow$) Łatwe.
 
-	($\Leftarrow$) \color{red} TODO
+	($\Leftarrow$)
+	Niech $\phi(\bar{x})$ będzie postaci $\exists y \, \varphi(\bar{x}, y)$,
+	gdzie $\varphi$ jest bezkwantyfikatorowa. Na mocy lematu powyżej
+	wystarczy pokazać, że z $\phi(\bar{x})$ da się wyeliminować $\exists$.
+
+	Załóżmy bez utraty ogólności, że
+	$T \not\models \forall \bar{x} \, \phi(\bar{x}) \text{ oraz }
+	T \not\models \neg\forall \bar{x} \, \phi(\bar{x})$. Rozważmy zbiór
+	formuł $\Gamma(\bar{x})$ zdefiniowany następująco:
+	$$\Gamma(\bar{x}) = \{\gamma(\bar{x}) \text{ bezkwantyfikatorowa}
+	\colon T \models \forall \bar{x} \, (\phi(\bar{x}) \Rightarrow
+	\gamma(\bar{x}))\}$$
+	Twierdzimy, że dla nowych stałych $\bar{d}$ zachodzi
+	\[
+		\tag{$\star$}
+		T \cup \Gamma(\bar{d}) \models \phi(\bar{d}).
+	\]
+	To zakończy dowód (1), ponieważ wówczas ze zwartości dla pewnych \\
+	$\gamma_1(\bar{d}), \ldots, \gamma_k(\bar{d}) \in \Gamma(\bar{d})$ mamy,
+	$$T \cup \{\gamma_1(\bar{d}), \ldots, \gamma_k(\bar{d})\}
+	\models \phi(\bar{d}),$$
+	a więc
+	$$T \models \gamma_1(\bar{d}) \wedge \ldots \wedge \gamma_k(\bar{d})
+	 \iff \phi(\bar{d}),$$
+	i ze ,,świeżości'' $\bar{d}$:
+	$$T \models \forall \bar{x} \, (\gamma_1(\bar{x}) \wedge \ldots \wedge
+	\gamma_k(\bar{x}) \iff \phi(\bar{x})).$$
+
+	Założmy nie wprost, że ($\star$) nie zachodzi i weźmy
+	$\A \models T \cup \Gamma(\bar{d}) \cup \{\neg\phi(\bar{d})\}$.
+	Niech $\D$ będzie podstrukturą $\A$ wygenerowaną przez (interpretację
+	stałych) $\bar{d}$. Twierdzimy, że
+	$\Diag(\D) \cup T \cup \{\phi(\bar{d})\}$
+	jest niesprzeczna. W przeciwnym razie dla pewnego
+	$\delta(\bar{d}) \in \Diag(\D)$ teoria $\delta(\bar{d}) \cup T \cup
+	\phi(\bar{d})$ jest sprzeczna i $T \cup \phi(\bar{d}) \models
+	\neg \delta(\bar{d})$. Stąd $T \models \forall \bar{x} \,
+	(\phi(\bar{x}) \Rightarrow \neg \delta(\bar{x}))$. Więc
+	$\neg \delta(\bar{x}) \in \Gamma(\bar{x})$, ale wtedy
+	$\A \models \neg \delta(\bar{d})$, i stąd
+	$\D \models \neg \delta(\bar{d})$.
+	Czyli $\neg\delta(\bar{d}) \in \Diag(\D)$ i sprzeczność.
+
+	Zatem $\Diag(\D) \cup T \cup \{\phi(\bar{d})\}$ jest niesprzeczna,
+	z czego wynika istnienie modelu $\B \supseteq \D$ takiego, że
+	$\B \models T \cup \{\phi(\bar{d})\}$. A to jest sprzeczne z (2).
 \end{proof}
 
 \begin{df}
 	Struktura $\A$ jest:
 	\begin{itemize}
-		\item \textit{minimalna}, jeśli każdy definiowalny podzbiór $A$ jest skończony lub koskończony,
-		\item \textit{silnie minimalna}, jeśli każda struktura $\B \equiv \A$ jest minimalna.
+		\item \textit{minimalna}, jeśli każdy definiowalny podzbiór $A$
+			jest skończony lub koskończony,
+		\item \textit{silnie minimalna}, jeśli każda struktura $\B
+			\equiv \A$ jest minimalna.
 	\end{itemize}
 
-	Teoria $T$ jest \textit{silnie minimalna} jeśli każda struktura $\B \models T$ jest minimalna.
+	Teoria $T$ jest \textit{silnie minimalna} jeśli każda struktura $\B
+	\models T$ jest minimalna.
 \end{df}
 
-% tu można przepisac jeszcze te zadania
+% tu można przepisać jeszcze te zadania
 
 \begin{df}
 	$T_{\forall} = \{\phi \text{ czysto uniwersalne takie, że } T \vdash
@@ -273,13 +343,21 @@ Dla dowolnej teorii $T$, \fae
 \end{df}
 
 \begin{stw}
-	Niech $T$ to teoria.
-	Wówczas $\A \models T_{\forall}$ \wtw istnieje $\B \models T$ takie, że $\A \subseteq \B$.
+	Niech $T$ to teoria. Wówczas $\A \models T_{\forall}$ \wtw istnieje $\B
+	\models T$ takie, że $\A \subseteq \B$.
 \end{stw}
 \begin{proof}
 	($\Leftarrow$) Oczywiste.
 
-	($\Rightarrow$) \color{red} TODO
+	($\Rightarrow$) Niech $\A \models T_{\forall}$. W celu uzyskania
+	$\B$ wystarczy pokazać niesprzeczność teorii $\Diag(\A) \cup T$.
+	Załóżmy, że jest przeciwnie -- wówczas istnieje taka fomuła
+	$\delta(\bar{a})$ będąca koniunkcją zdań z $\Diag(\A)$, że $T \cup
+	\{\delta(\bar{a})\}$ jest sprzeczna, czyli $T \models \neg
+	\delta(\bar{a})$. Zatem $T \models \forall \bar{x} \, \neg
+	\delta(\bar{x}) \in T_{\forall}$. Czyli $\A \models \forall \bar{x} \,
+	\neg \delta(\bar{x})$, ale $\delta(\bar{a})$ jest koniunkcją zdań z
+	$\Diag(\A)$, stąd sprzeczność.
 \end{proof}
 
 \begin{tw}
