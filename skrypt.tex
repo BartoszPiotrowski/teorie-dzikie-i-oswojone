@@ -27,9 +27,6 @@
 \title{\textbf{Logika matematyczna II} \\ \Large{$\sim$ notatki z wykładu $\sim$}}
 
 \date{\small{Wersja z dnia: \today}}
-\begin{document}
-
-\maketitle
 
 % Oznaczenia na zbiory liczb naturalnych, całkowitych, etc.
 \newcommand{\N}{\mathbb{N}}
@@ -119,10 +116,16 @@
 \def\dcle{\ensurestackMath{\stackon[0pt]{\leq}{\dclesize}}}
 \def\cleq{\def\stacktype{L}\mathbin{\scalerel*{\dcle}{\dclesize}}}
 
+\begin{document}
+
+\maketitle
+
+% TODO odpowiadają +- temu, co pojawiło się na tablicy
 \begin{abstract}
-	Notatki do wykładu \textit{Logika matematyczna II} dra Leszka Kołodziejczyka, prowadzonego w semestrze letnim roku akademickiego 2016/17.
-	Spisywane przez Bartosza Piotrowskiego i \ldots.
-	Uwagi o błędach są mile widziane -- proszę pisać na \texttt{bartoszpiotrowski@post.pl}
+	Notatki z wykładu \textit{Logika matematyczna II} dra Leszka
+	Kołodziejczyka, prowadzonego w semestrze letnim roku akademickiego
+	2016/2017. Spisane przez Bartosza Piotrowskiego. Uwagi o błędach są
+	mile widziane -- proszę pisać na \texttt{bartoszpiotrowski@post.pl}
 \end{abstract}
 
 
@@ -364,11 +367,17 @@ Dla dowolnej teorii $T$, \fae
 	\label{tw:qe}
 	Niech $T$ będzie teorią taką, że:
 	\begin{enumerate}
-		\item dla dowolnych $\A, \B \models T$ takich, że $\A \subseteq \B$, dla dowolnego $\bar{a} \in \A$ i dowolnej formuły bezkwantyfikatorowej $\psi(\bar{x}, y)$, mamy:
+		\item dla dowolnych $\A, \B \models T$ takich, że $\A \subseteq
+			\B$, dla dowolnego $\bar{a} \in \A$ i dowolnej formuły
+			bezkwantyfikatorowej $\psi(\bar{x}, y)$, mamy:
 			\[
-				\B \models \exists y \, \psi(\bar{a}, y) \Rightarrow \A \models \exists y \, \psi(\bar{a}, y)
+				\B \models \exists y \, \psi(\bar{a}, y)
+				\Rightarrow \A \models \exists y \, \psi(\bar{a}, y)
 			\]
-		\item dla każdej $\D \models T_{\forall}$ istnieje $\A \models T$ takie, że $\D \subseteq \A$ i każde zanurzenie $\D \hookrightarrow \B \models T$ rozszerza się do zanurzenia $\A \hookrightarrow \B$,
+		\item dla każdej $\D \models T_{\forall}$ istnieje $\A \models
+			T$ takie, że $\D \subseteq \A$ i każde zanurzenie $\D
+			\hookrightarrow \B \models T$ rozszerza się do
+			zanurzenia $\A \hookrightarrow \B$,
 	\end{enumerate}
 	wówczas $T$ ma eliminację kwantyfikatorów.
 \end{tw}
@@ -378,17 +387,21 @@ Dla dowolnej teorii $T$, \fae
 
 
 % WYKŁAD 2, data: 7 III 2017
-
 \section{Ciała algebraicznie domknięte}
 
 \begin{df}
-	$\ACF$ to teoria w języku $\{+, \cdot, -, 0, 1\}$ (gdzie $-$ jest arności $1$) wyposażona w następujące aksjomaty:
+	$\ACF$ (\textit{algebraically closed fields}) to teoria w języku $\{+,
+	\cdot, -, 0, 1\}$ (gdzie $-$ jest arności $1$) wyposażona w następujące
+	aksjomaty:
 	\begin{itemize}
 		\item aksjomaty ciał,
-		\item schemat aksjomatów: $\forall w_n, \ldots, w_0 (w_n \neq 0 \Rightarrow \exists y (w_n y^n + \cdots + w_1y + w_0 = 0))$, gdzie $n \in \N \setminus \{0\}$.
+		\item schemat aksjomatów:
+		$$\forall w_n, \ldots, w_0
+			(w_n \neq 0 \Rightarrow
+			\exists y (w_n y^n + \cdots + w_1y + w_0 = 0)),$$
+			gdzie $n \in \N \setminus \{0\}$.
 	\end{itemize}
 \end{df}
-
 
 \begin{tw}
 	$\ACF$ posiada eliminację kwantyfikatorów.
@@ -397,30 +410,75 @@ Dla dowolnej teorii $T$, \fae
 Dowodzimy następujące dwa lematy i korzystamy z Twierdzenia \ref{tw:qe}.
 
 \begin{lem}
-	$\ACF_{\forall}$ to teoria dziedzin całkowitości (tj. pierścieni bez dzielników zera).
-	Ponadto zachodzi ... %TODO
+	$\ACF_{\forall}$ to teoria dziedzin całkowitości (tj. pierścieni bez
+	dzielników zera). Ponadto zachodzi warunek (2) z Twierdzenia \ref{tw:qe}.
 \end{lem}
 \begin{proof}
-	($\subseteq$) TODO
-
+	($\subseteq$) Każda podstruktura $\mathbb{K} \models \ACF$ jest dziedziną
+	całkowitości.
 \begin{przyp}[z algebry]
 	~\begin{itemize}
-		\item Każde ciało $\mathbb{K}$ ma swoje algebraiczne domknięcie $\mathbb{K}^{\text{alg}}$ (tzn. takie ciało $\mathbb{L} \supseteq \mathbb{K}$, że $\mathbb{L} \models \ACF$ i rozszerzenie $\mathbb{L} \supseteq \mathbb{K}$ jest algebraiczne).
-		\item Algebraiczne domknięcie $\mathbb{K}^{\text{alg}}$ jest jedyne z dokładnością do izomorfizmu nad $\mathbb{K}$ (tzn. jeśli $\mathbb{L}_1$ i $\mathbb{L}_2$ są algebraicznymi domknięciami $\mathbb{K}$, wówczas istnieje izomorfizm $h \colon \mathbb{L}_1 \rightarrow \mathbb{L}_2$ taki, że $h|\mathbb{K} = \id(\mathbb{K})$ )
+		\item Każde ciało $\mathbb{K}$ ma swoje algebraiczne domknięcie
+			$\mathbb{K}^{\text{alg}}$ (tzn. takie ciało $\mathbb{L}
+			\supseteq \mathbb{K}$, że $\mathbb{L} \models \ACF$ i
+			rozszerzenie $\mathbb{L} \supseteq \mathbb{K}$ jest
+			algebraiczne).
+		\item Algebraiczne domknięcie $\mathbb{K}^{\text{alg}}$ jest
+			jedyne z dokładnością do izomorfizmu nad $\mathbb{K}$
+			(tzn. jeśli $\mathbb{L}_1$ i $\mathbb{L}_2$ są
+			algebraicznymi domknięciami $\mathbb{K}$, wówczas
+			istnieje izomorfizm $h \colon \mathbb{L}_1
+			\rightarrow \mathbb{L}_2$ taki, że $h|\mathbb{K} =
+			\id(\mathbb{K})$)
 	\end{itemize}
 \end{przyp}
+	($\supseteq$)
+	Niech $\mathbb{R}$ będzie dziedziną całkowitości, a $\mathbb{F}$ niech
+	będzie ciałem ułamków $\mathbb{R}$. Zauważmy, że $\mathbb{R}$ jest
+	podstrukturą $\mathbb{F}^\text{alg}$.
 
-
-	($\supseteq$) TODO
+	(zachodzenie warunku (2) z Tw. \ref{tw:qe})
+	Trzymając się oznaczeń z Tw. \ref{tw:qe} twierdzimy, że dla
+	$\mathcal{D} := R$, gdzie $R$ jest dziedziną całkowitości, należy wziąć
+	$\mathcal{A} := F^\text{alg}$, gdzie $F$ jest ciałem ułamków $R$.
+	Załóżmy, że $R$ zanuża się w $K \models \ACF$. Bez utraty ogólności,
+	$R \subseteq F \subseteq K$. Weźmy $L := \text{ad}_K(F)$, % TODO notacja?
+	tj. algebraiczne domknięcie $F$ wewnątrz $K$. Zauważmy, że $L$ jest
+	algebraicznym domknięciem $F$. W takim razie istnieje izomorfizm
+	z $\A = F^\text{alg}$ w $L$ (a zatem w $K$) będący identycznością na $F$.
 \end{proof}
 
 \begin{lem}
-	Dla $\ACF$ zachodzi warunek (2) Twierdzenia \ref{tw:qe}.
+	Dla $\ACF$ zachodzi warunek (1) z Twierdzenia \ref{tw:qe}.
 \end{lem}
 \begin{proof}
-TODO
+	Niech $K, L \models \ACF$, $K \subseteq L$, $\bar{a} \in K$ oraz
+	niech $L \models \exists y \, \psi(\bar{a}, y)$, gdzie $\psi$ jest formułą
+	bezkwantyfikatorową. Bez utraty ogólności $\psi$ jest koniunkcją
+	atomów i negacji atomów, czyli postaci
+	\[
+		\bigwedge_{i = 1}^n p_i(y) = 0 \wedge
+		\bigwedge_{j = 1}^m q_j(y) \not= 0,
+	\]
+	gdzie $p_i, q_j \in K[x]$.
+	Niech $b \in L$ takie, że $L \models \psi(\bar{a}, b)$.
+	\begin{itemize}
+		\item Załóżmy $n \not= 0$. Wtedy $p_1(b) = 0$, więc $b$ jest
+			pierwiatkiem wielomianu z $K[x]$. % TODO x czy X?
+			A skoro $K \models \ACF$, to $b \in K$.
+		\item Załóżmy teraz $n = 0$, czyli że $\psi$ jest postaci
+	\[
+		\bigwedge_{j = 1}^m q_j(y) \not= 0.
+	\]
+	Ponieważ każde $q_j \not\equiv 0$, to $q_j$ ma skończenie wiele
+			pierwiastków i zbiór
+			$\{b \in L \colon \bigvee_{j = 1}^m q_j(b) = 0\}$
+			jest skończony. $K$ jest nieskończone, więc możemy jako
+			$y$ wziąć dowolny element $K \setminus S$.
+	\end{itemize}
 \end{proof}
-Z powyższych dwóch lematów i twierdzenia \ref{tw:qe} wynika, że $\ACF$ posiada eliminację kwantyfikatorów.
+Z powyższych dwóch lematów i Twierdzenia \ref{tw:qe} wynika, że $\ACF$ posiada
+eliminację kwantyfikatorów.
 \end{proof}
 
 \begin{wnn}
