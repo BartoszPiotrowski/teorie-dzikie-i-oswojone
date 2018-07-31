@@ -1,10 +1,3 @@
-% jedno zdanie w jednej linii
-% myślniki w ekście piszemy jako "--" a minus jako "-"
-% zamiast "..." w wyraeniach matematycznych używamy "\ldots"
-% zamiast ":" w wyrażeniach matematycznych używamy "\colon"
-% wypunktowania lub wyliczenia robimy przy pomocy otoczeń itemize lub enumerate
-% w zasadzie nie używamy "\\"
-
 \documentclass{article}
 
 \usepackage[MeX,plmath]{polski}
@@ -15,9 +8,9 @@
 \usepackage{amssymb} % dodatkowe symbole
 \usepackage{latexsym} % dodatkowe symbole
 \usepackage{textcomp} % dodatkowe symbole
-\usepackage{hyperref} % klikalne linki -- użyj \url{...}
+\usepackage{hyperref} % klikalne linki -- \url{...}
 \usepackage{array} % do skomplikowanych tabel
-\usepackage{todonotes} % do notatek, nt. co jest do zrobienia; użyj \todo{...}
+\usepackage{todonotes} % do notatek; \todo{...}
 \usepackage{color} % do kolorowego tekstu
 \usepackage{tikz} % do tworzenia grafiki
 \usepackage{xfrac} % do pisania struktur typu A/B, A/~, etc.
@@ -594,25 +587,34 @@ Naszym celem na teraz będzie pokazanie w kilku krokach, że $ \RCF $ ma elimina
 
 \begin{tw}
 \label{tw:rcf}
-	 Niech $ (R, \leq) $ będzie ciałem uporządkowanym.
+	 Niech $ (K, \leq) $ będzie ciałem uporządkowanym.
 	 Następujące warunki są równoważne:
 	 \begin{enumerate}
-		 \item $(R, \leq) \models \RCF $,
-		 \item $R(i) := \sfrac{R[x]}{(x^2 + 1)} $ jest acf (ciałem algebraicznie domkniętym),
-		 \item $ (R, \leq) $ nie ma żadnego właściwego rozszerzenia algebraicznego uporządkowanego zgodnie z $ \leq $.
+		 \item $(K, \leq) \models \RCF $,
+		 \item $K(i) := \sfrac{K[x]}{(x^2 + 1)} $ jest acf (ciałem
+			 algebraicznie domkniętym),
+		 \item $ (K, \leq) $ nie ma żadnego właściwego rozszerzenia
+			 algebraicznego uporządkowanego zgodnie z $ \leq $.
 	 \end{enumerate}
-
+% TODO w notatkach najpierw było R, potem K. Czy notacja OK?
 \end{tw}
 \begin{proof}
-	 TODO
+	($2 \Rightarrow 1$)
+	Jasne -- przy założeniu (2) $K(i)$ jest jedynym właściwym rozszerzeniem
+	$K$.
+
+	($1 \Rightarrow 3$) TODO
+
+	($3 \Rightarrow 2$) TODO
 \end{proof}
 
+% Jakoś tu nie widzę tw. Sturma...
 \begin{wn}
 	Jeśli $ (R, \leq) \models \RCF $, to $ (R, \leq) $ ma własność Darboux dla wielomianów:
 	jeśli $ p(a) \cdot p(b) < 0 $ oraz $ a <b $, to istnieje $c \in (a, b) $ takie, że $ p(c) = 0 $, gdzie $ p \in R[x] $.
 \end{wn}
 \begin{proof}
-	 Bez utraty ogólności $ p $ jest nierozkładalny.
+	 Bez utraty ogólności, $ p $ jest nierozkładalny.
 	 A zatem, na mocy punktu 2. z twierdzenia powyżej, $ p $ jest stopnia $ 1 $, lub $ 2 $ z $ \Delta < 0$.
 	 \begin{itemize}
 		 \item Jeśli stopnia $ 1 $, to jest ok.

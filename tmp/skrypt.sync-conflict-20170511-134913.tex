@@ -1,0 +1,848 @@
+% jedno zdanie w jednej linii
+% myślniki w ekście piszemy jako "--" a minus jako "-"
+% zamiast "..." w wyraeniach matematycznych używamy "\ldots"
+% zamiast ":" w wyrażeniach matematycznych używamy "\colon"
+% wypunktowania lub wyliczenia robimy przy pomocy otoczeń itemize lub enumerate
+% w zasadzie nie używamy "\\"
+
+\documentclass{article}
+
+\usepackage[MeX,plmath]{polski}
+\usepackage[utf8]{inputenc}
+\usepackage{mathtools} % nowy, ulepszony amsmath
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb} % dodatkowe symbole
+\usepackage{latexsym} % dodatkowe symbole
+\usepackage{textcomp} % dodatkowe symbole
+\usepackage{hyperref} % klikalne linki -- użyj \url{...}
+\usepackage{array} % do skomplikowanych tabel
+\usepackage{todonotes} % do notatek, nt. co jest do zrobienia; użyj \todo{...}
+\usepackage{color} % do kolorowego tekstu
+\usepackage{tikz} % do tworzenia grafiki
+\usepackage{xfrac} % do pisania struktur typu A/B, A/~, etc.
+\usetikzlibrary{arrows, automata, positioning}
+
+\title{\textbf{Logika matematyczna II} \\ \Large{$\sim$ notatki z wykładu $\sim$}}
+
+\date{\small{Wersja z dnia: \today}}
+\begin{document}
+
+\maketitle
+
+% Oznaczenia na zbiory liczb naturalnych, całkowitych, etc.
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\B}{\mathbb{B}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\K}{\mathbb{K}}
+
+% Oznaczenia na ...
+\newcommand{\X}{\mathcal{X}}
+\newcommand{\Y}{\mathcal{Y}}
+
+% Oznaczenia na funkcje
+\newcommand{\id}{\text{id}}
+
+% Twierdzenia, wnioski, etc.
+\newtheorem{thm}{Thm}[section]
+\theoremstyle{plain}
+\newtheorem{tw}[thm]{Twierdzenie}
+\newtheorem{stw}[thm]{Stwierdzenie}
+\newtheorem{wn}[thm]{Wniosek}
+\newtheorem{wnn}[thm]{Wnioski}
+\newtheorem{lem}[thm]{Lemat}
+\newtheorem{teza}[thm]{Teza}
+\newtheorem{fakt}[thm]{Fakt}
+\newtheorem{uw}[thm]{Uwaga}
+\newtheorem{obs}[thm]{Obserwacja}
+
+% Definicje, oznaczenia, etc.
+\theoremstyle{definition}
+\newtheorem{df}[thm]{Definicja}
+\newtheorem{oznn}[thm]{Oznaczenia}
+\newtheorem{ozn}[thm]{Oznaczenie}
+
+% Przykłady, uwagi, etc.
+\theoremstyle{remark}
+\newtheorem{prz}[thm]{Przykład}
+\newtheorem{przyp}[thm]{Przypomnienie}
+\newtheorem{zd}{Zadanie}
+
+%\DeclareMathOperator{\Exists}{\exists}
+%\DeclareMathOperator{\Forall}{\forall}
+
+% Oznaczenia na różne teorie, ZFC, PA, etc.
+% (Skróty te działają w otoczeniu matematycznym)
+\newcommand{\PA}{\mathsf{P \mkern-1.9mu A}}
+\newcommand{\ZFC}{\mathsf{Z \mkern-1.6mu F \mkern-1.5mu C}}
+\newcommand{\DLO}{\mathsf{D \mkern-1.5mu L \mkern-1.8mu O}}
+\newcommand{\ACF}{\mathsf{A \mkern-2.0mu C \mkern-1.1mu F}}
+\newcommand{\RCF}{\mathsf{R \mkern-1.7mu C \mkern-1.4mu F}}
+\newcommand{\FO}{\mathsf{F \mkern-1.4mu O}}
+\newcommand{\q}{\mathsf{Q}}
+
+% Skróty popularnych wyrażeń.
+\newcommand{\wtw}{wtedy i tylko wtedy, gdy }
+\newcommand{\fae}{następujące warunki są równoważne: }
+\newcommand{\Fae}{Następujące warunki są równoważne: }
+
+% Inne
+\newcommand{\Th}{\text{Th}}
+\newcommand{\tp}{\text{tp}}
+\newcommand{\Diag}{\text{Diag}}
+\newcommand{\DiagEl}{\text{Diag}_{\text{el}}}
+
+\begin{abstract}
+	Notatki do wykładu \textit{Logika matematyczna II} dra Leszka Kołodziejczyka, prowadzonego w semestrze letnim roku akademickiego 2016/17.
+	Spisywane przez Jędrzeja Kołodziejskiego i Bartosza Piotrowskiego.
+	Uwagi o błędach są mile widziane -- proszę pisać na \texttt{bartoszpiotrowski@post.pl}
+\end{abstract}
+
+
+\section*{Uwagi wstępne}
+Teorie aksjomatyczne są dwojakiego rodzaju:
+\begin{itemize} % może oswojone v dzikie?
+	\item \textit{ładne} (pod takim, czy innym względem) -- da się zrozumieć zbiory w nich definiowalne, jak również struktury ich modeli; są rozstrzygalne.
+		Przykładem tego typu teorii są gęste liniowe porządki bez końców ($\DLO$), czyli $\Th(\Q, \leq), \Th(\R, +, \cdot, \leq)$, etc.
+		Tego typu \textit{ładne} teorie są przedmiotem zainteresowania teorii modeli.
+	\item \textit{straszne} (tzw. \textit{smoki}) -- teorie te nie spełniają żadnych warunków \textit{ładności}.
+		Przykłady: $\ZFC$, $\Th(\N, +, \cdot, \leq)$.
+\end{itemize}
+Pierwsza część niniejszego kursu będzie dotyczyła teorii \textit{ładnych}, druga zaś -- \textit{smoków}.
+
+Polecane podręczniki do pierwszej części to:
+\begin{itemize}
+	\item David Marker, \textit{Model Theory: An Introduction}, Graduate Texts in Mathematics, Springer, 2002,
+	\item Katrin Tent, Martin Ziegler, \textit{A Course in Model Theory}, Cambridge University Press, 2012.
+\end{itemize}
+
+
+\section{Eliminacja kwantyfikatorów}
+\begin{df}
+	Teoria $T$ ma \textit{eliminację kwantyfikatorów} (q.e.) \wtw dla dowolnej formuły $\psi(\bar{x})$ istnieje taka formuła bezkwantyfikatorowa $\phi(\bar{x})$, że $T \models \forall {\bar{x}} (\psi(\bar{x}) \iff \phi(\bar{x}))$.
+\end{df}
+
+\begin{uw}
+	Jeśli w sygnaturze teorii $T$ nie występują żadne stałe, wówczas teoria ta nie ma zdań bezkwantyfikatorowych.
+	W takiej sytuacji można:
+	\begin{itemize}
+		\item albo dopuścić sytuację, że dla zdania $\phi$ bierzemy formułę bezkwantyfikatorową $\psi$ taką, że $T \vdash \forall x (\phi \iff \psi(x))$,
+		\item albo wprowadzić zmienne zdaniowe $\top$ i $\bot$ i żądać zupełności teorii $T$.
+	\end{itemize}
+\end{uw}
+
+\begin{prz}
+	W $\Th(\R, +, \cdot, \leq)$ formuła $\phi(y, z, w) \equiv y \neq 0 \wedge \exists x (yx^2 + 2x + w = 0)$ jest równoważna formule bezkwantyfikatorowej $y \neq 0 \wedge z^2 - 4yw \geq 0$.
+\end{prz}
+
+Z eliminacji kwantyfikatorów typowo wynikają następujące korzyści:
+\begin{itemize}
+	\item zrozumienie zbiorów definiowalnych w danej teorii (no bo więcej, niż trzy bloki kwantyfikatorów sprawiają niemożliwym zrozumienie definicji),
+	\item uzyskanie zupełności teorii,
+	\item uzyskanie rozstrzygalności teorii.
+\end{itemize}
+
+Ale z drugiej strony trzeba uważać, bo:
+
+\begin{stw} Dla dowolnej niesprzecznej teorii $T$ istnieje jej niesprzeczne rozszerzenie $T^+ \supseteq T$ z eliminacją kwantyfikatorów.
+\end{stw}
+\begin{proof}
+	Dla każdej formuły $\phi(\bar{x})$ dodajemy nowy symbol relacyjny $R_{\phi}(\bar{x})$.
+	\[T^+ := T \cup \{\forall \bar{x} (\phi(\bar{x}) \iff R_{\phi}(\bar{x}))\}\].
+\end{proof}
+A nadawanie niezrozumiałym formułom nazw nie czyni ich zrozumiałymi.
+
+\begin{tw}
+	$\DLO$ (teoria gęstych liniowych porządków) posiada q.e.
+\end{tw}
+\begin{proof}
+	Niech $\phi$ to formuła $\DLO$ w zmiennych $x_1, \ldots, x_n$.
+	(Jak wiemy) $\DLO$ jest zupełna (bo ma tylko jeden, z dokładnością do izomorfizmu, przeliczalny model, tzn. jest $\omega$-kategoryczna, a mamy twierdzenie Löwenheima-Skolema).
+
+	Zauważmy, że:
+	\begin{itemize}
+		\item jeśli $a_1, \ldots, a_n, b_1, \ldots b_n \in \Q$ są takie, że dla każdej formuły bezkwantyfikatorowej $\phi$ zachodzi $(\Q, \leq) \models \phi(\bar{a}) \iff \phi(\bar{b})$, to istnieje autoizomorfizm $h(\Q, \leq)$ taki, że $h(a_i) = b_i$ dla $i \in \{1, \ldots, n\}$, a zatem dla każdej formuły $\gamma(\bar{x})$ mamy $(\Q, \leq) \models \gamma(\bar{a}) \iff \gamma(\bar{b})$,
+		\item z dokładnością do równoważności w $\DLO$ istnieje tylko skończenie wiele formuł bezkwantyfikatorowych w zmiennych $x_1, \ldots, x_n$ -- każda jest alternatywą koniunkcji takich, jak na przykład ta: $x_1 = x_2 \wedge x_1 \leq x_3 \wedge \neg x_3 \leq x_1$.
+			Takie koniunkcje oznaczamy przez $\psi_1(\bar{x}), \psi_2(\bar{x}), \ldots$
+			W takim razie
+			\[(\Q, \leq) \models \forall \bar{x} (\phi(\bar{x}) \iff \bigwedge_{\mathclap{\substack{i \text{ takie, że istnieje } \bar{a} \in \Q^n \\ \text{ takie, że }(\Q, \leq) \models \phi(\bar{a}) \wedge \psi_i(\bar{a})}}} \psi_i(\bar{x}))\]
+	\end{itemize}
+	Zatem z zupełności
+			\[\DLO \models \forall \bar{x} (\phi(\bar{x}) \iff \bigwedge_{\mathclap{\substack{i \text{ takie, że istnieje } \bar{a} \in \Q^n \\ \text{ takie, że }(\Q, \leq) \models \phi(\bar{a}) \wedge \psi_i(\bar{a})}}} \psi_i(\bar{x}))\]
+\end{proof}
+
+\begin{wn}
+	$\DLO$ jest \em{$o$-minimalna}, tj. dla dowolnego $A \models \DLO$ i dowolnej formuły $\phi(x,\bar{a})$, gdzie $a \in A^n$ zbiór definiowalny $\{x \in A \colon  A \models \phi(x,\bar{a})\}$ jest skończoną sumą przedziałów (być może jednopunktowych).
+\end{wn}
+
+
+\begin{tw}
+Dla dowolnej teorii $T$, \fae
+	\begin{enumerate}
+		\item $T$ ma eliminację kwantyfikatorów,
+		\item dla dowolnych dwóch struktur $\A, \B \models T$, dowolnego $\D$ takiego, że $\A \supseteq \D \subseteq \B$,  dowolnego $\bar{d} \in \D$, i dowolnej formuły bezkwantyfikatorowej $\psi(\bar{x}, y)$  zachodzi:
+			\[\A \models \exists y \, \psi(\bar{d}, y) \iff \B \models \exists y \, \psi(\bar{d}, y)\]
+	\end{enumerate}
+\end{tw}
+\begin{proof}
+	($\Rightarrow$) Łatwe.
+
+	($\Leftarrow$) \color{red} TODO
+\end{proof}
+
+\begin{df}
+	\begin{itemize}
+		Struktura $\A$ jest:
+		\item \textit{minimalna}, jeśli każdy definiowalny podzbiór $A$ jest skończony lub koskończony,
+		\item \textit{silnie minimalna}, jeśli każda struktura $\B \equiv \A$ jest minimalna.
+	\end{itemize}
+
+	Teoria $T$ jest \textit{silnie minimalna} jeśli każda struktura $\B \models T$ jest minimalna.
+\end{df}
+
+% tu można przepisac jeszcze te zadania
+
+\begin{df}
+	$T_{\forall} = \{\phi \text{ czysto uniwersalne takie, że } T \vdash
+	\phi\}$
+\end{df}
+
+\begin{stw}
+	Niech $T$ to teoria.
+	Wówczas $\A \models T_{\forall}$ \wtw istnieje $\B \models T$ takie, że $\A \subseteq \B$.
+\end{stw}
+\begin{proof}
+	($\Leftarrow$) Oczywiste.
+
+		($\Rightarrow$) \color{red} TODO
+\end{proof}
+
+\begin{tw}
+	\label{tw:qe}
+	Niech $T$ będzie teorią taką, że:
+	\begin{enumerate}
+		\item dla dowolnych $\A, \B \models T$ takich, że $\A \subseteq \B$, dla dowolnego $\bar{a} \in \A$ i dowolnej formuły bezkwantyfikatorowej $\psi(\bar{x}, y)$, mamy:
+			\[
+				\B \models \exists y \, \psi(\bar{a}, y) \Rightarrow \A \models \exists y \, \psi(\bar{a}, y)
+			\]
+		\item dla każdej $\D \models T_{\forall}$ istnieje $\A \models T$ takie, że $\D \subseteq \A$ i każde zanurzenie $\D \hookrightarrow \B \models T$ rozszerza się do zanurzenia $\A \hookrightarrow \B$,
+	\end{enumerate}
+	wówczas $T$ ma eliminację kwantyfikatorów.
+\end{tw}
+\begin{proof}
+	\color{red} TODO
+\end{proof}
+
+
+% WYKŁAD 2, data: 7 III 2017
+
+\section{Ciała algebraicznie domknięte}
+
+\begin{df}
+	$\ACF$ to teoria w języku $\{+, \cdot, -, 0, 1\}$ (gdzie $-$ jest arności $1$) wyposażona w następujące aksjomaty:
+	\begin{itemize}
+		\item aksjomaty ciał,
+		\item schemat aksjomatów: $\forall w_n, \ldots, w_0 (w_n \neq 0 \Rightarrow \exists y (w_n y^n + \cdots + w_1y + w_0 = 0))$, gdzie $n \in \N \setminus \{0\}$.
+\end{df}
+
+
+\begin{tw}
+	$\ACF$ posiada eliminację kwantyfikatorów.
+\end{tw}
+\begin{proof}
+Dowodzimy następujące dwa lematy i korzystamy z Twierdzenia \ref{tw:qe}.
+
+\begin{lem}
+	$\ACF_{\forall}$ to teoria dziedzin całkowitości (tj. pierścieni bez dzielników zera).
+	Ponadto zachodzi ... %TODO
+\end{lem}
+\begin{proof}
+	($\subseteq$) TODO
+
+\begin{przyp}[z algebry]
+	~\begin{itemize}
+		\item Każde ciało $\mathbb{K}$ ma swoje algebraiczne domknięcie $\mathbb{K}^{\text{alg}}$ (tzn. takie ciało $\mathbb{L} \supseteq \mathbb{K}$, że $\mathbb{L} \models \ACF$ i rozszerzenie $\mathbb{L} \supseteq \mathbb{K}$ jest algebraiczne).
+		\item Algebraiczne domknięcie $\mathbb{K}^{\text{alg}}$ jest jedyne z dokładnością do izomorfizmu nad $\mathbb{K}$ (tzn. jeśli $\mathbb{L}_1$ i $\mathbb{L}_2$ są algebraicznymi domknięciami $\mathbb{K}$, wówczas istnieje izomorfizm $h \colon \mathbb{L}_1 \rightarrow \mathbb{L}_2$ taki, że $h|\mathbb{K} = \id(\mathbb{K})$ )
+	\end{itemize}
+\end{przyp}
+
+
+	($\supseteq$) TODO
+\end{proof}
+
+\begin{lem}
+	Dla $\ACF$ zachodzi warunek (2) Twierdzenia \ref{tw:qe}.
+\end{lem}
+\begin{proof}
+TODO
+\end{proof}
+Z powyższych dwóch lematów i twierdzenia \ref{tw:qe} wynika, że $\ACF$ posiada eliminację kwantyfikatorów.
+\end{proof}
+
+\begin{wnn}
+	~\begin{itemize}
+		\item $\ACF$ jest silnie minimalna, tj. w dowolnym $\mathbb{K} \models \ACF$ dowolny definiowalny podzbiór $\mathbb{K}$ jest skończony lub koskończony,
+		\item jeśli $p$ jest liczbą pierwszą lub zerem, to teoria $\ACF_p := \ACF +  \{\text{char} = p\}$ jest zupełna,
+		\item $\ACF$ jest rozstrzygalna.
+	\end{itemize}
+\end{wnn}
+
+\begin{fakt}
+	Dla każdej nieprzeliczalnej liczby porządkowej $\kappa$ teoria $\ACF_p$ jest $\kappa$-kategoryczna.
+\end{fakt}
+Ideą dowodu dla powyższego faktu jest to, że ciała algebraicznie domknięte tej samej charakterystyki i o tym samym stopniu przestępnym są izomorficzne.
+
+\begin{tw}[Ax--Grothendick]
+	Niech $\mathbb{K} \models \ACF$.
+	Niech funkcja $f \colon K^n \rightarrow K^n$ będzie dana wielomianami, tzn. $$f(x_1, \ldots, x_n) = \langle p_1(x_1, \ldots, x_n), \ldots, p_n(x_1, \ldots, x_n)\rangle ,$$ gdzie $p_1(x_1, \ldots, x_n), \ldots, p_n(x_1, \ldots, x_n) \in K[x_1, \ldots, x_n]$. %TODO nie <> tylko cos innego.
+	Wówczas jeśli $f$ jest iniekcją, to jest też surjekcją.
+\end{tw}
+\begin{proof}
+	Rozważmy zdanie $\psi_{n,k}$ wyrażające następującą własność ciała $\K$:
+	\textit{dla wszystkich $f \colon K^n \rightarrow K^n$ danych przez $p_1, p_2, \ldots, p_n$ jak wyżej, ale spełniające warunek $\text{deg } p_i \leq k$, jeśli $f$ jest iniekcją, to jest też surjekcją. }
+	Zauważmy, że $\psi_{n,k}$ jest zdaniem postaci $\forall \exists$.
+	Jeśli $\K$ jest skończone, to $\K \models \psi_{n,k}$ (w zbiorach skończonych iniekcje są też surjekcjami). %TODO można źle zrozumieć..
+	Niech $\F^{\text{alg}}_{p}$ oznacza algebraiczne domknięcie ciała $p$-elementowego $\F^{\text{alg}}_p$.
+	Zauważmy, że $$\F^{\text{alg}}_{p} = \bigcup_{m \in \N} \F_{p^m},$$ gdzie $\F_{p^m}$ to jedyne ciało o $p^m$ elementach.
+	Zdania postaci $\forall \exists$ zachowują prawdziwość w sumach łańcuchów:
+	jeśli $\psi$ jest takim zdaniem, $\A_0 \subset \A_1 \subset \ldots $ i dla każdego $m \in \N$ zachodzi $\A_m \models \psi$, to $\bigcup_{m \in \N} \A_m \models \psi$.
+	Zatem $\F^{\text{alg}} \models \psi_{n,k}$. % indeks p?
+	Z zupełności $\ACF_p$, gdzie $p$ jest pierwsza, mamy $\ACF_p \models \psi_{n,k}$.
+	Ze zwartości i zupełności $\ACF_0$ również $\ACF_0 \models \psi_{n,k}$.
+
+\end{proof}
+
+\begin{df}
+	Jeśli $\K \models \ACF$ oraz $I \subseteq K[x_1, x_2, \ldots, x_n ]$ jest ideałem, to wtedy zbiory postaci $$V(I) = \{(a_1, a_2, \ldots, a_n) \in K^n \colon p( a_1, a_2, \ldots, a_n ) = 0 \text{ dla wszystkich } p \in I\}$$ nazywamy \textit{zbiorem algebraicznym}.
+\end{df}
+
+
+\begin{obs}
+	Ponieważ $K[x_1, x_2, \ldots, x_n ]$ jest noetherowski, to ideał $I$ jest generowany przez skończenie wiele wielomianów $p_1, p_2, \ldots, p_k$.
+	Czyli zbiór $V(I)$ jest definiowalny jako:
+	$$V(I) = \{ \bar{a} \in K^n \colon p_1(\bar{a}) = 0 \wedge p_2(\bar{a}) = 0 \wedge p_n(\bar{a})=0 \}.$$
+	%CHECK
+\end{obs}
+
+\begin{df}
+	 Zbiór konstruowalny to kombinacja borelowska zbiorów konstruowalnych.
+\end{df}
+
+\begin{tw}[Chevalley'a]
+	 Jeśli $\K \models \ACF$, $V \subseteq K^n$ to zbiór konstruowalny, $f \colon K^n \to K^l$ przekształcenie dane wielomianami $q_1, q_2, \ldots, q_l$,
+	 wówczas $f(V)$ jest konstruowalny.
+	 W szczególności rzut zbioru konstruowalnego jest konstruowalny.
+\end{tw}
+\begin{proof}
+	\[
+		f(V) = \{ (y_1, y_2, \ldots, y_l ) \colon \exists x_1, x_2, \ldots, x_n \in V (q_1(\bar{x}) = y_1, \ldots q_l(\bar{x}) = y_l)  \}.
+	\]
+	Zatem $ f(V) $ jest definiowalny formułą bezkwantyfikatorową, a zatem konstruowalny.
+\end{proof}
+
+\begin{tw}[słaba wersja twierdzenia Hilberta o zerach]
+	Niech $  \K \models \ACF $ i niech $  I \subseteq K[x_1, x_2, \ldots, x_n ] $ będzie ideałem własnym, tj. $  1 \in I $.
+	Wówczas $  V(I) \neq \emptyset $.
+\end{tw}
+\begin{proof}
+	 Niech ideał $I$ będzie generowany przez $  p_1, p_2, \ldots, p_k  $.
+	 Niech $  M \supseteq I$ będzie ideałem maksymalnym.
+	 Wtedy $L :=  \sfrac{K[x_1, x_2, \ldots, x_n ]}{M} $ jest ciałem.
+	 Zauważmy, że $  L \models \exists x_1, x_2, \ldots, x_n (p_1(\bar{x}) = 0 \wedge \ldots \wedge p_k(\bar{x}) = 0) $.
+	 Niech $ L^{\text{alg}} $ będzie algebraicznym domknięciem $ L $.
+	Mamy $  L^{\text{alg}} \models \exists x_1, x_2, \ldots, x_n (p_1(\bar{x}) = 0 \wedge \ldots \wedge p_k(\bar{x}) = 0) $.
+	Ale $  K \subseteq L^{\text{alg}} $, a $ K , L \models \ACF $, czyli $ K \prec L^{\text{alg}} $.
+	Stąd $  K \models \exists x_1, x_2, \ldots, x_n (p_1(\bar{x}) = 0 \wedge \ldots \wedge p_k(\bar{x}) = 0) $
+\end{proof}
+
+% WYKŁAD 3, 14 III 2017
+
+\begin{stw}
+	 $ \R $ nie ma eliminacji kwantyfikatorów w języku $ \{+, \cdot, -, 0, 1\} $. %TODO "-" jest jednoargumentowy
+\end{stw}
+\begin{proof}
+	Gdyby miało, to $ (\R, +, \cdot, -, 0, 1) $ byłoby silnie minimalne.
+	Ale $\exists y (y^2 = x) $ definiuje nieskończony, konieskończony podzbiór $ \R $.
+\end{proof}
+
+\begin{df}
+	 $ \RCF $ to teoria w języku $ \{ +, \cdot, -, 0, 1, \leq \} $ z następującą aksjomatyką:
+	 \begin{enumerate}
+		 \item $ \{+, \cdot, -, 0, 1\} $ spełnia aksjomaty ciała,
+		 \item po dodaniu $\leq $ mamy ciało uporządkowane, tzn. spełnione jest:
+			 \begin{itemize}
+				 \item $ \leq $ jest liniowym porządkiem,
+				 \item $ \forall x y (x, y \geq 0 \Rightarrow x\cdot y \geq 0) $,
+				 \item $\forall x y z (x \leq y \Rightarrow x + z \leq y + z )  $,
+			 \end{itemize}
+
+		 \item $ \forall x (x \geq 0 \Rightarrow \exists y ( y^2 = x )) $,
+		 \item dla wszystkich nieparzystych $ n \in \N$ zachodzi
+			 \[
+				 \forall y_0 y_1 \ldots y_n (y_n \neq 0 \Rightarrow \exists x (y_n \cdot x^n + \ldots + y_1 \cdot x + y_0 = 0))
+		         \]
+	 \end{enumerate}
+
+\end{df}
+
+Motywacją do badania $ \RCF $ jest m. in. 17. problem Hilberta, który brzmi następująco:
+\textit{Czy każda funkcja wymierna $ f \in \R(x_1, x_2, \ldots, x_n ) $ taka, że $ f \geq 0 $ jest sumą kwadratów funkcji wymiernych?}
+
+Naszym celem na teraz będzie pokazanie w kilku krokach, że $ \RCF $ ma eliminację kwantyfikatorów.
+
+\begin{tw}
+\label{tw:rcf}
+	 Niech $ (R, \leq) $ będzie ciałem uporządkowanym.
+	 Następujące warunki są równoważne:
+	 \begin{enumerate}
+		 \item $(R, \leq) \models \RCF $,
+		 \item $R(i) := \sfrac{R[x]}{(x^2 + 1)} $ jest acf (ciałem algebraicznie domkniętym),
+		 \item $ (R, \leq) $ nie ma żadnego właściwego rozszerzenia algebraicznego uporządkowanego zgodnie z $ \leq $.
+	 \end{enumerate}
+
+\end{tw}
+\begin{proof}
+	 TODO
+\end{proof}
+
+\begin{wn}
+	Jeśli $ (R, \leq) \models \RCF $, to $ (R, \leq) $ ma własność Darboux dla wielomianów:
+	jeśli $ p(a) \cdot p(b) < 0 $ oraz $ a <b $, to istnieje $c \in (a, b) $ takie, że $ p(c) = 0 $, gdzie $ p \in R[x] $.
+\end{wn}
+\begin{proof}
+	 Bez utraty ogólności $ p $ jest nierozkładalny.
+	 A zatem, na mocy punktu 2. z twierdzenia powyżej, $ p $ jest stopnia $ 1 $, lub $ 2 $ z $ \Delta < 0$.
+	 \begin{itemize}
+		 \item Jeśli stopnia $ 1 $, to jest ok.
+		 \item Jeśli stopnia $2$ z $\Delta < 0 $, to $ p $ ma stały znak na $ R $.
+	 \end{itemize}
+
+\end{proof}
+
+\begin{tw}
+	 $ \RCF$ ma eliminację kwantyfikatorów.
+\end{tw}
+\begin{proof}
+	Pokażemy, że zachodzą obydwa warunki dostateczne posiadania q.e. z twierdzenia \ref{tw:qe}.
+	\begin{lem} % po co lemat?
+		 Niech $ (K, \leq) \subseteq (R, \leq)$ będą rcf-ami,
+	        $ \bar{a} \in K, \psi(\bar{x}, y)$ niech będzie formułą bezkwantyfikatorową,
+		oraz niech $ b \in R$ będzie takie, że $(R, \leq) \models  \psi(\bar{a}, b)$.
+		Bez utraty ogólności $ \psi(\bar{a}, y)$ ma postać:
+		\[
+			p(y) = 0 \wedge  \bigwedge_{ i = 1 }^n q_i > 0,
+		\]
+		gdzie $ p, q_i \in K[x], q_i \not \equiv 0$.
+	\end{lem}
+	Są dwie możliwości:
+	\begin{enumerate}
+		\item $ p \not \equiv 0$.
+			Wtedy $ b$ jest algebraiczne nad $ K$.
+			Z charakterystyki rcf-ów (twierdzenie \ref{tw:rcf}), $ b \in K$.
+		\item $ p \equiv 0$.
+			Wtedy $ \psi$ ma postać $ \bigwedge_{ i } q_i(y) > 0$.
+			\\TODO OBRAZEK\\
+			Zauważmy, że
+			\begin{itemize}
+				\item $ c_i < b$ i $ c_i \in K \cup \{-\infty\}$,
+				\item $ d_i > b$ i $ d_i \in K \cup \{+\infty\}$.
+			\end{itemize}
+			Niech $ c := \max (c_1, \ldots, c_n)$ oraz $ d := \min (d_1, \ldots, d_n)$.
+			Wtedy dla dowolnego elementu $ b' \in (c,d) \cup K $ zachodzi $ (K, \leq) \models \psi(\bar{a},\tilde{b})$.
+	\end{enumerate}
+	\begin{lem}
+		 $\RCF_{\forall}$ to teoria pierścieni uporządkowanych.
+	\end{lem}
+	\begin{proof}
+		 \textbf{($ \subseteq$)} Każda podstruktura ciała uporządkowanego jest pierścieniem uporządkowanym.
+		 \\\textbf{($ \supseteq$)} Niech $ (P, \leq)$ będzie pierścieniem uporządkowanym, a $Q$ niech będzie ciałem ułamków $P$.
+		 Rozszerzamy $\leq$ w kanoniczny sposób na $Q$ dostając ciało uporządkowane $ (Q, \leq)$.
+		 Weźmu maksymalne ciało uporządkowane $(R, \leq)$ będące algebraicznym rozszerzeniem $ (Q, \leq)$
+		 (na mocy lematu Kuratowskiego-Zorna).
+		 Na mocy charakteryzacji rcf-ów z twierdzenia \ref{tw:rcf} mamy $(R, \leq) \models \RCF$,
+		 a zatem $(P, \leq) \models \RCF_{\forall}$.
+	\end{proof}
+	\begin{df}
+		 Niech $(Q, \leq)$ będzie ciałem uporządkowanym.
+		 Dowolny rcf będący algebraicznym rozszerzeniem $(Q, \leq)$ uporządkowanym zgodnie z $ \leq$ nazywamy
+		 \textit{rzeczywistym domknięciem} $ (Q, \leq)$.
+	\end{df}
+	\begin{lem}
+		 Jeśli mamy pierścień uporządkowany $ (D, \leq)$,
+		 $(Q, \leq)$ jest ciałem ułamków $D$ uporządkowanym przez kanoniczne rozszerzenie $\leq$,
+		 $ (R, \leq)$ jest rzeczywistym domknięciem $ (Q, \leq)$
+		 oraz $ (Q, \leq) \subseteq (K, \tilde{\leq}) \models \RCF$,
+		 to istnieje zanurzenie $ (R, \leq)$ w $ (K, \tilde{\leq})$ będące identycznością na $ Q$
+	\end{lem}
+	\begin{proof}
+		 TODO
+	\end{proof}
+
+
+
+
+\end{proof}
+
+\begin{wn}
+	$ \RCF$ jest zupełna, rozstrzygalna i \textit{o}-minimalna.
+\end{wn}
+
+\begin{uw}
+	 Z rozstrzygalności $ \RCF$ wynika rozstrzygalność ,,geometrii elementarnej".
+\end{uw}
+
+\begin{df}
+	 Niech $ (R, \leq)$ będzie rcf-em.
+	 Zbiór \textit{semialgebraiczny} to $ S \subseteq R^n$ będący skończoną sumą zbiorów postaci
+	 \[
+		 \{\bar{x} \in R^n \colon p_1(\bar{x}) = \ldots = p_l(\bar{x}) = 0, q_1(\bar{x}) > 0, \ldots, q_k(\bar{x}) > 0 \}
+	 \]
+\end{df}
+
+\begin{uw}
+	 Rodzina zbiorów semialgebraicznych jest domknięta na rzutowania.
+\end{uw}
+
+% WYKŁAD 21 III 2017
+
+Zastanówmy się nad następującą rzeczą: jakie ciała są porządkowalne?
+Wiemy bowiem, że $ \C$ lub ciała charakterystyki $ p$ nie są porządkowalne.
+
+\begin{df}
+	 $ K$ jest ciałem \textit{formalnie rzeczywistym}, jeśli $ -1$ nie jest sumą kwadratów, tzn. $ -1 \not \in \Sigma K^2$.
+\end{df}
+\begin{df}
+         Niech $ K$ będzie ciałem formalnie rzeczywistym.
+         \textit{Stożkiem} w $ K$ nazywamy taki zbiór $P$,
+	 że $\Sigma K^2 \subseteq P \subseteq K$, $P$ jest domknięty na działania $+, \cdot$ oraz $-1 \not \in P$.
+\end{df}
+
+\begin{uw}
+	W każdym ciele formalnie rzeczywistym $K$ jest przynajmniej jeden stożek, mianowicie $\Sigma K^2$.
+\end{uw}
+\begin{stw}
+	Jeśli $P$ jest stożkiem oraz $-a \not \in P$, to zbiór $$P[a] := \{x + a \cdot y \colon x, y \in P\}$$ też jest stożkiem.
+\end{stw}
+\begin{proof}
+	Wystarczy pokazać, że $-1 \not \in P[a]$.
+	Załóżmy przeciwnie: niech $-1 = x + a \cdot y$ dla pewnych $x, y \in P$.
+	Musi być $y \neq 0$, bo $-1 \not \in P$.
+	Więc
+	\begin{align*}
+		-a \cdot y &= x + 1 \\
+		-a &= \frac{1}{y} \cdot (x + 1) \\
+		-a &= \frac{1}{y^2} \cdot y \cdot (x + 1).
+	\end{align*}
+	Prawa strona ostatniego równania należy do  $P$, tak więc sprzeczność.
+\end{proof}
+\begin{wn}
+	 Niech $K$ będzie ciałem formalnie rzeczywistym a $P$ stożkiem w $K$.
+	 $P$ rozszerza się do stożka $Q$ takiego, że dla każdego $a \in K$ jest $a \in Q$ lub $-a \in Q$.
+\end{wn}
+\begin{proof}
+	 Niech $Q$ będzie maksymalnym stożkiem zawierającym $P$.
+	 Weźmy $a \in K$ i załóżmy, że $a \not \in P$.
+	 Wtedy $Q[-a]$ jest stożkiem, a z maksymalności $Q$ mamy $-a \in Q$.
+\end{proof}
+
+\begin{wn}
+	\label{wn:forrz}
+	 Niech $K$ będzie ciałem formalnie rzeczywistym oraz niech $a \not \in \Sigma K^2$.
+	 Wówczas $K$ ma uporządkowanie $\leq$, w którym $a < 0$.
+\end{wn}
+\begin{proof}
+	 $\Sigma K^2$ jest stożkiem.
+	 Wystarczy więc w dowodzie wniosku powyżej za $P$ wziąć $\Sigma K^2$ i otrzymany maksymalny stożek $Q$ porządkuje $K$.
+\end{proof}
+
+\begin{tw}
+	 17. problem Hilberta ma pozytywne rozwiązanie:
+	 jeśli $f \in \R(x_1, x_2, \ldots, x_n)$ oraz $\forall \bar{x} \in \R^n \, f(\bar{x}) \geq 0$,
+	 to są $g_1, g_2, \ldots \in \R(x_1, x_2, \ldots, x_n)$ takie, że $f = \Sigma_i g_i^2$
+\end{tw}
+\begin{proof}
+	 Załóżmy przeciwnie.
+	 $K := \R(x_1, x_2, \ldots, x_n) $ jest ciałem formalnie rzeczywistym.
+	 Założyliśmy, że $f \not \in \Sigma K^2$, dlatego na mocy wniosku \ref{wn:forrz} istnieje takie uporządkowanie $\leq$,
+	 że $f < 0$.
+	 Zauważmy, że $\leq$ rozszerza zwykły porządek na $\R$ (bo każdy nieujemny element $\R$ w $\leq$ jest kwadratem).
+	 Niech $(L, \leq)$ będzie rzeczywistym domknięciem $(K, \leq)$.
+	 \[
+	 	 (L, \leq) \models f(x_1, x_2, \ldots, x_n ) < 0
+	 \]
+	 \[
+	 	 (L, \leq) \models \exists \bar{x}  \, f(\bar{x}) < 0.
+	 \]
+	 Z modelowej zupełności $\RCF$ mamy $(\R, \leq) \preccurlyeq (L, \leq)$, więc
+	 \[
+	 	 (\R, \leq) \models  \exists \bar{x}  \, f(\bar{x}) < 0,
+	 \]
+Zatem sprzeczność.
+\end{proof}
+
+% Tu idą uzupełnienia luk w dowodzie tego i owego. Trzeba chyba to uporządkować.
+
+\section{Typy}
+
+\begin{df}
+	\textit{Typ} (czy też $n$-\textit{typ}) nad teorią $T$ to maksymalny, niesprzeczny z $T$ zbiór formuł o zmiennych wolnych należących do zbioru $\{x_1, x_2, \ldots, x_n\}$.
+		Jeśli $\A$ to struktura oraz $D \subseteq A$, to \textit{typem nad $\A$ z parametrami z $D$} nazywamy typ nad teorią $\Th(\A_D)$, gdzie $\A_D$ to rozszerzenie struktury $\A$ o stałe dla każdego elementu z $D$.
+		Podzbiór typu nazywamy \textit{typem częściowym}.
+\end{df}
+
+\begin{ozn}
+	Typy typowo oznaczamy przez $p(\bar{x}), q(\bar{x})$, natomiast:
+	 ~\begin{itemize}
+		 \item przez $S_n(T)$ oznaczamy zbiór $n$-typów nad $T$,
+		 \item przez $S_n^{\A}(D)$ oznaczamy zbiór $n$-typów nad $\A$ z parametrami z $D \subseteq A$.
+	 \end{itemize}
+\end{ozn}
+
+\begin{df}
+	Typ $p(\bar{x})$ jest \textit{realizowany} w $\A$, jeśli jest takie $\bar{a} \in A^n$, że dla każdej formuły $\phi(\bar{x}) \in p(\bar{x})$ zachodzi $\A \models \phi(\bar{a})$.
+	W przeciwnym przypadku mówimy, że $\A$ \textit{omija} typ $p(\bar{x})$.
+\end{df}
+
+\begin{prz}
+	Rozważmy następujące typy nad $(\Q, \leq)$ z parametrami z $\N$:
+	\begin{itemize}
+		\item $p_1(x) = \{\phi(x, \bar{n}) \colon \Q \models \phi(\frac{1}{2}, \bar{n})\}$,
+		\item $p_2(x)$ będący maksymalnym, niesprzecznym rozszerzeniem zbioru formuł $\{x > n \colon n \in \N\}$.
+	\end{itemize}
+	Typ $p_1$ jest realizowany, natomiast $p_2$ jest ominięty.
+\end{prz}
+
+\begin{stw}
+	Jeśli $p(\bar{x})$ jest typem nad $\A$ z parametrami z $D \subseteq A$,
+	 to istnieje $\tilde{\A} \succcurlyeq \A$ realizujący $p$.
+\end{stw}
+\begin{proof}
+	Teoria $\DiagEl(\A) \cup p(\bar{x})$ jest niesprzeczna, a jej model jest elementarnym rozszerzeniem $\A$.
+\end{proof}
+
+% WYKŁAD 28 III 2017
+
+Pytanie: jakie typy można omijać?
+
+
+\begin{df}
+	Typ $p(\bar{x})$ nad teorią $T$ (być może częściowy) jest \textit{izolowany},
+	jeśli istnieje formuła $\phi(\bar{x})$ taka, że $T + \exists \bar{x}\, \phi(\bar{x})$ jest niesprzeczne oraz dla każdego $\psi(\bar{x}) \in p(\bar{x})$, $T \vdash \forall \bar{x} \, (\phi(\bar{x}) \Rightarrow \psi(\bar{x}))$
+\end{df}
+
+\begin{stw}
+	Jeśli typ $p(\bar{x})$ nad $T$ jest izolowany, to jest realizowany w każdym modelu $T + \exists \bar{x} \, \phi(\bar{x})$.
+	W szczególności, jeśli $T$ jest zupełna, to $p(\bar{x})$ jest realizowany w każdym modelu $T$.
+\end{stw}
+
+\begin{tw}[O omijaniu typów]
+	\label{tw:omi}
+	Niech $T$ będzie teorią w przeliczalnym języku, a $p(\bar{x})$ niech będzie typem nad $T$, który nie jest izolowany.
+	Wówczas istnieje model $\A \models T$, który omija $p$.
+\end{tw}
+\begin{proof}
+	Do języka dodajemy nowe stałe $c_1, c_2, \ldots$
+	Niech $\phi_1, \phi_2, \ldots $ będzie listą wszystkich zdań w tym rozszerzonym języku, a $\psi_1(x), \psi_2(x), \ldots$ będzie listą wszystkich formuł z jedną zmienną wolną w rozszerzonym języku.
+	Definiujemy łańcuch teorii $T = T_0 \subseteq T_1 \subseteq T_2 \subseteq \ldots$
+	w sposób następujący:
+	\begin{itemize}
+		\item \textit{Krok $3i+1$:}
+			\[
+				 T_{3i+1} := \left\{\begin{array}{lr}
+						 T_{3i} + \phi_i, & \text{jeśli niesprzeczna,}\\
+						 T_{3i} + \neg \phi_i, & \text{w p.p.}
+       						 \end{array}
+			\]
+
+		\item \textit{Krok $3i+2$:}
+			Niech $c_j$ będzie pierwszą stałą nie występującą w teorii $T_{3i+1}$.
+			Wówczas $T_{3i+2} := T_{3i+1} + \exists x \, \psi_i(x) \Rightarrow \psi_i(c_j)$.
+		\item \textit{Krok $3i+3$:}
+			Niech $\bar{c}_i$ będzie $i$-tą $n$-tką nowych stałych.
+			$T_{3i+2}$ jest postaci $T + \delta(\bar{c}_i, \bar{d})$, gdzie $\delta(\bar{x}, \bar{y})$ jest formułą a $\bar{d}$ to nowe stałe spoza $\bar{c}_i$.
+			Wiadomo, że $T + \exists \bar{x} \, \exists \bar{y} \, \delta(\bar{x}, \bar{y})$ jest niesprzeczna, a zatem z nieizolowalności $p(\bar{x})$ istnieje $\pi(\bar{x}) \in p(\bar{x})$ takie, że $T + \exists \bar{x} \, \exists \bar{y} \, \delta(\bar{x}, \bar{y}) \not \vdash \pi(\bar{x})$.
+
+			Bierzemy $T_{3i+3} := T_{3i+2} + \neg \pi(\bar{c}_i)$.
+	\end{itemize}
+	Zauważmy, że $\bigcup_n T_n$ jest zupełna i ma własność zaświadczania przez stałe.
+	Niech $\B \models \bigcup_n T_n$ oraz niech $\widetilde{\A} \preccurlyeq \B$, gdzie uniwersum $\widetilde{\A}$ to $\{c_1^{\B}, c_2^{\B}, \ldots\}$.
+	$\widetilde{\A}$ jest podstrukturą $\B$ na mocy zaświadczania przez stałe, a podstrukturą elementarą na mocy kryterium Vaughta -- wszystko z powodu kroków $3i+2$.
+	Niech $\A$ będzie reduktem $\widetilde{\A}$ do języka $T$.
+	$\A \models T$, bo $\widetilde{\A} \models \bigcup_n T_n \supseteq T$.
+	Ponadto $\A$ omija typ $p$ na mocy kroków $3i+3$.
+	% TODO wyjaśnij to z LAK
+
+\end{proof}
+\begin{uw}
+	 W ten sam sposób można naraz ominąć przeliczalnie wiele typów.
+\end{uw}
+
+\begin{tw}
+	 Niech $T$ będzie zupełną teorią w przeliczalnym języku.
+	 Następujące warunki są równoważne:
+	 \begin{enumerate}
+		 \item $T$ jest $\omega$-kategoryczna,
+		 \item Dla każdego $n \in \N$, każdy typ w $S^n(T)$ jest izolowany,
+		 \item Dla każdego $n \in \N$, $|S^n(T)| < \aleph_0$,
+		 \item Dla każdego $n \in \N$, z dokładnością do równoważności w $T$ istnieje tylko skończenie wiele formuł ze zmiennymi wolnymi $x_1, x_2, \ldots, x_n$.
+	 \end{enumerate}
+\end{tw}
+\begin{proof}
+	\textbf{($4 \Rightarrow 3$)} Jeśli dla danego $n$, $\phi_1(\bar{x}), \phi_2(\bar{x}), \ldots, \phi_k(\bar{x})$  to wszystkie formuły z punktu 4, to typ z $S^n(T)$ możemy określić na co najwyżej $2^k$ sposobów -- wskazując, które formuły do niego należą.
+
+	\textbf{($3 \Rightarrow 2$)} Niech $p_1, p_2, \ldots, p_k$ to wszystkie typy w $S^n(T)$.
+	Weźmy typ $p_i$.
+	Dla każdego $j \neq i$ istnieje formuła $\phi_{ij}(\bar{x})$ taka, że jednocześnie $\phi_{ij}(\bar{x}) \in p_i$ oraz $\neg \phi_{ij}(\bar{x}) \in p_j$.
+	Wtedy $p_i$ jest izolowany przez $\bigwedge_{i \neq j} \phi_{ij}(\bar{x})$.
+
+	\textbf{($2 \Rightarrow 1$)} Niech $\A, \B$ będą modelami $T$.
+	Pokażemy, że Duplikator wygrywa $G^{\infty}(\A, \B)$, co da 1.
+	Strategia Duplikatora:
+	jeśli po $k$ rundach wybrane są elementy $a_1, a_2, \ldots, a_k \in \A$ oraz $b_1, b_2, \ldots, b_k \in \B$, to $\text{tp}^{\A}(a_1, a_2, \ldots, a_k) = \text{tp}^{\B}(b_1, b_2, \ldots, b_k)$.
+	Tak można zrobić, bo np. $\text{tp}^{\A}(a_1, a_2, \ldots, a_{k+1})$ izolowany formułą
+	$\phi(x_1, x_2, \ldots, x_{k+1})$, ale $\exists x_{k+1} \, \phi(x_1, x_2, \ldots, x_{k+1}) \in \text{tp}^{\A}(a_1, a_2, \ldots, a_k)$.
+
+	\textbf{($1 \Rightarrow 2$)} Załóżmy nie wprost, że w $S^n(T)$ jest typ nieizolowany $p(\bar{x})$.
+	Wtedy istnieje przeliczalny model $\A$ realizujący $p$ oraz drugi model przeliczalny $\B$ omijający $p$.
+	Oczywiście $\A \not \simeq \B$.
+
+	\textbf{($2 \Rightarrow 3$)}
+	Załóżmy nie wprost, że dla pewnego $n$ typów w $S^n(T)$ jest nieskończenie wiele.
+	Zauważmy, że istnieje formuła $\psi(\bar{x})$ taka, że zarówno ona, jak i jej negacja występują w nieskończenie wielu typach.
+	W przeciwnym przypadku zbiór $\{\phi(\bar{x}) \colon \phi \text{ występuje w nieskończenie wielu typach}\}$ byłby typem nieizolowanym.
+	Podobnie, jeśli $\psi_1(\bar{x})$ występuje w nieskończenie wielu typach, to istnieje $\psi_2(\bar{x})$ takie, że zarówno $\psi_1(\bar{x})\wedge \psi_2(\bar{x})$, jak i $\psi_1(\bar{x})\wedge \neg \psi_2(\bar{x})$ występują w nieskończenie wielu typach.
+	Istnieje typ $\{\psi_i(\bar{x}) \colon i \in \N\}$ taki, że dla każdego $k $ koniunkcja $\psi_1(\bar{x}) \wedge \psi_2(\bar{x}) \wedge \ldots \wedge \psi_k(\bar{x})$ występuje w nieskończenie wielu typach.
+	Ten typ nie może być izolowany.
+
+	\textbf{($3 \Rightarrow 4$)}
+	Formuły nierozróżnialne przez typy są równoważne.
+\end{proof}
+
+
+% WYKŁAD 4 IV 2017
+\section{Modele małe i duże}
+\begin{df}
+	 Niech $\kappa$ będzie liczbą kardynalną.
+	 Model $\A$ nazywamy $\kappa$-nasyconym, jeśli dla każdego $D \subseteq A$, $|D| < \kappa$, każdy typ w $S^{\A}_n(D)$ jest realizowany w $\A$.
+	Model $\A$ jest nasycony, jeśli jest $|A|$-nasycony.
+\end{df}
+
+\begin{uw}
+	Nasycenie wystarczy sprawdzać dla $1$-typów (przy założeniu $\kappa \geq \aleph_0$).
+\end{uw}
+
+\begin{stw}
+	 Jeśli $T$ jest przeliczalną i zupełną teorią, to każde dwa przeliczalne i nasycone modele $T$ są izomorficzne.
+\end{stw}
+\begin{proof}
+	 TODO
+\end{proof}
+%TODO przy typach jednolicić indeks górny/dolny
+\begin{stw}
+	Teoria $T$ ma przeliczalny model nasycony wtedy i tylko wtedy, gdy $\forall n \,|S_n(T)| \leq \aleph_0$.
+\end{stw}
+\begin{proof}
+	 \textbf{($\Rightarrow$)} Oczywiste.
+	 \\\textbf{($\Leftarrow$)} Jeśli w $S_n(T)$ jest tylko przeliczalnie wiele typów dla dowolnego $n$, to również dla dowolnej skończonej krotki parametrów $a_1, a_2, \ldots, a_k \in A$, gdzie $\A \models T$, jest tylko przeliczalnie wiele typów o $n$ zmiennych z parametrami $a_1, a_2, \ldots, a_k$ (bo to jeden z możliwych typów nad $k+n$ zmiennymi).
+	 Konstruujemy model przeliczalnie nasycony jako sumę łańcucha elementarnego $\A_1, \A_2, \ldots$ złożonego z przeliczanych modeli $T$ -- po kolei realizując wszystkie typy ze wszystkich krotek parametrów pojawiających się w trakcie konstrukcji.
+
+\end{proof}
+
+\begin{df}
+	$\A$ jest \textit{modelem atomowym}, jeśli dla dowolnego $n \in \N$ oraz dowolnych $a_1, a_2, \ldots, a_n \in A$ typ $\text{tp}^{\A}(a_1, a_2, \ldots, a_n)$ jest izolowany.
+\end{df}
+%TODO wyjaśnij oznaczenie tp^{\A}(...)
+\begin{df}
+	Model $\A \models T$ jest \textit{modelem pierwszym} dla $T$,
+	jeśli dla dowolnego modelu $\B \models T$ zachodzi $\A \preccurlyeq \B$.
+\end{df}
+\begin{stw}
+	 Model $\A \models T$ jest pierwszy wtedy i tylko wtedy, gdy jest przeliczany i atomowy.
+\end{stw}
+\begin{proof}
+	\textbf{($\Rightarrow$)} Oczywiste (ze względu na twierdzenie \ref{tw:omi} o omijaniu typów).
+	\\\textbf{($\Leftarrow$)}
+	Załóżmy, że $\A$ jest przeliczalny i atomowy, i niech $A = \{a_1, a_2, \ldots, a_n\}$.
+	Weźmy $B \models T$
+\end{proof}
+%TODO ta gdzie n \in \N czasem powinno być \N^+
+\begin{wn}
+	 Każde dwa modele pierwsze dla danej teorii są izomorficzne.
+\end{wn}
+\begin{proof}
+	Obydwa są przeliczlne i atomowe, więc istnieje dla nich strategia w $G^{\infty}$.
+\end{proof}
+
+\begin{wn}
+	Jeśli dla każdego $n$ jest $|S^n(T)| \leq \aleph_0$, to $T$ ma model pierwszy.
+	W szczególności, jeśli $T$ ma model przeliczalny i nasycony, to ma model pierwszy.
+\end{wn}
+\begin{proof}
+	 Skoro wszystkich typów jest co najwyżej przeliczalnie wiele, to nieizolowanych też.
+	 Można je wszystkie ominąć w jednym modelu przeliczalnym.
+\end{proof}
+
+Ile modeli przeliczalnych może mieć przeliczalna i zupełna teoria?
+\begin{itemize}
+	\item $1$, np. $\DLO$,
+	\item $2$ mieć nie może (Vought),
+	\item $3, 4, 5, \ldots$ -- może mieć,
+	\item $\aleph_0$, np. $\Th(\Z, S)$,
+	\item $\aleph_1$ przy założeniu $\aleph_1 <  \mathfrak{c}$ -- nie wiadomo, hipoteza Voughta mówi, że nie może tyle mieć,
+	\item $ \mathfrak{c}$, np. $\RCF$.
+\end{itemize}
+Więcej być nie może.
+
+
+\section{Przeliczalna pełność i zwartość dla $\FO(\exists^{\geq \aleph_0})$}
+
+\begin{df}[System dowodowy dla $\FO(\exists^{\geq \aleph_1})$]
+	 Dla dowolnego rozsądnego systemu dowodowego dla $\FO$ (w szczególności umożliwiającego zamianę zmiennych związanych)
+	 dodajemy następujące aksjomaty i reguły:
+	 \\\mbox{  }\textbf{(A1)} $\neg \exists^{\geq \aleph_1} x \, (x = y \vee x = z)$,
+	 \\\mbox{  }\textbf{(A2)} $\forall x \,(\phi \Rightarrow \psi) \Rightarrow (\exists^{\geq \aleph_1} x \, \phi \Rightarrow \exists^{\geq \aleph_1} x \, \psi)$,
+	 \\\mbox{  }\textbf{(A3)} $\exists^{\geq \aleph_1} y \exists x \, \phi \Rightarrow (\exists x \exists^{\geq \aleph_1} y \, \phi \vee \exists^{\geq \aleph_1} \exists y \, \phi)$.
+
+\end{df}
+
+\begin{uw}
+	Te reguły/aksjomaty byłyby również poprawne dla $\exists^{\geq \aleph_0} x$.
+\end{uw}
+
+\begin{ozn}
+	Dla krótkości piszemy ,,$\q$" zamiast ,,$\exists^{\geq \aleph_1} x$".
+\end{ozn}
+
+\begin{prz}
+	Parę formuł dowodliwych w $\FO(\q)$:
+	\begin{itemize}
+		\item $\q x \, \phi \Rightarrow \exists x \, \phi$,
+		\item $\exists x \,\q y \, \phi \Rightarrow \q y \, \exists x \, \phi$,
+		\item $\q x \, (\phi \vee \psi) \iff \q x \, \phi \vee \q x \, \psi$,
+		\item $\q x (\phi \wedge \psi) \iff \phi \wedge \q x \, \psi$, gdy $x \not \in \mathsf{FV}(\phi)$,
+		\item $\q x \, \phi \wedge \neg \q x \, \psi \Rightarrow \q x \, (\phi \wedge \neg \psi)$.
+	\end{itemize}
+\end{prz}
+Udowodnijmy przykładowo pierwszą z formułę z listy:
+\begin{proof}
+	 Załóżmy, że $\neg \exists x \, \phi$.
+	 Wtedy $\forall x \, (\phi \Rightarrow (x = y \vee x = z))$.
+	 Załóżmy $\q x \, \phi$.
+	 Na mocy (A2) $\q x \, (x = y \vee x = z)$.
+	 Jest to sprzeczne z (A1).
+\end{proof}
+
+\begin{tw}[Przeliczalna pełność dla $\FO(\q)$]
+	Jeśli $T$ to \underline{przeliczalna} teoria w $\FO(\q)$, a $\phi$ to zdanie takie, że $T \vdash \phi$,
+	to istnieje dowód $\phi$ z $T$ w naszym systemie dowodowym.
+\end{tw}
+
+
+\end{document}
