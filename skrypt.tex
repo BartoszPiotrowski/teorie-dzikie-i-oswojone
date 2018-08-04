@@ -384,10 +384,10 @@ Dla dowolnej teorii $T$, \fae
 
 \begin{df}
 	$\ACF$ (\textit{algebraically closed fields}) to teoria w języku $\{+,
-	\cdot, -, 0, 1\}$ (gdzie $-$ jest arności $1$) wyposażona w następujące
-	aksjomaty:
+	\cdot, -, 0, 1\}$ (gdzie ,,$-$'' jest arności $1$), wyposażona w
+	następujące aksjomaty:
 	\begin{itemize}
-		\item aksjomaty ciał,
+		\item aksjomaty ciała,
 		\item schemat aksjomatów:
 		$$\forall w_n, \ldots, w_0
 			(w_n \neq 0 \Rightarrow
@@ -598,17 +598,9 @@ Naszym celem na teraz będzie pokazanie w kilku krokach, że $ \RCF $ ma elimina
 	 \end{enumerate}
 % TODO w notatkach najpierw było R, potem K. Czy notacja OK?
 \end{tw}
-\begin{proof}
-	($2 \Rightarrow 1$)
-	Jasne -- przy założeniu (2) $K(i)$ jest jedynym właściwym rozszerzeniem
-	$K$.
+% TODO na wykładzie dowód był pokazan później -- czy tu też tak chcemy?
 
-	($1 \Rightarrow 3$) TODO
-
-	($3 \Rightarrow 2$) TODO
-\end{proof}
-
-% Jakoś tu nie widzę tw. Sturma...
+% TODO Jakoś tu nie widzę tw. Sturma...
 \begin{wn}
 	Jeśli $ (R, \leq) \models \RCF $, to $ (R, \leq) $ ma własność Darboux dla wielomianów:
 	jeśli $ p(a) \cdot p(b) < 0 $ oraz $ a <b $, to istnieje $c \in (a, b) $ takie, że $ p(c) = 0 $, gdzie $ p \in R[x] $.
@@ -785,6 +777,96 @@ Zatem sprzeczność.
 \end{proof}
 
 % Tu idą uzupełnienia luk w dowodzie tego i owego. Trzeba chyba to uporządkować.
+
+Teraz pora uzupełnić luki powstałe w toku dochodzenia do eliminacji
+kwantyfikatorów dla $\RCF$. Najpierw udowodnimy Twierdzenie \ref{tw:rcf}.
+
+\begin{proof}[Dowód Twierdzenia \ref{tw:rcf}]
+
+	\textbf{($2 \Rightarrow 1$)}
+	Jasne -- przy założeniu (2) $K(i)$ jest jedynym właściwym rozszerzeniem
+	$K$.
+
+	\textbf{($1 \Rightarrow 3$)}
+	Załóżmy (1). Niech $K \ni a \geq 0$ oraz niech
+	$\sqrt{a} \notin K$. Weźmy $K(\sqrt{a})$. Rozważmy $P \subseteq
+	K(\sqrt{a})$ zbiór elementów postaci
+	\[
+		\sum_{i=1}^{n} b_i (c_i + d_i \sqrt{a})^2,
+	\]
+	gdzie $b_i, c_i, d_i \in K, b_i \geq 0$. Pokażemy, że $P$ jest stożkiem
+	w $K(\sqrt{a})$, co udowodni, że $K(\sqrt{a})$ można uporządkować
+	zgodnie z $\leq$ -- wbrew (1).
+
+	Załóżmy, że $-1 = \sum_{i=1}^n b_i (c_i + d_i \sqrt{a})^2$.%TODO check ^2
+	Wtedy
+	$$ -1 = \sum_{i=1}^n b_i c_i^2 + b_i d_i^2 a \geq 0$$
+	równość -- bo $\sqrt{a} \notin K$,
+	nierówność -- bo $b_i, c_i^2, d_i^2, a \geq 0$.
+	Czyli faktycznie -- wszystkie nieujemne elementy $K$ są kwadratami.
+	% TODO sprzeczność -- błyskawica
+
+	Teraz załóżmy, że wielomian $p(x) \in K(x)$ jest nieparzystego stopnia
+	bez pierwiastków w $K$. Bez utraty ogólności, niech $P$ będzie
+	najmniejszego stopnia i nierozkładalny. % TODO najmniejszego? ->notatki
+	Niech $\text{deg } p = 2n + 1$. Wiemy, że $\sfrac{K(X)}{(p)}$ nie jest
+	formalnie rzeczywiste. W takim razie możemy napisać: % TODO sfrac?
+	\[
+		- 1 = \sum_{j=1}^m h_i^2(x) + g(x) \cdot p(x)
+	\]
+	gdzie, bez utraty ogólności, $\sum_{j=1}^m h_i^2(x)$ jest stopnia
+	parzystego $\leq 4n$, a $g(x)$ jest stopnia nieparzystego $\leq 2n + 1$.
+	Zatem $g$ ma pierwiastek w $K$ -- $g(\alpha) = 0$. Stąd
+	\[
+		- 1 = \sum_{j=1}^m h_i^2(\alpha) + 0,
+	\]
+	sprzeczność.
+
+	\textbf{($3 \Rightarrow 2$)}
+	Najpierw pokażemy, że każdy wielomian $p(x) \in P[x]$ ma pierwiastek w
+	$K(i)$: udowodnimy to przez indukcję po $m$, gdzie
+	$$\text{deg }(p) = d = 2^m(2n + 1).$$
+	$m = 0$ już mamy. Weźmy $m > 0$.
+	Dla każdego $k \in \N$ rozważmy wielomian
+	\[
+		f_k(X, Y_1, \ldots, Y_d) =
+		\prod_{1 \leq \mu \leq \lambda \leq d}
+		X - Y_\mu - Y_\lambda - k Y_\mu Y_\lambda
+	\]
+	Zauważmy, że jeśli popatrzymy na $f_k$ jako na wielomian z
+	$(K[Y_1, \ldots, Y_n])[X]$, to współczynnik przy każdej potędze $X$
+	jest kombinacją wielomianów
+	\begin{align*}
+		&Y_1 + \ldots + Y_d \\
+		&Y_1 Y_2 + Y_1 Y_3 + \ldots + Y_{d-1} Y_d \\
+		&Y_1 Y_2 Y_3 + Y_1 Y_2 Y_4 + \ldots + Y_{d-2} Y_{d-1} Y_d
+	\end{align*}
+	Teraz, jeśli $\alpha_1, \ldots, \alpha_d$ to wszystkie pierwiastki
+	$p$, to $f_k(X, \alpha_1, \ldots, \alpha_d)$ % TODO ale że co? uzupełnij
+	(z obserwacji nt. $f_k$ oraz z wzorów Viete'a).
+	\[
+		\text{deg } f_k(X, \alpha_1, \ldots, \alpha_d) = {d \choose 2} =
+		2^{m-1}(2s + 1)
+	\]
+	Czyli dla każdego $k$, $f_k(X, \alpha_1, \ldots, \alpha_d)$ ma
+	pierwiastek w $K(i)$ -- stąd dla każdego $k$ istnieją
+	$1 \leq \mu \leq \lambda \leq d$ takie, że
+	$k \alpha_\lambda \alpha_\mu - \alpha_\lambda - \alpha_\mu \in K(i)$.
+	Z zasady szufladkowej są takie $\lambda < \mu$, że
+	$\alpha_\lambda \alpha_\mu \in K(i)$. Zatem
+	$\alpha_\lambda + \alpha_\mu \in K(i)$.
+	\begin{equation}
+		(X - \alpha_\lambda) (X - \alpha_\mu) =
+		X^2 - (\alpha_\lambda + \alpha_\mu) X + \alpha_\lambda \alpha_\mu
+	\end{equation}
+	Z ogólnych rozważań nad $\Delta$, ten wielomian ma dwa pierwiastki
+	w $K(i)$. W takim razie $\alpha_\lambda, \alpha_\mu \in K(i)$.
+	Czyli $p(x)$ ma pierwiatek w $K(i)$. Jeśli teraz $p \in K(i)[X]$ to
+	rozważmy $\bar{p}$, tj. wielomian otrzymany z $p$ poprzez sprzężenie
+	współczynników. $p \bar{p} \in K[X]$, więc ma pierwiatek $\alpha$
+	w $K(i)$. $p(\alpha) = 0$, lub $\bar{p}(\alpha) = 0$ -- w którym to
+	przypadku $p(\bar{\alpha}) = 0$.
+\end{proof}
 
 \section{Typy}
 
