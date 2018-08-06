@@ -494,7 +494,7 @@ Ideą dowodu dla powyższego faktu jest to, że ciała algebraicznie domknięte 
 \end{tw}
 \begin{proof}
 	Rozważmy zdanie $\psi_{n,k}$ wyrażające następującą własność ciała $\K$:
-	\textit{dla wszystkich $f \colon K^n \rightarrow K^n$ danych przez $p_1, p_2, \ldots, p_n$ jak wyżej, ale spełniające warunek $\text{deg } p_i \leq k$, jeśli $f$ jest iniekcją, to jest też surjekcją. }
+	\textit{dla wszystkich $f \colon K^n \rightarrow K^n$ danych przez $p_1, p_2, \ldots, p_n$ jak wyżej, ale spełniające warunek $deg p_i \leq k$, jeśli $f$ jest iniekcją, to jest też surjekcją. }
 	Zauważmy, że $\psi_{n,k}$ jest zdaniem postaci $\forall \exists$.
 	Jeśli $\K$ jest skończone, to $\K \models \psi_{n,k}$ (w zbiorach skończonych iniekcje są też surjekcjami). %TODO można źle zrozumieć..
 	Niech $\F^{\text{alg}}_{p}$ oznacza algebraiczne domknięcie ciała $p$-elementowego $\F^{\text{alg}}_p$.
@@ -672,6 +672,29 @@ Naszym celem na teraz będzie pokazanie w kilku krokach, że $ \RCF $ ma elimina
 	\end{lem}
 	\begin{proof}
 		 TODO
+		W tym celu korzystamy z twierdzenia Sturma:
+		\begin{tw} \label{tw:sturma}
+			Niech $(R, \leq)$ to rcf, $p \in R[X]$ niech nie ma
+			pierwiastków wielokrotnych, niech $a, b \in R$ będą
+			takie, że $p(a) \neq 0 \neq p(b)$ oraz $a < b$.
+			Rozważmy ciąg
+			\begin{align*}
+				&p_0 = p \\
+				&p_1 = p' \\
+				&\vdots \\
+				&p_{i+2} = -p_i + g \cdot p_{i + 1},
+				\text{ gdzie } g \text{ jest dobrane tak, by }
+				\deg p_{i+1} > \deg  p_{i+2} \\
+				&\vdots \\
+				&p_s = \text{NWD}(p, p')
+				\text{ (stała niezerowa w } R\text{)}
+			\end{align*}
+			Niech $v(p, x)$ oznacza liczbę zmian znaków w ciągu
+			$$p_0(x), p_1(x), \ldots, p_s(x),$$
+			(zera ignorujemy). Wtedy liczba pierwiastków $p$
+			w $R \cap (a, b)$ jest równa $$v(p, a) - v(p, b).$$
+		\end{tw}
+		 TODO
 	\end{proof}
 
 
@@ -809,7 +832,7 @@ kwantyfikatorów dla $\RCF$. Najpierw udowodnimy Twierdzenie \ref{tw:rcf}.
 	Teraz załóżmy, że wielomian $p(x) \in K(x)$ jest nieparzystego stopnia
 	bez pierwiastków w $K$. Bez utraty ogólności, niech $P$ będzie
 	najmniejszego stopnia i nierozkładalny. % TODO najmniejszego? ->notatki
-	Niech $\text{deg } p = 2n + 1$. Wiemy, że $\sfrac{K(X)}{(p)}$ nie jest
+	Niech $deg p = 2n + 1$. Wiemy, że $\sfrac{K(X)}{(p)}$ nie jest
 	formalnie rzeczywiste. W takim razie możemy napisać: % TODO sfrac?
 	\[
 		- 1 = \sum_{j=1}^m h_i^2(x) + g(x) \cdot p(x)
@@ -825,7 +848,7 @@ kwantyfikatorów dla $\RCF$. Najpierw udowodnimy Twierdzenie \ref{tw:rcf}.
 	\textbf{($3 \Rightarrow 2$)}
 	Najpierw pokażemy, że każdy wielomian $p(x) \in P[x]$ ma pierwiastek w
 	$K(i)$: udowodnimy to przez indukcję po $m$, gdzie
-	$$\text{deg }(p) = d = 2^m(2n + 1).$$
+	$$deg(p) = d = 2^m(2n + 1).$$
 	$m = 0$ już mamy. Weźmy $m > 0$.
 	Dla każdego $k \in \N$ rozważmy wielomian
 	\[
@@ -845,7 +868,7 @@ kwantyfikatorów dla $\RCF$. Najpierw udowodnimy Twierdzenie \ref{tw:rcf}.
 	$p$, to $f_k(X, \alpha_1, \ldots, \alpha_d)$ % TODO ale że co? uzupełnij
 	(z obserwacji nt. $f_k$ oraz z wzorów Viete'a).
 	\[
-		\text{deg } f_k(X, \alpha_1, \ldots, \alpha_d) = {d \choose 2} =
+		deg f_k(X, \alpha_1, \ldots, \alpha_d) = {d \choose 2} =
 		2^{m-1}(2s + 1)
 	\]
 	Czyli dla każdego $k$, $f_k(X, \alpha_1, \ldots, \alpha_d)$ ma
@@ -866,6 +889,17 @@ kwantyfikatorów dla $\RCF$. Najpierw udowodnimy Twierdzenie \ref{tw:rcf}.
 	współczynników. $p \bar{p} \in K[X]$, więc ma pierwiatek $\alpha$
 	w $K(i)$. $p(\alpha) = 0$, lub $\bar{p}(\alpha) = 0$ -- w którym to
 	przypadku $p(\bar{\alpha}) = 0$.
+\end{proof}
+
+\begin{proof}[Dowód Twierdzenia Sturma, \ref{tw:sturma}] % TODO ref ?
+	Zauważmy, że nie ma $\alpha \in (a, b)$ takiego, że
+	$p_i(\alpha) = p_{i+1}(\alpha) = 0$. Pozostaje rozważyć takie $\alpha$,
+	że dla pewnego $i$, $p_i(\alpha) = 0$, i zobaczyć, co się dzieje ze
+	znakami $p_{i-1}(\alpha)$, $p_{i}(\alpha)$, $p_{i+1}(\alpha)$ na lewo
+	i na prawo od $\alpha$.
+
+
+	TODO skończ.
 \end{proof}
 
 \section{Typy}
