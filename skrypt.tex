@@ -148,6 +148,12 @@ Polecane podręczniki do pierwszej części to:
 % TODO oznaczenia
 % co znaczy \phi(\bar{x})? \bar{x} to wszystkie zmienne wolne?
 
+\newpage
+\begin{center}
+{\Large \textsc{I część kursu}}
+\end{center}
+\vspace{-0.4cm}
+
 \section{Eliminacja kwantyfikatorów}
 \begin{df}
 	Teoria $T$ ma \textit{eliminację kwantyfikatorów} (\textit{q.e.}) \wtw dla
@@ -832,7 +838,7 @@ kwantyfikatorów dla $\RCF$. Najpierw udowodnimy Twierdzenie \ref{tw:rcf}.
 	Teraz załóżmy, że wielomian $p(x) \in K(x)$ jest nieparzystego stopnia
 	bez pierwiastków w $K$. Bez utraty ogólności, niech $P$ będzie
 	najmniejszego stopnia i nierozkładalny. % TODO najmniejszego? ->notatki
-	Niech $deg p = 2n + 1$. Wiemy, że $\sfrac{K(X)}{(p)}$ nie jest
+	Niech $\deg p = 2n + 1$. Wiemy, że $\sfrac{K(X)}{(p)}$ nie jest
 	formalnie rzeczywiste. W takim razie możemy napisać: % TODO sfrac?
 	\[
 		- 1 = \sum_{j=1}^m h_i^2(x) + g(x) \cdot p(x)
@@ -868,7 +874,7 @@ kwantyfikatorów dla $\RCF$. Najpierw udowodnimy Twierdzenie \ref{tw:rcf}.
 	$p$, to $f_k(X, \alpha_1, \ldots, \alpha_d)$ % TODO ale że co? uzupełnij
 	(z obserwacji nt. $f_k$ oraz z wzorów Viete'a).
 	\[
-		deg f_k(X, \alpha_1, \ldots, \alpha_d) = {d \choose 2} =
+		\deg f_k(X, \alpha_1, \ldots, \alpha_d) = {d \choose 2} =
 		2^{m-1}(2s + 1)
 	\]
 	Czyli dla każdego $k$, $f_k(X, \alpha_1, \ldots, \alpha_d)$ ma
@@ -891,15 +897,36 @@ kwantyfikatorów dla $\RCF$. Najpierw udowodnimy Twierdzenie \ref{tw:rcf}.
 	przypadku $p(\bar{\alpha}) = 0$.
 \end{proof}
 
-\begin{proof}[Dowód Twierdzenia Sturma, \ref{tw:sturma}] % TODO ref ?
+\begin{proof}[Dowód Twierdzenia \ref{tw:sturma} (Sturma)]
 	Zauważmy, że nie ma $\alpha \in (a, b)$ takiego, że
 	$p_i(\alpha) = p_{i+1}(\alpha) = 0$. Pozostaje rozważyć takie $\alpha$,
 	że dla pewnego $i$, $p_i(\alpha) = 0$, i zobaczyć, co się dzieje ze
 	znakami $p_{i-1}(\alpha)$, $p_{i}(\alpha)$, $p_{i+1}(\alpha)$ na lewo
 	i na prawo od $\alpha$.
-
-
-	TODO skończ.
+	\begin{enumerate}
+		\item Niech $i > 0$. Zauważmy, że
+			$p_{i-1}(\alpha) , p_{i+1}(\alpha)$ są przeciwnych
+			znaków, na przykład $+$ i $-$. Wtedy mamy:
+			\begin{table}[!htbp] \centering
+			\begin{tabular}{l|ccc}
+			&na lewo od $\alpha$ & $\alpha$ & na prawo od $\alpha$ \\
+				\hline
+			$p_{i-1}$ & $+$ & $+$ & $+$ \\
+			$p_{i}$ & ? & $0$ & ? \\
+			$p_{i+1}$ & $-$ & $-$ & $-$
+			\end{tabular}
+			\end{table}
+		\item Niech $i = 0$. Niech, na przykład, $p'(\alpha) = +$. Wtedy:
+			\begin{table}[!htbp] \centering
+			\begin{tabular}{l|ccc}
+			&na lewo od $\alpha$ & $\alpha$ &na prawo od $\alpha$ \\
+				\hline
+			$p$ & $-$ & $0$ & $+$ \\
+			$p'$ & $+$ & $+$ & $+$
+			\end{tabular}
+			\end{table}
+	\end{enumerate}
+	Liczba zmian znaków spadła o $1$.
 \end{proof}
 
 \section{Typy}
@@ -1221,7 +1248,12 @@ W tym rozdziale zakładamy, że teoria $T$ jest przeliczalna i zupełna.
 	 TODO
 \end{proof}
 
-{\Large \textbf{II część kursu -- Teorie interpretujące arytmetykę}}
+\vspace{0.5cm}
+\begin{center}
+{\Large \textsc{II część kursu}}
+\end{center}
+\vspace{-0.4cm}
+\section{Teorie interpretujące arytmetykę}
 
 W zamierzeniu: mowa będzie o teoriach mających ,,aksjomatyzować matematykę'' (bądź jakiś jej istotny fragment).
 Takimi teoriami są m.in. $\ZFC$ oraz $\PA$.
